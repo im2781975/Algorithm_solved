@@ -1,0 +1,37 @@
+Consider a money system consisting of n coins. Each coin has a positive integer value. Your task is to calculate the number of distinct ways you can produce a money sum x using th
+#include <iostream>
+#include <vector>
+
+int countWays(std::vector<int>& coins, int n, int x) {
+    std::vector<int> dp(x + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = coins[i]; j <= x; ++j) {
+            dp[j] += dp[j - coins[i]];
+        }
+    }
+
+    return dp[x];
+}
+
+int main() {
+    int n; // Number of coins
+    int x; // Money sum to produce
+    std::cout << "Enter the number of coins: ";
+    std::cin >> n;
+
+    std::vector<int> coins(n);
+    std::cout << "Enter the values of the coins: ";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> coins[i];
+    }
+
+    std::cout << "Enter the money sum (x): ";
+    std::cin >> x;
+
+    int ways = countWays(coins, n, x);
+    std::cout << "Number of distinct ways to make " << x << " using the given coins: " << ways << std::endl;
+
+    return 0;
+}
