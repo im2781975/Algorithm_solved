@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+ 
+    int arr[] = { 1, 1, 1, 1, 0, 0, 0, 0, 0 };
+    int size = sizeof(arr) / sizeof(arr[0]);
+ 
+    // Pointer to the first occurrence of one
+ 
+    auto ptr
+        = upper_bound(arr, arr + size, 1, greater<int>());
+    cout << "Count of 1's in given array is "
+         << (ptr - arr);
+ 
+    return 0;
+}
