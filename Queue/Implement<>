@@ -1,0 +1,85 @@
+struct QNode {
+    int data;
+    QNode* next;
+    QNode(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+};
+ 
+struct Queue {
+    QNode *front, *rear;
+    Queue() { front = rear = NULL; }
+};
+void queueEnqueue(int data)
+{
+    // Check queue is full or not
+    if (capacity == rear) {
+        printf("\nQueue is full\n");
+        return;
+    }
+ 
+    // Insert element at the rear
+    else {
+        queue[rear] = data;
+        rear++;
+    }
+    return;
+}
+void queueDequeue()
+{
+    // If queue is empty
+    if (front == rear) {
+        printf("\nQueue is empty\n");
+        return;
+    }
+ 
+    // Shift all the elements from index 2
+    // till rear to the left by one
+    else {
+        for (int i = 0; i < rear - 1; i++) {
+            queue[i] = queue[i + 1];
+        }
+ 
+        // decrement rear
+        rear--;
+    }
+    return;
+}
+// Function to get front of queue
+int front(Queue* queue)
+{
+    if (isempty(queue))
+        return INT_MIN;
+    return queue->arr[queue->front];
+}
+int rear(queue<int>& myQueue)
+{
+    queue<int> tempQueue = myQueue;
+ 
+    while (tempQueue.size() > 1) {
+        tempQueue.pop();
+    }
+ 
+    return tempQueue.front();
+}
+// This function will check whether
+// the queue is empty or not:
+bool isEmpty()
+{
+    if (front == -1)
+        return true;
+    else
+        return false;
+}
+// This function will check
+// whether the queue is full or not.
+bool isFull()
+{
+    if (front == 0 && rear == MAX_SIZE - 1) {
+        return true;
+    }
+    return false;
+}
+
