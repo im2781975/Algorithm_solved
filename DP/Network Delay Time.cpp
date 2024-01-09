@@ -1,6 +1,6 @@
-//You are given a network of n nodes, labeled from 1 to n. You are also given times, a list of travel times as directed edges times[i] = (ui, vi, wi), where ui is the source node, vi is the target node, and wi is the time it takes for a signal to travel from source to target.
-
-We will send a signal from a given node k. Return the minimum time it takes for all the n nodes to receive the signal. If it is impossible for all the n nodes to receive the signal, return -1.
+//You are given a network of n nodes, labeled from 1 to n. You are also given times, a list of travel times as directed edges times[i] = (ui, vi, wi),
+//where ui is the source node, vi is the target node, and wi is the time it takes for a signal to travel from source to target We will send a signal from a given node k. 
+//Return the minimum time it takes for all the n nodes to receive the signal. If it is impossible for all the n nodes to receive the signal, return -1.
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -19,7 +19,6 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         int w = edge[2];
         graph[u].push_back({v, w});
     }
-
     // Initialize a vector to store the minimum time it takes to reach each node from k.
     vector<int> dist(n + 1, numeric_limits<int>::max());
 
@@ -47,7 +46,6 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
             }
         }
     }
-
     int maxTime = *max_element(dist.begin() + 1, dist.end());  // Skip the 0th element.
 
     if (maxTime == numeric_limits<int>::max()) {
@@ -56,13 +54,12 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         return maxTime;
     }
 }
-
 int main() {
     int n = 5;
     int k = 2;
     vector<vector<int>> times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
     int result = networkDelayTime(times, n, k);
-    cout << "Minimum time to reach all nodes: " << result << endl;
+    cout << "Minimum time to reach all nodes: " << result ;
 
     return 0;
 }
