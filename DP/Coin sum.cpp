@@ -1,9 +1,7 @@
 //You have n coins with certain values. Your task is to find all money sums you can create using these coins.
-using c++
 #include <iostream>
 #include <vector>
 #include <set>
-
 using namespace std;
 
 void findMoneySums(vector<int>& coins, int n) {
@@ -22,11 +20,9 @@ void findMoneySums(vector<int>& coins, int n) {
         cout << sum << " ";
     }
 }
-
 int main() {
     vector<int> coins = {1, 2, 5};
     int n = coins.size();
     findMoneySums(coins, n);
-
     return 0;
 }
