@@ -1,31 +1,27 @@
 //Consider an n \times n grid whose squares may have traps. It is not allowed to move to a square with a trap.
-Your task is to calculate the number of paths from the upper-left square to the lower-right square. You can only move right or down.
-Print the number of paths modulo 10^9+7. using c++ dp
+//Your task is to calculate the number of paths from the upper-left square to the lower-right square. You can only move right or down.
 #include <iostream>
 #include <vector>
 
 const int MOD = 1000000007;
 
-int countPaths(int n, std::vector<std::vector<bool>>& traps) {
-    std::vector<std::vector<int>> dp(n, std::vector<int>(n, 0));
+int countPaths(int n, vector<vector<bool>>& traps) {
+    vector<vector<int>> dp(n,vector<int>(n, 0));
 
     // Initialize the top-left square.
     dp[0][0] = traps[0][0] ? 0 : 1;
-
     // Initialize the first column.
     for (int i = 1; i < n; ++i) {
         if (!traps[i][0]) {
             dp[i][0] = dp[i - 1][0];
         }
     }
-
     // Initialize the first row.
     for (int j = 1; j < n; ++j) {
         if (!traps[0][j]) {
             dp[0][j] = dp[0][j - 1];
         }
     }
-
     // Fill in the DP table.
     for (int i = 1; i < n; ++i) {
         for (int j = 1; j < n; ++j) {
@@ -34,27 +30,23 @@ int countPaths(int n, std::vector<std::vector<bool>>& traps) {
             }
         }
     }
-
     return dp[n - 1][n - 1];
 }
-
 int main() {
-    int n; // Size of the grid
-    std::cin >> n;
+    int n; 
+    cin >> n;
 
-    std::vector<std::vector<bool>> traps(n, std::vector<bool>(n, false));
+    vector<vector<bool>> traps(n, vector<bool>(n, false));
 
     // Input trap locations (1 for trap, 0 for empty square)
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             int trap;
-            std::cin >> trap;
+            cin >> trap;
             traps[i][j] = (trap == 1);
         }
     }
-
     int result = countPaths(n, traps);
-    std::cout << result << std::endl;
-
+    cout << result ;
     return 0;
 }
