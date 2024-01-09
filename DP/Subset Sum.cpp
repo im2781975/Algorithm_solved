@@ -1,17 +1,15 @@
 //Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
 #include <iostream>
 #include <vector>
-
+using namespace std;
 bool canPartition(std::vector<int>& nums) {
     int sum = 0;
     for (int num : nums) {
         sum += num;
     }
-
     if (sum % 2 != 0) {
         return false; // If the sum is not even, it can't be divided into two equal subsets.
     }
-
     int target = sum / 2;
     int n = nums.size();
     std::vector<std::vector<bool>> dp(n + 1, std::vector<bool>(target + 1, false));
@@ -29,17 +27,15 @@ bool canPartition(std::vector<int>& nums) {
             }
         }
     }
-
     return dp[n][target];
 }
-
 int main() {
-    std::vector<int> nums = {1, 5, 11, 5};
+    vector<int> nums = {1, 5, 11, 5};
     bool result = canPartition(nums);
     if (result) {
-        std::cout << "The array can be partitioned into two equal-sum subsets." << std::endl;
+        cout << "The array can be partitioned into two equal-sum subsets." ;
     } else {
-        std::cout << "The array cannot be partitioned into two equal-sum subsets." << std::endl;
+        cout << "The array cannot be partitioned into two equal-sum subsets." ;
     }
     return 0;
 }
