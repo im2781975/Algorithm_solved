@@ -1,17 +1,6 @@
-//You are given two integer numbers, n
- and x
-. You may perform several operations with the integer x
-.
-
-Each operation you perform is the following one: choose any digit y
- that occurs in the decimal representation of x
- at least once, and replace x
- by x⋅y
-.
-
-You want to make the length of decimal representation of x
- (without leading zeroes) equal to n
-. What is the minimum number of operations required to do that?
+//You are given two integer numbers, n and x. You may perform several operations with the integer x
+//Each operation you perform is the following one: choose any digit y that occurs in the decimal representation of x at least once, and replace x by x⋅y
+//You want to make the length of decimal representation of x(without leading zeroes) equal to n.What is the minimum number of operations required to do that?
 #include <iostream>
 #include <string>
 using namespace std;
@@ -30,7 +19,6 @@ int main() {
         x_str = to_string(x) + x_str; // Update the string representation.
         operations++;
     }
-
-    cout << operations << endl;
+    cout << operations ;
     return 0;
 }
