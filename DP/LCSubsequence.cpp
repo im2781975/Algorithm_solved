@@ -1,16 +1,13 @@
-//You are given strings 
-s and 
-t. Find one longest string that is a subsequence of both 
-s and t.using c++
+//given strings s & t. Find one longest string that is a subsequence of both s and t.
 #include <iostream>
 #include <vector>
 #include <string>
-
-std::string longestCommonSubsequence(const std::string& s, const std::string& t) {
+using namespace std;
+string longestCommonSubsequence(const string& s, const string& t) {
     int m = s.length();
     int n = t.length();
 
-    std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1, 0));
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
     // Building the dynamic programming table
     for (int i = 1; i <= m; i++) {
@@ -22,10 +19,8 @@ std::string longestCommonSubsequence(const std::string& s, const std::string& t)
             }
         }
     }
-
     int length = dp[m][n];
-    std::string lcs(length, ' ');
-
+    string lcs(length, ' ');
     // Backtrack to find the LCS
     int i = m, j = n;
     while (i > 0 && j > 0) {
@@ -39,17 +34,14 @@ std::string longestCommonSubsequence(const std::string& s, const std::string& t)
             j--;
         }
     }
-
     return lcs;
 }
-
 int main() {
-    std::string s = "AGGTAB";
-    std::string t = "GXTXAYB";
+    string s = "AGGTAB";
+    string t = "GXTXAYB";
 
-    std::string lcs = longestCommonSubsequence(s, t);
+    string lcs = longestCommonSubsequence(s, t);
 
-    std::cout << "Longest Common Subsequence: " << lcs << std::endl;
+    cout << "Longest Common Subsequence: " << lcs ;
     return 0;
 }
-
