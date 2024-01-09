@@ -1,11 +1,7 @@
-//Taro has decided to choose some of the 
-N items and carry them home in a knapsack. The capacity of the knapsack is 
-W, which means that the sum of the weights of items taken must be at most 
-W.you are allowed to pick an item any number of times.
-Find the maximum possible sum of the values of items that Taro takes home.
+//The capacity of the knapsack is W, which means that the sum of the weights of items taken must be at most W.
+//are allowed to pick an item any number of times.Find the maximum possible sum of the values of items that takes home
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
 int knapsack(int N, int W, vector<int>& weights, vector<int>& values) {
@@ -18,10 +14,8 @@ int knapsack(int N, int W, vector<int>& weights, vector<int>& values) {
             }
         }
     }
-
     return dp[W];
 }
-
 int main() {
     int N, W;
     cin >> N >> W;
@@ -31,9 +25,7 @@ int main() {
     for (int i = 0; i < N; i++) {
         cin >> weights[i] >> values[i];
     }
-
     int result = knapsack(N, W, weights, values);
-    cout << "Maximum value that can be carried in the knapsack: " << result << endl;
-
+    cout << "Maximum value that can be carried in the knapsack: " << result ;
     return 0;
 }
