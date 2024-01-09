@@ -1,22 +1,17 @@
 //Given an integer n, return the least number of perfect square numbers that sum to n.
-
-A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
 #include <vector>
 #include <algorithm>
-
+using namespace std;
 int numSquares(int n) {
     // Create a vector to store the minimum number of perfect squares needed to sum to each number from 0 to n.
-    std::vector<int> dp(n + 1, INT_MAX);
-    
+    vector<int> dp(n + 1, INT_MAX);
     // Initialize dp[0] to 0, since it takes 0 perfect squares to sum to 0.
     dp[0] = 0;
-    
     // Generate a list of perfect squares up to n.
-    std::vector<int> perfectSquares;
+    vector<int> perfectSquares;
     for (int i = 1; i * i <= n; i++) {
         perfectSquares.push_back(i * i);
     }
-    
     for (int i = 1; i <= n; i++) {
         for (int square : perfectSquares) {
             if (i - square >= 0) {
@@ -24,14 +19,12 @@ int numSquares(int n) {
             }
         }
     }
-    
     return dp[n];
 }
-
 int main() {
-    int n = 12; // You can change n to any positive integer.
+    int n = 12; 
     int result = numSquares(n);
-    std::cout << "The least number of perfect squares that sum to " << n << " is: " << result << std::endl;
+    std::cout << "The least number of perfect squares that sum to " << n << " is: " << result ;
     return 0;
 }
 
