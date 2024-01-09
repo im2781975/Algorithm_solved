@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
 using namespace std;
 
 int longestPalindromeSubseq(string s) {
@@ -19,14 +18,11 @@ int longestPalindromeSubseq(string s) {
             }
         }
     }
-
     return dp[0][n - 1];
 }
-
 int main() {
-    string s = "babad"; // Replace with your input string.
+    string s = "babad";
     int result = longestPalindromeSubseq(s);
-    cout << "Longest Palindromic Subsequence Length: " << result << endl;
+    cout << "Longest Palindromic Subsequence Length: " << result ;
     return 0;
 }
-
