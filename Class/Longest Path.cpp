@@ -1,34 +1,28 @@
-//Given an m x n integers matrix, return the length of the longest increasing path in matrix. using c++
-
-From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).
+//return the length of the longest increasing path in matrix.
 #include <vector>
-
+using namespace std;
 class Solution {
 public:
-    int longestIncreasingPath(std::vector<std::vector<int>>& matrix) {
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
         if (matrix.empty() || matrix[0].empty()) {
             return 0;
         }
-
         int m = matrix.size();
         int n = matrix[0].size();
-        std::vector<std::vector<int>> memo(m, std::vector<int>(n, 0));
+        vector<vector<int>> memo(m, vector<int>(n, 0));
         int longestPath = 0;
 
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                longestPath = std::max(longestPath, dfs(matrix, i, j, memo));
+                longestPath = max(longestPath, dfs(matrix, i, j, memo));
             }
         }
-
         return longestPath;
     }
-
-    int dfs(std::vector<std::vector<int>>& matrix, int x, int y, std::vector<std::vector<int>>& memo) {
+    int dfs(vector<vector<int>>& matrix, int x, int y, vector<vector<int>>& memo) {
         if (memo[x][y] != 0) {
             return memo[x][y];
         }
-
         int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         int maxPath = 1;
 
@@ -40,7 +34,6 @@ public:
                 maxPath = std::max(maxPath, 1 + dfs(matrix, newX, newY, memo));
             }
         }
-
         memo[x][y] = maxPath;
         return maxPath;
     }
