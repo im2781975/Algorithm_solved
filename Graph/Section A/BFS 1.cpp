@@ -1,30 +1,16 @@
-// C++ implementation of modified BFS 
 #include<bits/stdc++.h> 
 using namespace std; 
-  
-// A utility function to add an edge in an 
-// directed graph. 
+// function to add an edge in an  directed graph. 
 void addEdge(vector<int> adj[], int u, int v) 
 { 
     adj[u].push_back(v); 
 } 
-  
-// A utility function to do BFS of graph 
-// from a given vertex u. 
-void BFSUtil(int u, vector<int> adj[], 
-            vector<bool> &visited) 
+void BFSUtil(int u, vector<int> adj[], vector<bool> &visited) 
 { 
-  
-    // Create a queue for BFS 
     list<int> q; 
-   
-    // Mark the current node as visited and enqueue it 
     visited[u] = true; 
     q.push_back(u); 
-   
-    // 'i' will be used to get all adjacent vertices 4 
-    // of a vertex list<int>::iterator i; 
-   
+ 
     while(!q.empty()) 
     { 
         // Dequeue a vertex from queue and print it 
@@ -32,9 +18,6 @@ void BFSUtil(int u, vector<int> adj[],
         cout << u << " "; 
         q.pop_front(); 
    
-        // Get all adjacent vertices of the dequeued 
-        // vertex s. If an adjacent has not been visited,  
-        // then mark it visited and enqueue it 
         for (int i = 0; i != adj[u].size(); ++i) 
         { 
             if (!visited[adj[u][i]]) 
@@ -45,9 +28,6 @@ void BFSUtil(int u, vector<int> adj[],
         } 
     } 
 } 
-  
-// This function does BFSUtil() for all  
-// unvisited vertices. 
 void BFS(vector<int> adj[], int V) 
 { 
     vector<bool> visited(V, false); 
@@ -55,8 +35,6 @@ void BFS(vector<int> adj[], int V)
         if (visited[u] == false) 
             BFSUtil(u, adj, visited); 
 } 
-  
-// Driver code 
 int main() 
 { 
     int V = 5; 
