@@ -1,14 +1,8 @@
-// A C++ program for getting minimum product
-// spanning tree The program is for adjacency matrix
+// minimum product spanning tree The program is for adjacency matrix
 // representation of the graph
 #include <bits/stdc++.h>
- 
-// Number of vertices in the graph
 #define V 5
- 
-// A utility function to find the vertex with minimum
-// key value, from the set of vertices not yet included
-// in MST
+// find the vertex with minimum key value, from the set of vertices not yet included in MST
 int minKey(int key[], bool mstSet[])
 {
     // Initialize min value
@@ -20,10 +14,7 @@ int minKey(int key[], bool mstSet[])
  
     return min_index;
 }
- 
-// A utility function to print the constructed MST
-// stored in parent[] and print Minimum Obtainable
-// product
+// print the constructed MST stored in parent[] and print Minimum Obtainable product
 int printMST(int parent[], int n, int graph[V][V])
 {
     printf("Edge   Weight\n");
@@ -44,50 +35,45 @@ int printMST(int parent[], int n, int graph[V][V])
 // logGraph is sent for actual MST operations
 void primMST(int inputGraph[V][V], double logGraph[V][V])
 {
-    int parent[V]; // Array to store constructed MST
-    int key[V]; // Key values used to pick minimum
+    int parent[V]; 
+    // Array to store constructed MST
+    int key[V]; 
+    // Key values used to pick minimum
     // weight edge in cut
-    bool mstSet[V]; // To represent set of vertices not
+    bool mstSet[V]; 
+    // To represent set of vertices not
     // yet included in MST
- 
-    // Initialize all keys as INFINITE
     for (int i = 0; i < V; i++)
         key[i] = INT_MAX, mstSet[i] = false;
  
     // Always include first 1st vertex in MST.
-    key[0] = 0; // Make key 0 so that this vertex is
+    key[0] = 0;
+    // Make key 0 so that this vertex is
     // picked as first vertex
-    parent[0] = -1; // First node is always root of MST
+    parent[0] = -1; 
+    // First node is always root of MST
  
     // The MST will have V vertices
     for (int count = 0; count < V - 1; count++) {
         // Pick the minimum key vertex from the set of
         // vertices not yet included in MST
         int u = minKey(key, mstSet);
- 
         // Add the picked vertex to the MST Set
         mstSet[u] = true;
  
-        // Update key value and parent index of the
-        // adjacent vertices of the picked vertex.
-        // Consider only those vertices which are not yet
-        // included in MST
+        // Update key value and parent index of the adjacent vertices of the picked vertex.
+        // Consider only those vertices which are not yet included in MST
         for (int v = 0; v < V; v++)
- 
-            // logGraph[u][v] is non zero only for
-            // adjacent vertices of m mstSet[v] is false
-            // for vertices not yet included in MST
-            // Update the key only if logGraph[u][v] is
+            // logGraph[u][v] is non zero only for  adjacent vertices of m mstSet[v] is false
+            // for vertices not yet included in MST Update the key only if logGraph[u][v] is
             // smaller than key[v]
             if (logGraph[u][v] > 0 && mstSet[v] == false && logGraph[u][v] < key[v])
  
                 parent[v] = u, key[v] = logGraph[u][v];
     }
- 
     // print the constructed MST
     printMST(parent, V, inputGraph);
 }
- 
 // Method to get minimum product spanning tree
 void minimumProductMST(int graph[V][V])
 {
@@ -102,13 +88,9 @@ void minimumProductMST(int graph[V][V])
                 logGraph[i][j] = 0;
         }
     }
- 
-    // Applying standard Prim's MST algorithm on
-    // Log graph.
+    // Applying standard Prim's MST algorithm on Log graph.
     primMST(graph, logGraph);
 }
- 
-// driver program to test above function
 int main()
 {
     /* Let us create the following graph
@@ -126,8 +108,6 @@ int main()
         { 6, 8, 0, 0, 9 },
         { 0, 5, 7, 9, 0 },
     };
- 
-    // Print the solution
     minimumProductMST(graph);
  
     return 0;
