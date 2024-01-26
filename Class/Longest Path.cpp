@@ -38,3 +38,15 @@ public:
         return maxPath;
     }
 };
+int main() {
+    vector<vector<int>> matrix = {
+        {9, 9, 4},
+        {6, 6, 8},
+        {2, 1, 1}
+    };
+    Solution solution;
+    int result = solution.longestIncreasingPath(matrix);
+    cout << "Length of the longest increasing path: " << result << endl;
+
+    return 0;
+}
