@@ -1,10 +1,6 @@
-// C++ program for the above approach
- 
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Function to find unit area of the largest region of 1s.
- 
+//find unit area of the largest region of 1s.
 int largestRegion(vector<vector<int> >& grid)
 {
     int m = grid.size();
@@ -89,16 +85,11 @@ int largestRegion(vector<vector<int> >& grid)
     }
     return area;
 }
- 
-// Driver Code
 int main()
 {
-    vector<vector<int> > M = { { 0, 0, 1, 1, 0 },
-                               { 1, 0, 1, 1, 0 },
-                               { 0, 1, 0, 0, 0 },
-                               { 0, 0, 0, 0, 1 } };
- 
-    // Function call
+    vector<vector<int> > M = 
+    { { 0, 0, 1, 1, 0 },{ 1, 0, 1, 1, 0 },
+    { 0, 1, 0, 0, 0 },{ 0, 0, 0, 0, 1 } };
     cout << largestRegion(M);
     return 0;
 }
