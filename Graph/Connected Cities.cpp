@@ -1,34 +1,28 @@
 //There are n cities and m roads between them. Your task is to process q queries where you have to determine the length of the shortest route between two given cities.
-
-Write a C++ program to solve this problem by using Floyd Warshall algorithm.
 #include <iostream>
 #include <vector>
 #include <climits>
-
 using namespace std;
-
 const int INF = INT_MAX;
 
 int main() {
     int n, m, q;
     cin >> n >> m;
-
-    // Initialize the adjacency matrix with infinity for all pairs
     vector<vector<int>> dist(n, vector<int>(n, INF));
 
     // Fill the diagonal with zeros (the distance from a city to itself is 0)
     for (int i = 0; i < n; i++) {
         dist[i][i] = 0;
     }
-
     // Read the road lengths
     for (int i = 0; i < m; i++) {
         int u, v, w;
         cin >> u >> v >> w;
-        dist[u - 1][v - 1] = w; // Assuming cities are 1-indexed
-        dist[v - 1][u - 1] = w; // If roads are bidirectional
+        dist[u - 1][v - 1] = w;
+        // Assuming cities are 1-indexed
+        dist[v - 1][u - 1] = w;
+        // If roads are bidirectional
     }
-
     // Floyd-Warshall algorithm
     for (int k = 0; k < n; k++) {
         for (int i = 0; i < n; i++) {
@@ -39,7 +33,6 @@ int main() {
             }
         }
     }
-
     cin >> q;
     for (int i = 0; i < q; i++) {
         int src, dest;
@@ -51,6 +44,6 @@ int main() {
             cout << "Not connected" << endl;
         }
     }
-
     return 0;
 }
+
