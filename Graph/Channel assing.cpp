@@ -4,22 +4,20 @@
 #define M 3
 #define N 4
 using namespace std;
- 
 // A Depth First Search based recursive function that returns true
 // if a matching for vertex u is possible
 bool bpm(int table[M][N], int u, bool seen[], int matchR[])
 {
-    // Try every receiver one by one
+    //Try every receiver one by one
     for (int v = 0; v < N; v++)
     {
-        // If sender u has packets to send to receiver v and
+        //If sender u has packets to send to receiver v and
         // receiver v is not already mapped to any other sender
         // just check if the number of packets is greater than '0'
         // because only one packet can be sent in a time frame anyways
         if (table[u][v]>0 && !seen[v])
         {
-            seen[v] = true; // Mark v as visited
- 
+            seen[v] = true;
             // If receiver 'v' is not assigned to any sender OR
             // previously assigned sender for receiver v (which is
             // matchR[v]) has an alternate receiver available. Since
@@ -34,23 +32,20 @@ bool bpm(int table[M][N], int u, bool seen[], int matchR[])
     }
     return false;
 }
- 
 // Returns maximum number of packets that can be sent parallelly in 1
 // time slot from sender to receiver
 int maxBPM(int table[M][N])
 {
-    // An array to keep track of the receivers assigned to the senders.
-    // The value of matchR[i] is the sender ID assigned to receiver i.
+    //An array to keep track of the receivers assigned to the senders. The value of matchR[i] is the sender ID assigned to receiver i.
     // the value -1 indicates nobody is assigned.
     int matchR[N];
- 
     // Initially all receivers are not mapped to any senders
     memset(matchR, -1, sizeof(matchR));
- 
-    int result = 0; // Count of receivers assigned to senders
+    int result = 0; 
+    // Count of receivers assigned to senders
     for (int u = 0; u < M; u++)
     {
-        // Mark all receivers as not seen for next sender
+        //Mark all receivers as not seen for next sender
         bool seen[N];
         memset(seen, 0, sizeof(seen));
  
@@ -58,7 +53,6 @@ int maxBPM(int table[M][N])
         if (bpm(table, u, seen, matchR))
             result++;
     }
- 
     cout << "The number of maximum packets sent in the time slot is "
          << result << "\n";
  
@@ -67,8 +61,6 @@ int maxBPM(int table[M][N])
             cout << "T" << matchR[x]+1 << "-> R" << x+1 << "\n";
     return result;
 }
- 
-// Driver program to test above function
 int main()
 {
     int table[M][N] = {{0, 2, 0}, {3, 0, 1}, {2, 4, 0}};
