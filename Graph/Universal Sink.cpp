@@ -1,13 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
 const int MAX = 100;
- 
 class Graph {
     int vertices;
     int adjacency_matrix[MAX][MAX];
- 
-public:
+    public:
     Graph(int vertices)
     {
         this->vertices = vertices;
@@ -18,7 +15,6 @@ public:
     {
         adjacency_matrix[destination - 1] = 1;
     }
- 
     bool is_sink(int i)
     {
         for (int j = 0; j < vertices; j++) {
@@ -29,7 +25,6 @@ public:
         }
         return true;
     }
- 
     int eliminate()
     {
         int i = 0, j = 0;
@@ -39,7 +34,6 @@ public:
             else
                 j = j + 1;
         }
- 
         if (i > vertices)
             return -1;
         else if (!is_sink(i))
@@ -48,7 +42,6 @@ public:
             return i;
     }
 };
- 
 int main()
 {
     int number_of_vertices = 6, number_of_edges = 5;
@@ -60,12 +53,10 @@ int main()
     g.insert(5, 3);
  
     int vertex = g.eliminate();
- 
     if (vertex >= 0)
         cout << "Sink found at vertex " << (vertex + 1)
              << endl;
     else
         cout << "No Sink" << endl;
- 
     return 0;
 }
