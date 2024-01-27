@@ -2,18 +2,14 @@
 #include <queue>
 #include <vector>
 using namespace std;
- 
 // define a pair to represent a node in the forest
 typedef pair<int, int> Node;
- 
 // function to perform BFS from a given node and mark all visited nodes
 void bfs(vector<vector<int>>& forest, Node start, vector<vector<bool>>& visited) {
     // create a queue for BFS
     queue<Node> q;
     q.push(start);
     visited[start.first][start.second] = true;
- 
-    // BFS loop
     while (!q.empty()) {
         Node curr = q.front();
         q.pop();
@@ -31,16 +27,13 @@ void bfs(vector<vector<int>>& forest, Node start, vector<vector<bool>>& visited)
         }
     }
 }
- 
 // function to count the number of trees in a forest using BFS
 int count_trees_in_forest(vector<vector<int>>& forest) {
     int count = 0;
     int n = forest.size();
     int m = forest[0].size();
- 
     // create a 2D boolean array to keep track of visited nodes
     vector<vector<bool>> visited(n, vector<bool>(m, false));
- 
     // iterate over all nodes in the forest and perform BFS from each unvisited tree
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -50,12 +43,9 @@ int count_trees_in_forest(vector<vector<int>>& forest) {
             }
         }
     }
- 
     return count;
 }
- 
 int main() {
-    // example usage
     vector<vector<int>> forest = {
         {0, 1, 1, 0, 0},
         {0, 0, 0, 0, 0},
