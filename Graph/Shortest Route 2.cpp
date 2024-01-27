@@ -1,14 +1,12 @@
 //There are n cities and m roads between them. Your task is to process q queries where you have to determine the length of the shortest route between two given cities.
-Print the length of the shortest route for each query. If there is no route, print -1 instead
+//Print the length of the shortest route for each query. If there is no route, print -1 instead
 #include <iostream>
 #include <vector>
 #include <queue>
 #include <limits>
-
 using namespace std;
 
 const int INF = numeric_limits<int>::max();
-
 // Define a structure to represent the edges of the graph
 struct Edge {
     int to, weight;
@@ -72,6 +70,6 @@ int main() {
             cout << shortest_distance << endl;
         }
     }
-
     return 0;
 }
+
