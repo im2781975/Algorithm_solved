@@ -1,14 +1,10 @@
-//You are given a map of a labyrinth, and your task is to find a path from start to end. You can walk left, right, up and down.
-First print "YES", if there is a path, and "NO" otherwise.
-
-If there is a path, print the length of the shortest such path and its description as a string consisting of characters L (left), R (right), U (up), and D (down). You can print any valid solution.
+//find a path from start to end. You can walk left, right, up and down. First print "YES", if there is a path, and "NO" otherwise.
+//If there is a path, print the length of the shortest such path
 #include <iostream>
 #include <queue>
 #include <vector>
 #include <string>
-
 using namespace std;
-
 const int MAX_N = 100;  // Adjust this according to the size of your labyrinth
 const char WALL = '#';
 const int dx[] = {1, -1, 0, 0};
@@ -18,24 +14,19 @@ int n, m;
 char labyrinth[MAX_N][MAX_N];
 int dist[MAX_N][MAX_N];
 pair<int, int> parent[MAX_N][MAX_N];
-
 bool is_valid(int x, int y) {
     return x >= 0 && x < n && y >= 0 && y < m && labyrinth[x][y] != WALL;
 }
-
 void bfs(pair<int, int> start, pair<int, int> end) {
     queue<pair<int, int>> q;
     q.push(start);
     dist[start.first][start.second] = 0;
-
     while (!q.empty()) {
         pair<int, int> cur = q.front();
         q.pop();
-
         if (cur == end) {
-            return;  // Found the end point
+            return; 
         }
-
         for (int i = 0; i < 4; i++) {
             int new_x = cur.first + dx[i];
             int new_y = cur.second + dy[i];
@@ -53,7 +44,6 @@ string find_shortest_path(pair<int, int> start, pair<int, int> end) {
     if (dist[end.first][end.second] == -1) {
         return "NO";
     }
-
     string path;
     while (end != start) {
         pair<int, int> prev = parent[end.first][end.second];
@@ -67,19 +57,15 @@ string find_shortest_path(pair<int, int> start, pair<int, int> end) {
         }
         end = prev;
     }
-
     return "YES\n" + to_string(dist[start.first][start.second]) + "\n" + path;
 }
-
 int main() {
     cin >> n >> m;
-
     pair<int, int> start, end;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             cin >> labyrinth[i][j];
             dist[i][j] = -1;
-
             if (labyrinth[i][j] == 'A') {
                 start = {i, j};
             } else if (labyrinth[i][j] == 'B') {
@@ -87,10 +73,7 @@ int main() {
             }
         }
     }
-
     bfs(start, end);
     cout << find_shortest_path(start, end) << endl;
-
     return 0;
 }
-
