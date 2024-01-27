@@ -1,40 +1,29 @@
-// A C++ program to Clone an Undirected Graph
+//Clone an Undirected Graph
 #include<bits/stdc++.h>
 using namespace std;
- 
 struct GraphNode
 {
     int val;
- 
-    //A neighbour vector which contains addresses to
-    //all the neighbours of a GraphNode
+    //A neighbour vector which contains addresses to all the neighbours of a GraphNode
     vector<GraphNode*> neighbours;
 };
- 
-// A function which clones a Graph and
-// returns the address to the cloned
-// src node
+// A function which clones a Graph &  returns the address to the cloned src node
 GraphNode *cloneGraph(GraphNode *src)
 {
-    //A Map to keep track of all the
-    //nodes which have already been created
+    //A Map to keep track of all the nodes which have already been created
     map<GraphNode*, GraphNode*> m;
     queue<GraphNode*> q;
- 
     // Enqueue src node
     q.push(src);
     GraphNode *node;
- 
     // Make a clone Node
     node = new GraphNode();
     node->val = src->val;
- 
     // Put the clone node into the Map
     m[src] = node;
     while (!q.empty())
     {
-        //Get the front node from the queue
-        //and then visit all its neighbours
+        //Get the front node from the queue and then visit all its neighbours
         GraphNode *u = q.front();
         q.pop();
         vector<GraphNode *> v = u->neighbours;
@@ -44,23 +33,19 @@ GraphNode *cloneGraph(GraphNode *src)
             // Check if this node has already been created
             if (m[v[i]] == NULL)
             {
-                // If not then create a new Node and
-                // put into the HashMap
+                // If not then create a new Node & put into the HashMap
                 node = new GraphNode();
                 node->val = v[i]->val;
                 m[v[i]] = node;
                 q.push(v[i]);
             }
- 
             // add these neighbours to the cloned graph node
             m[u]->neighbours.push_back(m[v[i]]);
         }
     }
- 
     // Return the address of cloned src Node
     return m[src];
 }
- 
 // Build the desired graph
 GraphNode *buildGraph()
 {
@@ -98,8 +83,7 @@ GraphNode *buildGraph()
     return node1;
 }
  
-// A simple bfs traversal of a graph to
-// check for proper cloning of the graph
+// A simple bfs traversal of a graph to check for proper cloning of the graph
 void bfs(GraphNode *src)
 {
     map<GraphNode*, bool> visit;
@@ -125,8 +109,6 @@ void bfs(GraphNode *src)
     }
     cout << endl;
 }
- 
-// Driver program to test above function
 int main()
 {
     GraphNode *src = buildGraph();
