@@ -1,5 +1,4 @@
 #include <iostream> 
-  
 using namespace std; 
   
 class LinkedList { 
@@ -8,26 +7,22 @@ private:
     public: 
         int data; 
         Node* next; 
-  
         Node(int data) { 
             this->data = data; 
             this->next = nullptr; 
         } 
     }; 
-  
     Node* head; 
   
-public: 
+    public: 
     LinkedList() { 
         head = nullptr; 
     } 
-  
     void addToFront(int data) { 
         Node* newNode = new Node(data); 
         newNode->next = head; 
         head = newNode; 
     } 
-  
     bool isCircular() { 
         if (head == nullptr) { 
             return false; 
@@ -44,7 +39,6 @@ public:
         return false; 
     } 
 }; 
-  
 int main() { 
     LinkedList list; 
     list.addToFront(1); 
