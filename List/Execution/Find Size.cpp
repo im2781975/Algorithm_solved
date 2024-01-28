@@ -1,18 +1,12 @@
-// A complete working C++ program to 
-// find size of doubly linked list. 
+// find size of doubly linked list.
 #include <bits/stdc++.h> 
-using namespace std; 
-  
-// A linked list node 
+using namespace std;
 struct Node 
 { 
     int data; 
     struct Node *next; 
     struct Node *prev; 
 }; 
-  
-/* Function to add a node to front of doubly 
-   linked list */
 void push(struct Node** head_ref, int new_data) 
 { 
     struct Node* new_node = new Node; 
@@ -23,8 +17,6 @@ void push(struct Node** head_ref, int new_data)
       (*head_ref)->prev = new_node ; 
     (*head_ref)    = new_node; 
 } 
-  
-// This function returns size of linked list 
 int findSize(struct Node *node) 
 { 
    int res = 0; 
@@ -34,9 +26,7 @@ int findSize(struct Node *node)
        node = node->next; 
    } 
    return res; 
-} 
-  
-/* Driver program to test above functions*/
+}
 int main() 
 { 
     struct Node* head = NULL; 
