@@ -1,5 +1,4 @@
-// CPP program to construct a linked list
-// from given 2D matrix
+// construct a linked list from given 2D matrix
 #include <bits/stdc++.h>
 using namespace std;
 // struct node of linked list
@@ -7,22 +6,18 @@ struct Node {
     int data;
     Node *right, *down;
 };
-// returns head pointer of linked list
-// constructed from 2D matrix
+// returns head pointer of linked list constructed from 2D matrix
 Node* construct(int arr[][4], int i, int j, int m, int n,
-                vector<vector<Node*> >& visited)
+    vector<vector<Node*> >& visited)
 {
     // return if i or j is out of bounds
     if (i > m - 1 || j > n - 1)
         return NULL;
-    // Check if node is previously created then,
-    // don't need to create new/
+    // Check if node is previously created then, don't need to create new
     if (visited[i][j]) {
         return visited[i][j];
     }
-    // create a new node for current i and j
-    // and recursively allocate its down and
-    // right pointers
+    // create a new node for current i and j & recursively allocate its down and right pointers
     Node* temp = new Node();
     visited[i][j] = temp;
     temp->data = arr[i][j];
@@ -30,8 +25,7 @@ Node* construct(int arr[][4], int i, int j, int m, int n,
     temp->down = construct(arr, i + 1, j, m, n, visited);
     return temp;
 }
-// utility function for displaying
-// linked list data
+// displaying linked list data
 void display(Node* head)
 {
     // pointer to move right
@@ -50,17 +44,14 @@ void display(Node* head)
         Dp = Dp->down;
     }
 }
-// driver program
 int main()
 {
-    // 2D matrix
-    int arr[][4] = { { 1, 2, 3, 0 },
-                     { 4, 5, 6, 1 },
-                     { 7, 8, 9, 2 },
-                     { 7, 8, 9, 2 } };
+    int arr[][4] = { { 1, 2, 3, 0 }, { 4, 5, 6, 1 },
+     { 7, 8, 9, 2 }, { 7, 8, 9, 2 } };
     int m = 4, n = 4;
     vector<vector<Node*> > visited(m, vector<Node*>(n));
     Node* head = construct(arr, 0, 0, m, n, visited);
     display(head);
     return 0;
 }
+
