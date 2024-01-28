@@ -1,4 +1,4 @@
-// C++ program to reverse a doubly linked list
+// reverse a doubly linked list
 #include <bits/stdc++.h>
 using namespace std;
 struct LinkedList {
@@ -13,8 +13,7 @@ struct LinkedList {
     };
     Node* head = NULL;
  
-    /* Function to reverse a Doubly Linked List using Stacks
-     */
+    // Function to reverse a Doubly Linked List using Stacks
     void reverse()
     {
         stack<int> st;
@@ -23,49 +22,30 @@ struct LinkedList {
             st.push(temp->data);
             temp = temp->next;
         }
- 
-        // added all the elements sequence wise in the
-        // st
+        // added all the elements sequence wise in the st
         temp = head;
         while (temp != NULL) {
             temp->data = st.top();
             st.pop();
             temp = temp->next;
         }
- 
-        // popped all the elements and the added in the
-        // linked list,
-        // which are in the reversed order->
+        // popped all the elements and the added in the linked list, which are in the reversed order
     }
- 
-    /* UTILITY FUNCTIONS */
-    /* Function to insert a node at the beginning of the
-     * Doubly Linked List */
     void Push(int new_data)
     {
- 
-        /* allocate node */
         Node* new_node = new Node(new_data);
  
-        /* since we are adding at the beginning,
-         prev is always NULL */
+        // since we are adding at the beginning, prev is always NULL
         new_node->prev = NULL;
- 
-        /* link the old list of the new node */
+        //link the old list of the new node 
         new_node->next = head;
- 
-        /* change prev of head node to new node */
+        // change prev of head node to new node 
         if (head != NULL) {
             head->prev = new_node;
         }
- 
-        /* move the head to point to the new node */
+        //move the head to point to the new node 
         head = new_node;
     }
- 
-    /* Function to print nodes in a given doubly linked list
-     This function is same as printList() of singly linked
-     list */
     void printList(Node* node)
     {
         while (node) {
@@ -74,15 +54,9 @@ struct LinkedList {
         }
     }
 };
- 
-// Driver Code
 int main()
 {
     LinkedList list;
- 
-    /* Let us create a sorted linked list to test the
-     functions Created linked list will be 10->8->4->2
-   */
     list.Push(2);
     list.Push(4);
     list.Push(8);
