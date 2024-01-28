@@ -1,4 +1,4 @@
-// C++ program for merge sort on doubly linked list 
+//Merge sort on doubly linked list
 #include <bits/stdc++.h>
 using namespace std;
 class Node 
@@ -7,25 +7,21 @@ class Node
     int data; 
     Node *next, *prev; 
 }; 
- 
 Node *split(Node *head); 
- 
 // Function to merge two linked lists 
 Node *merge(Node *first, Node *second) 
 { 
     // If first linked list is empty 
     if (!first) 
         return second; 
- 
     // If second linked list is empty 
     if (!second) 
         return first; 
- 
     // Pick the smaller value 
     if (first->data < second->data) 
     { 
         first->next = merge(first->next,second); 
-        first->next->prev = first; 
+        first->next->prev = first;
         first->prev = NULL; 
         return first; 
     } 
@@ -37,24 +33,21 @@ Node *merge(Node *first, Node *second)
         return second; 
     } 
 } 
- 
 // Function to do merge sort 
 Node *mergeSort(Node *head) 
 { 
     if (!head || !head->next) 
         return head; 
     Node *second = split(head); 
- 
     // Recur for left and right halves 
     head = mergeSort(head); 
     second = mergeSort(second); 
  
-    // Merge the two sorted halves 
+    // Merge the two sorted halves
     return merge(head,second); 
 } 
  
-// A utility function to insert a new node at the 
-// beginning of doubly linked list 
+// insert a new node at the  beginning of doubly linked list 
 void insert(Node **head, int data) 
 { 
     Node *temp = new Node();
@@ -68,10 +61,7 @@ void insert(Node **head, int data)
         (*head)->prev = temp; 
         (*head) = temp; 
     } 
-} 
- 
-// A utility function to print a doubly linked list in 
-// both forward and backward directions 
+}
 void print(Node *head) 
 { 
     Node *temp = head; 
@@ -88,8 +78,7 @@ void print(Node *head)
         cout << temp->data << " "; 
         temp = temp->prev; 
     } 
-} 
- 
+}
 // Utility function to swap two integers 
 void swap(int *A, int *B) 
 { 
@@ -97,9 +86,7 @@ void swap(int *A, int *B)
     *A = *B; 
     *B = temp; 
 } 
- 
-// Split a doubly linked list (DLL) into 2 DLLs of 
-// half sizes 
+// Split a doubly linked list (DLL) into 2 DLLs of half sizes 
 Node *split(Node *head) 
 { 
     Node *fast = head,*slow = head; 
@@ -111,9 +98,7 @@ Node *split(Node *head)
     Node *temp = slow->next; 
     slow->next = NULL; 
     return temp; 
-} 
- 
-// Driver program 
+}
 int main(void) 
 { 
     Node *head = NULL; 
