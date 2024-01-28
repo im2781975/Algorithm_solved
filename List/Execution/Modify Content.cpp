@@ -1,51 +1,32 @@
-// C++ implementation to modify the contents of  
-// the linked list 
+// modify the contents of the linked list 
 #include <bits/stdc++.h> 
-using namespace std; 
-  
-/* Linked list node */
+using namespace std;
 struct Node 
 { 
     int data; 
     struct Node* next; 
-}; 
-  
-/* function prototype for printing the list */
-void printList(struct Node*); 
-  
-/* Function to insert a node at the beginning of  
-   the linked list */
+};
+void printList(struct Node*);
 void push(struct Node **head_ref, int new_data) 
 { 
-  /* allocate node */
-  struct Node* new_node = 
-            (struct Node*) malloc(sizeof(struct Node)); 
+    struct Node* new_node = 
+    (struct Node*) malloc(sizeof(struct Node)); 
     
-  /* put in the data  */
-  new_node->data = new_data; 
-    
-  /* link the old list at the end of the new node */
-  new_node->next = *head_ref;     
-    
-  /* move the head to point to the new node */
-  *head_ref = new_node; 
-}  
-  
-/* Split the nodes of the given list  
-   into front and back halves, 
-   and return the two lists  
-   using the reference parameters. 
-   Uses the fast/slow pointer strategy. */
+    //put in the data
+    new_node->data = new_data; 
+    //link the old list at the end of the new node 
+    new_node->next = *head_ref; 
+    //move the head to point to the new node 
+    *head_ref = new_node; 
+}
 void frontAndBackSplit(struct Node *head,  
-               struct Node **front_ref, struct Node **back_ref) 
+    struct Node **front_ref, struct Node **back_ref) 
 { 
     Node *slow, *fast; 
-      
     slow = head; 
     fast = head->next; 
       
-    /* Advance 'fast' two nodes, and  
-       advance 'slow' one node */
+    //Advance 'fast' two nodes, & advance 'slow' one node */
     while (fast != NULL) 
     { 
         fast = fast->next; 
@@ -55,15 +36,11 @@ void frontAndBackSplit(struct Node *head,
             fast = fast->next; 
         } 
     } 
-      
-     /* 'slow' is before the midpoint in the list,  
-        so split it in two at that point. */
+    // 'slow' is before the midpoint in the list, so split it in two at that point. 
     *front_ref = head; 
     *back_ref = slow->next; 
     slow->next = NULL; 
-} 
-  
-/* Function to reverse the linked list */
+}
 void reverseList(struct Node **head_ref) 
 { 
     struct Node *current, *prev, *next; 
@@ -77,88 +54,65 @@ void reverseList(struct Node **head_ref)
         current = next; 
     }     
     *head_ref = prev; 
-} 
-  
-// perform the required subtraction operation on 
-// the 1st half of the linked list 
-void modifyTheContentsOf1stHalf(struct Node *front, 
-                                struct Node *back) 
+}
+// perform the required subtraction operation on the 1st half of the linked list 
+void modifyTheContentsOf1stHalf(struct Node *front, struct Node *back) 
 { 
     // traversing both the lists simultaneously 
     while (back != NULL) 
     { 
-        // subtraction operation and node data 
-        // modification 
+        // subtraction operation and node data  modification 
         front->data = front->data - back->data; 
           
         front = front->next; 
         back = back->next; 
     } 
-} 
-  
+}
 // function to concatenate the 2nd(back) list at the end of 
 // the 1st(front) list and returns the head of the new list 
-struct Node* concatFrontAndBackList(struct Node *front, 
-                                    struct Node *back) 
+struct Node* concatFrontAndBackList(struct Node *front,struct Node *back) 
 { 
     struct Node *head = front; 
-      
     while (front->next != NULL) 
         front = front->next;     
-          
-    front->next    = back; 
-      
+         front->next = back; 
     return head; 
 } 
-  
 // function to modify the contents of the linked list 
 struct Node* modifyTheList(struct Node *head) 
 { 
     // if list is empty or contains only single node 
     if (!head || head->next == NULL) 
         return head; 
-      
     struct Node *front, *back; 
       
-    // split the list into two halves 
-    // front and back lists 
+    // split the list into two halves front and back lists 
     frontAndBackSplit(head, &front, &back);     
-          
     // reverse the 2nd(back) list 
     reverseList(&back); 
-      
     // modify the contents of 1st half     
     modifyTheContentsOf1stHalf(front, back); 
-          
     // again reverse the 2nd(back) list 
     reverseList(&back); 
-      
-    // concatenating the 2nd list back to the  
-    // end of the 1st list 
+    // concatenating the 2nd list back to the end of the 1st list 
     head = concatFrontAndBackList(front, back); 
-      
     // pointer to the modified list 
     return head; 
-} 
-  
-// function to print the linked list 
+}
 void printList(struct Node *head) 
 { 
     if (!head) 
-        return; 
-      
+        return;
     while (head->next != NULL) 
     { 
         cout << head->data << " -> "; 
         head = head->next; 
     } 
     cout << head->data << endl; 
-} 
-// Driver program to test above 
+}
 int main() 
 { 
-    struct Node *head = NULL; 
-      
+    struct Node *head = NULL;
     // creating the linked list 
     push(&head, 10); 
     push(&head, 7); 
@@ -168,9 +122,7 @@ int main()
     push(&head, 2); 
       
     // modify the linked list 
-    head = modifyTheList(head); 
-      
-    // print the modified linked list 
+    head = modifyTheList(head);
     cout << "Modified List:" << endl; 
     printList(head); 
     return 0; 
