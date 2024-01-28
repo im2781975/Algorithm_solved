@@ -1,13 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Doubly linked list node
 struct Node {
     int data;
     struct Node* next;
     struct Node* prev;
 };
- 
 // Function to create a new node
 struct Node* getNode(int data)
 {
@@ -17,15 +14,12 @@ struct Node* getNode(int data)
     newNode->next = NULL;
     return newNode;
 }
- 
-// Function to display the list
 void displayList(struct Node* start)
 {
     if (start == NULL) {
         cout << "The list is empty." << endl;
         return;
     }
- 
     cout << "The list is: ";
     struct Node* temp = start;
  
@@ -36,13 +30,11 @@ void displayList(struct Node* start)
  
     cout << endl;
 }
- 
 // Function to count the number of elements in the list
 int countList(struct Node* start)
 {
     if (start == NULL)
         return 0;
- 
     int count = 0;
     struct Node* temp = start;
  
@@ -53,12 +45,10 @@ int countList(struct Node* start)
  
     return count;
 }
- 
 // Function to insert a node at a given position
 bool insertAtLocation(struct Node** start, int data, int loc)
 {
     int count = countList(*start);
- 
     if (loc < 1 || loc > count + 1)
         return false;
  
@@ -81,46 +71,32 @@ bool insertAtLocation(struct Node** start, int data, int loc)
     else {
         struct Node* temp = *start;
         int currPos = 1;
- 
         // Traverse to the node before the desired position
         while (currPos < loc - 1) {
             temp = temp->next;
             currPos++;
         }
- 
         // Insert the new node
         newNode->next = temp->next;
         newNode->prev = temp;
         temp->next->prev = newNode;
         temp->next = newNode;
     }
- 
     return true;
 }
- 
-// Driver Code
 int main()
 {
-    // Array elements to create
-    // circular doubly linked list
     int arr[] = { 1, 2, 3, 4, 5, 6 };
     int n = sizeof(arr) / sizeof(arr[0]);
- 
     // Start Pointer
     struct Node* start = NULL;
- 
     // Create the List
     for (int i = 0; i < n; i++)
         insertAtLocation(&start, arr[i], i + 1);
- 
-    // Display the list before insertion
     displayList(start);
- 
+
     // Inserting 8 at 3rd position
     insertAtLocation(&start, 8, 3);
- 
-    // Display the list after insertion
     displayList(start);
- 
     return 0;
 }
