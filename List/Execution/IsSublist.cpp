@@ -1,5 +1,4 @@
 #include <iostream>
- 
 using namespace std;
  
 class Node {
@@ -23,8 +22,6 @@ bool isSublist(Node* list, Node* sublist)
     if (list == nullptr) {
         return false;
     }
- 
-    // Recursive case
     if (list->data == sublist->data) {
         return isSublist(list->next, sublist->next);
     }
@@ -32,10 +29,8 @@ bool isSublist(Node* list, Node* sublist)
         return isSublist(list->next, sublist);
     }
 }
- 
 int main()
 {
-    // Create the main list
     Node* list = new Node(1);
     list->next = new Node(2);
     list->next->next = new Node(1);
@@ -43,7 +38,6 @@ int main()
     list->next->next->next->next = new Node(3);
     list->next->next->next->next->next = new Node(4);
  
-    // Create the sublist
     Node* sublist = new Node(1);
     sublist->next = new Node(2);
     sublist->next->next = new Node(3);
