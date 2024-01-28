@@ -1,14 +1,10 @@
-// C++ program to convert a given Binary Tree to Doubly Linked List 
+//Convert a given Binary Tree to Doubly Linked List 
 #include <bits/stdc++.h> 
-  
 // Structure for tree and linked list 
 struct Node { 
     int data; 
     Node *left, *right; 
 }; 
-  
-// Utility function for allocating node for Binary 
-// Tree. 
 Node* newNode(int data) 
 { 
     Node* node = new Node; 
@@ -17,34 +13,26 @@ Node* newNode(int data)
     return node; 
 } 
   
-// A simple recursive function to convert a given 
-// Binary tree to Doubly Linked List 
+// A simple recursive function to convert a given Binary tree to Doubly Linked List 
 // root    --> Root of Binary Tree 
 // head --> Pointer to head node of created doubly linked list 
 void BToDLL(Node* root, Node*& head) 
 { 
-    // Base cases 
     if (root == NULL) 
         return; 
-  
     // Recursively convert right subtree 
     BToDLL(root->right, head); 
-  
     // insert root into DLL 
     root->right = head; 
-  
     // Change left pointer of previous head 
     if (head != NULL) 
         head->left = root; 
   
     // Change head of Doubly linked list 
-    head = root; 
-  
+    head = root;
     // Recursively convert left subtree 
     BToDLL(root->left, head); 
-} 
-  
-// Utility function for printing double linked list. 
+}
 void printList(Node* head) 
 { 
     printf("Extracted Double Linked list is:\n"); 
@@ -52,9 +40,7 @@ void printList(Node* head)
         printf("%d ", head->data); 
         head = head->right; 
     } 
-} 
-  
-// Driver program to test above function 
+}
 int main() 
 { 
     /* Constructing below tree  
@@ -80,6 +66,5 @@ int main()
     BToDLL(root, head); 
   
     printList(head); 
-  
     return 0; 
 } 
