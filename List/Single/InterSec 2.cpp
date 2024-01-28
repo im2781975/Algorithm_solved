@@ -1,8 +1,6 @@
-// C++ program to implement above approach
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Link list node
+
 struct Node {
     int data;
     struct Node* next;
@@ -14,7 +12,6 @@ void printList(struct Node* node)
         node = node->next;
     }
 }
- 
 void append(struct Node** head_ref, int new_data)
 {
  
@@ -22,9 +19,7 @@ void append(struct Node** head_ref, int new_data)
         = (struct Node*)malloc(sizeof(struct Node));
  
     new_node->data = new_data;
- 
     new_node->next = (*head_ref);
- 
     (*head_ref) = new_node;
 }
 vector<int> intersection(struct Node* tmp1, struct Node* tmp2,
@@ -39,7 +34,6 @@ vector<int> intersection(struct Node* tmp1, struct Node* tmp2,
     }
  
     int cnt = 0;
- 
     while (tmp2 != NULL) {
         if (set.find(tmp2->data) != set.end()) {
             res[cnt] = tmp2->data;
@@ -47,11 +41,8 @@ vector<int> intersection(struct Node* tmp1, struct Node* tmp2,
         }
         tmp2 = tmp2->next;
     }
- 
     return res;
 }
- 
-// Driver code
 int main()
 {
  
@@ -77,7 +68,6 @@ int main()
     append(&ll1,9);
  
     vector<int> arr= intersection(ll, ll1, 6);
- 
     for (int i :arr)
         cout << i << "\n";
  
