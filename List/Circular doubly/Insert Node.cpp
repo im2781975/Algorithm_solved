@@ -82,6 +82,48 @@ void display(struct Node* start)
     }
     printf("%d ", temp->data);
 }
+//search the particular element from the list
+int searchList(struct Node* start, int search)
+{
+    // Declare the temp variable
+    struct Node *temp = start;
+      
+    // Declare other control variable for the searching
+    int count=0,flag=0,value;
+    // If start is NULL return -1
+    if(temp == NULL)
+        return -1;
+    else
+    {
+        // Move the temp pointer until, temp->next doesn't move. start address (Circular Fashion)
+        while(temp->next != start)
+        {
+            // Increment count for location
+            count++;
+            // If it is found raise the flag and break the loop
+            if(temp->data == search)
+            {
+                flag = 1;
+                count--;
+                break;
+            }
+            // Increment temp pointer
+            temp = temp->next;   
+        }
+        // Check whether last element in the list content the value if contain, 
+        // raise a flag and increment count
+        if(temp->data == search)
+        {
+            count++;
+            flag = 1;
+        }
+        // If flag is true, then element found, else not
+        if(flag == 1)
+            cout<<"\n"<<search <<" found at location "<< count<<endl;
+        else
+            cout<<"\n"<<search <<" not found"<<endl;
+    }
+}
 int main()
 {
     //Start with the empty list
@@ -94,5 +136,6 @@ int main()
  
     printf("Created circular doubly linked list is: ");
     display(start);
+    searchList(start, 5);
     return 0;
 }
