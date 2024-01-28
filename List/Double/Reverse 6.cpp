@@ -7,7 +7,6 @@ struct Node {
 // function to add Node at the end of a Doubly LinkedList
 Node* insertAtEnd(Node* head, int data)
 {
- 
     Node* new_node = new Node();
     new_node->data = data;
     new_node->next = NULL;
@@ -17,7 +16,6 @@ Node* insertAtEnd(Node* head, int data)
         head = new_node;
         return head;
     }
- 
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -34,8 +32,7 @@ void printDLL(Node* head)
     }
     cout << endl;
 }
-// function to Reverse a doubly linked list
-// in groups of given size
+// function to Reverse a doubly linked list in groups of given size
 Node* reverseByN(Node* head, int k)
 {
     if (!head)
@@ -51,17 +48,13 @@ Node* reverseByN(Node* head, int k)
         curr = curr->prev;
         count++;
     }
-    // checking if the reversed LinkedList size is
-    // equal to K or not
-    // if it is not equal to k that means we have reversed
-    // the last set of size K and we don't need to call the
-    // recursive function
+    // checking if the reversed LinkedList size is equal to K or not if it is not equal to k that means we have reversed
+    // the last set of size K and we don't need to call the recursive function
     if (count >= k) {
         Node* rest = reverseByN(curr, k);
         head->next = rest;
         if (rest != NULL)
-            // it is required for prev link otherwise u wont
-            // be backtrack list due to broken links
+            // it is required for prev link otherwise u wont be backtrack list due to broken links
             rest->prev = head;
     }
     return newHead;
