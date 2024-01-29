@@ -1,9 +1,5 @@
-// C++ program for the above approach 
-  
 #include <bits/stdc++.h> 
 using namespace std; 
-  
-/* Structure for a linked list node */
 struct Node { 
     int data; 
     struct Node* next; 
@@ -11,45 +7,31 @@ struct Node {
   
 void push(struct Node** head_ref, int new_data) 
 { 
-    /* allocate node */
-    struct Node* new_node = new Node(); 
-  
-    /* put in the data */
+    struct Node* new_node = new Node();
     new_node->data = new_data; 
   
-    /* link the old list of the new node */
+    //link the old list of the new node
     new_node->next = (*head_ref); 
-  
-    /* move the head to point to the new node */
+    // move the head to point to the new node 
     (*head_ref) = new_node; 
 } 
-  
-// A recursive C++ function to check if two linked 
-// lists are identical or not 
+// A recursive C++ function to check if two linked lists are identical or not 
 bool areIdentical(Node* a, Node* b) 
 { 
     // If both lists are empty 
     if (a == NULL && b == NULL) 
         return true; 
   
-    // If both lists are not empty, then data of 
-    // current nodes must match, and same should 
+    // If both lists are not empty, then data of current nodes must match, and same should
     // be recursively true for rest of the nodes. 
     if (a != NULL && b != NULL) 
         return (a->data == b->data) 
                && areIdentical(a->next, b->next); 
-  
-    // If we reach here, then one of the lists 
-    // is empty and other is not 
+    // If we reach here, then one of the lists is empty and other is not 
     return false; 
 } 
-  
-// Driver Code 
 int main() 
 { 
-    /* The constructed linked lists are : 
-    a: 3->2->1 
-    b: 3->2->1 */
     struct Node* a = NULL; 
     struct Node* b = NULL; 
     push(&a, 1); 
@@ -58,7 +40,6 @@ int main()
     push(&b, 1); 
     push(&b, 2); 
     push(&b, 3); 
-  
     // Function call 
     if (areIdentical(a, b)) 
         cout << "Identical"; 
