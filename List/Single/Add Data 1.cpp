@@ -1,13 +1,10 @@
-// Recursive C++ program to add 1 to a linked list
+//add 1 to a linked list
 #include <bits/stdc++.h>
- 
-/* Linked list node */
 struct Node {
     int data;
     Node* next;
 };
- 
-/* Function to create a new node with given data */
+//Function to create a new node with given data
 Node* newNode(int data)
 {
     Node* new_node = new Node;
@@ -15,11 +12,8 @@ Node* newNode(int data)
     new_node->next = NULL;
     return new_node;
 }
- 
 Node* addOne(Node* head)
 {
-    // Your Code here
-    // return head of list after adding one
     Node* ln = head;
     if (head->next == NULL) {
         head->data += 1;
@@ -55,8 +49,6 @@ Node* addOne(Node* head)
     }
     return head;
 }
- 
-// A utility function to print a linked list
 void printList(Node* node)
 {
     while (node != NULL) {
@@ -66,8 +58,6 @@ void printList(Node* node)
     printf("NULL");
     printf("\n");
 }
- 
-/* Driver code */
 int main(void)
 {
     Node* head = newNode(1);
@@ -79,9 +69,7 @@ int main(void)
     printList(head);
  
     head = addOne(head);
- 
     printf("\nResultant list is ");
     printList(head);
- 
     return 0;
 }
