@@ -1,18 +1,14 @@
 #include <iostream>
 #include <set>
- 
-// Define a node in a linked list
 struct ListNode {
-    int val; // Value of the node
-    ListNode*
-        next; // Pointer to the next node in the linked list
+    int val; 
+    ListNode*next;
     ListNode(int x)
     {
         this->val = x;
         this->next = NULL;
     }
 };
- 
 class Solution {
 public:
     // Remove duplicates from sorted linked list using set
@@ -21,38 +17,31 @@ public:
         // Return head if it's empty
         if (!head)
             return head;
- 
         // Use set to store unique values in linked list
-        std::set<int> set;
-        ListNode* curr
-            = head; // Pointer to traverse the linked list
-        ListNode* prev = NULL; // Pointer to keep track of
-                               // the previous node
- 
+        set<int> set;
+        ListNode* curr = head; 
+            // Pointer to traverse the linked list
+        ListNode* prev = NULL; 
+        // Pointer to keep track of the previous node
         // Iterate through the linked list
         while (curr) {
-            // If the current value already exists in set,
-            // remove the node
+            // If the current value already exists in set, remove the node
             if (set.count(curr->val)) {
                 prev->next = curr->next;
             }
             else {
-                // Otherwise, add the value to set and move
-                // on to the next node
+                // Otherwise, add the value to set and move on to the next node
                 set.insert(curr->val);
                 prev = curr;
             }
             curr = curr->next;
         }
- 
         // Return the head of the linked list
         return head;
     }
 };
- 
 int main()
 {
-    // Initialize linked list with values 1, 2, 2, 3
     ListNode* head = new ListNode(1);
     head->next = new ListNode(2);
     head->next->next = new ListNode(2);
@@ -62,29 +51,25 @@ int main()
     head->next->next->next->next->next->next
         = new ListNode(3);
     ListNode* BeforePrinter = head;
-    std::cout
-        << "Before removing duplicates linked list is:"
-        << std::endl;
+    cout<< "Before removing duplicates linked list is:"
+        << "\n";
     while (BeforePrinter) {
-        std::cout << BeforePrinter->val << " ";
+        cout << BeforePrinter->val << " ";
         BeforePrinter = BeforePrinter->next;
     }
-    std::cout << std::endl;
- 
+    cout << "\n";
     Solution solution;
     // Remove duplicates from the linked list using the
     // deleteDuplicates function
     head = solution.deleteDuplicates(head);
- 
     // Print the linked list after removing duplicates
-    std::cout << "after removing duplicates linked list is:"
-              << std::endl;
+    cout << "after removing duplicates linked list is:"
+              << "\n";
     ListNode* curr = head;
     while (curr) {
-        std::cout << curr->val << " ";
+        cout << curr->val << " ";
         curr = curr->next;
     }
-    std::cout << std::endl;
- 
+    cout << "\n";
     return 0;
 }
