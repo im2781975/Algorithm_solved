@@ -1,13 +1,10 @@
 #include <bits/stdc++.h>
 #include<iostream>
 using namespace std;
- 
-/* Linked list Node */
 struct Node {
     int data;
     struct Node* next;
 };
- 
 Node* newNode(int data)
 {
     Node* new_node = (Node*)malloc(sizeof(Node));
@@ -15,15 +12,13 @@ Node* newNode(int data)
     new_node->next = NULL;
     return new_node;
 }
- 
-/* Function to insert a node at the
-beginning of the Singly Linked List */
+// Function to insert a node at the beginning
 void push(Node** head_ref, int new_data){
-    /* allocate node */
+    //allocate node
     Node* new_node = newNode(new_data);
-    /* link the old list of the new node */
+    //link the old list of the new node
     new_node->next = (*head_ref);
-    /* move the head to point to the new node */
+    // move the head to point to the new node 
     (*head_ref) = new_node;
 }
 // function to linked list
