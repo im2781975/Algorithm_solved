@@ -1,14 +1,11 @@
-// C++ Code to add two nodes by reversing the two lists
- 
+//add two nodes by reversing the two lists
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* Linked list Node */
+// Linked list Node
 struct Node {
     int data;
     struct Node* next;
 };
- 
 Node* newNode(int data)
 {
     Node* new_node = (Node*)malloc(sizeof(Node));
@@ -16,19 +13,16 @@ Node* newNode(int data)
     new_node->next = NULL;
     return new_node;
 }
- 
-/* Function to insert a node at the
-beginning of the Singly Linked List */
+// Function to insert a node at the beginning
 void push(Node** head_ref, int new_data)
 {
-    /* allocate node */
+    // allocate node
     Node* new_node = newNode(new_data);
-    /* link the old list off the new node */
+    //link the old list off the new node 
     new_node->next = (*head_ref);
-    /* move the head to point to the new node */
+    // move the head to point to the new node 
     (*head_ref) = new_node;
 }
- 
 void printList(Node* n)
 {
     while (n) {
@@ -37,7 +31,6 @@ void printList(Node* n)
     }
     cout << endl;
 }
- 
 struct Node* reverseList(struct Node* list)
 {
     Node *prev = NULL, *cur = list, *next = NULL;
@@ -49,9 +42,6 @@ struct Node* reverseList(struct Node* list)
     }
     return prev;
 }
- 
-//----------------------------------------------------------------------------
- 
 Node* addTwoLists(Node* first, Node* second)
 {
     // code here
@@ -79,20 +69,13 @@ Node* addTwoLists(Node* first, Node* second)
         newNode->next = sum;
         sum = newNode;
         // initialising nodes for next iteration
- 
         if (first)
             first = first->next;
         if (second)
             second = second->next;
     }
- 
     return sum;
 }
- 
-//----------------------------------------------------------------------------
- 
-// { Driver Code Starts.
- 
 int main()
 {
     Node* first = NULL;
