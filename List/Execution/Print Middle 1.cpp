@@ -1,34 +1,24 @@
-// C++ program for the above approach
- 
 #include <iostream>
 using namespace std;
- 
 class Node {
 public:
     int data;
     Node* next;
 };
- 
 class NodeOperation {
 public:
     // Function to add a new node
     void pushNode(class Node** head_ref, int data_val)
     {
- 
         // Allocate node
         class Node* new_node = new Node();
- 
         // Put in the data
         new_node->data = data_val;
- 
         // Link the old list of the new node
         new_node->next = *head_ref;
- 
         // move the head to point to the new node
         *head_ref = new_node;
     }
- 
-    // A utility function to print a given linked list
     void printNode(class Node* head)
     {
         while (head != NULL) {
@@ -37,8 +27,6 @@ public:
         }
         cout << "NULL" << endl;
     }
- 
-    /* Utility Function to find length of linked list */
     int getLen(class Node* head)
     {
         int len = 0;
@@ -49,7 +37,6 @@ public:
         }
         return len;
     }
- 
     void printMiddle(class Node* head)
     {
  
@@ -57,7 +44,6 @@ public:
             // find length
             int len = getLen(head);
             class Node* temp = head;
- 
             // traverse till we reached half of length
             int midIdx = len / 2;
             while (midIdx--) {
@@ -69,8 +55,6 @@ public:
         }
     }
 };
- 
-// Driver Code
 int main()
 {
     class Node* head = NULL;
@@ -82,3 +66,4 @@ int main()
     }
     return 0;
 }
+
