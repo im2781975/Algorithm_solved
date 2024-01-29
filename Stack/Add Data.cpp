@@ -1,5 +1,4 @@
-// C++ program to add two numbers represented by Linked
-// Lists using Stack
+//add two numbers represented by Linked Lists using Stack
 #include <bits/stdc++.h>
 using namespace std;
 class Node {
@@ -7,16 +6,13 @@ public:
     int data;
     Node* next;
 };
- 
 Node* newnode(int data)
 {
     Node* x = new Node();
     x->data = data;
     return x;
 }
- 
-// function that returns the sum of two numbers represented
-// by linked lists
+// function that returns the sum of two numbers represented by linked lists
 Node* addTwoNumbers(Node* l1, Node* l2)
 {
     Node* prev = NULL;
@@ -33,8 +29,7 @@ Node* addTwoNumbers(Node* l1, Node* l2)
         l2 = l2->next;
     }
     int carry = 0;
-    // Fill the third stack with the sum of first and second
-    // stack
+    // Fill the third stack with the sum of first and second stack
     while (!s1.empty() && !s2.empty()) {
         int sum = s1.top()->data + s2.top()->data + carry;
         Node* temp = newnode(sum % 10);
@@ -72,14 +67,12 @@ Node* addTwoNumbers(Node* l1, Node* l2)
         }
         s2.pop();
     }
-    // If carry is still present create a new node with
-    // value 1 and push it to the third stack
+    // If carry is still present create a new node with value 1 and push it to the third stack
     if (carry == 1) {
         Node* temp = newnode(1);
         s3.push(temp);
     }
-    // Link all the elements inside third stack with each
-    // other
+    // Link all the elements inside third stack with each other
     if (!s3.empty())
         prev = s3.top();
     while (!s3.empty()) {
@@ -94,9 +87,6 @@ Node* addTwoNumbers(Node* l1, Node* l2)
     }
     return prev;
 }
- 
-// utility functions
-// Function that displays the List
 void Display(Node* head)
 {
     if (head == NULL) {
@@ -108,7 +98,6 @@ void Display(Node* head)
     }
     cout << head->data << endl;
 }
- 
 // Function that adds element at the end of the Linked List
 void push(Node** head_ref, int d)
 {
@@ -126,12 +115,8 @@ void push(Node** head_ref, int d)
     last->next = new_node;
     return;
 }
-// Driver Program for above Functions
 int main()
 {
-    // Creating two lists
-    // first list = 9 -> 5 -> 0
-    // second List = 6 -> 7
     Node* first = NULL;
     Node* second = NULL;
     Node* sum = NULL;
