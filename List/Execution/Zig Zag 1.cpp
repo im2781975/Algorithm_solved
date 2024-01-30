@@ -1,15 +1,10 @@
-// C++ program to arrange linked list
-// in zigzag fashion
+//arrange linked list in zigzag fashion
 #include <iostream>
 using namespace std;
- 
-// a linked list node
 struct node {
     int data;
     node* next;
 };
- 
-/* Function to push a Node */
 void push(node** head_ref, int new_data)
 {
     node* new_Node = (node*)malloc(sizeof(node));
@@ -17,7 +12,6 @@ void push(node** head_ref, int new_data)
     new_Node->next = (*head_ref);
     (*head_ref) = new_Node;
 }
- 
 // Rearrange the linked list in zig zag way
 node* zigzag(node* head, bool flag)
 {
@@ -34,8 +28,6 @@ node* zigzag(node* head, bool flag)
         return zigzag(head->next, !flag);
     }
 }
- 
-// fun to print list
 void printList(node* head)
 {
     while (head) {
@@ -44,8 +36,6 @@ void printList(node* head)
     }
     cout << "NULL";
 }
- 
-// main fun
 int main()
 {
  
@@ -60,7 +50,6 @@ int main()
     cout << endl;
  
     zigzag(head, 1);
- 
     cout << "LL in zig zag fashion : " << endl;
     printList(head);
     return 0;
