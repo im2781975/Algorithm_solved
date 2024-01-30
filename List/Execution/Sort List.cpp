@@ -1,17 +1,13 @@
-// C++ program to sort a linked list, already
-// sorted by absolute values
+// sort a linked list, already sorted by absolute values
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Linked List Node
 struct Node
 {
     Node* next;
     int data;
 };
  
-// Utility function to insert a node at the
-// beginning
+//insert a node at the beginning
 void push(Node** head, int data)
 {
     Node* newNode = new Node;
@@ -19,8 +15,6 @@ void push(Node** head, int data)
     newNode->data = data;
     (*head) = newNode;
 }
- 
-// Utility function to print a linked list
 void printList(Node* head)
 {
     while (head != NULL)
@@ -32,45 +26,33 @@ void printList(Node* head)
     }
     cout<<endl;
 }
- 
-// To sort a linked list by actual values.
-// The list is assumed to be sorted by absolute
-// values.
+// To sort a linked list by actual values. The list is assumed to be sorted by absolute values.
 void sortList(Node** head)
 {
     // Initialize previous and current nodes
     Node* prev = (*head);
     Node* curr = (*head)->next;
- 
     // Traverse list
     while (curr != NULL)
     {
-        // If curr is smaller than prev, then
-        // it must be moved to head
+        // If curr is smaller than prev, then it must be moved to head
         if (curr->data < prev->data)
         {
             // Detach curr from linked list
             prev->next = curr->next;
- 
             // Move current node to beginning
             curr->next = (*head);
             (*head) = curr;
- 
             // Update current
             curr = prev;
         }
- 
-        // Nothing to do if current element
-        // is at right place
+        // Nothing to do if current element is at right place
         else
             prev = curr;
- 
         // Move current
         curr = curr->next;
     }
 }
- 
-// Driver code
 int main()
 {
     Node* head = NULL;
