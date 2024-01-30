@@ -1,15 +1,9 @@
-// C++ code to implement the approach
- 
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Structure of a node of linked list
 struct Node {
     int val;
     Node* next;
     Node* arbit;
-   
-    // Constructor
     Node(int x)
     {
         this->val = x;
@@ -17,22 +11,18 @@ struct Node {
         this->arbit = NULL;
     }
 };
- 
 // Function to clone the linked list
 Node* cloneLinkedList(Node* head)
 {
-    // Map to store the mapping of 
-    // old nodes with new ones
+    // Map to store the mapping of  old nodes with new ones
     unordered_map<Node*, Node*> mp;
     Node *temp, *nhead;
-   
     // Duplicate of the first node
     temp = head;
     nhead = new Node(temp->val);
     mp[temp] = nhead;
    
-    // Loop to create duplicates of nodes 
-    // with only next pointer
+    // Loop to create duplicates of nodes with only next pointer
     while (temp->next != NULL) {
         nhead->next 
             = new Node(temp->next->val);
@@ -41,18 +31,14 @@ Node* cloneLinkedList(Node* head)
         mp[temp] = nhead;
     }
     temp = head;
-   
     // Loop to clone the arbit pointers
     while (temp != NULL) {
         mp[temp]->arbit = mp[temp->arbit];
         temp = temp->next;
     }
-   
     // Return the head of the clone
     return mp[head];
 }
- 
-// Function to print the linked list
 void printList(Node* head)
 {
     cout << head->val << "("
@@ -65,8 +51,6 @@ void printList(Node* head)
     }
     cout << endl;
 }
- 
-// Driver code
 int main()
 {
     // Creating a linked list with random pointer
@@ -97,3 +81,4 @@ int main()
    
     return 0;
 }
+
