@@ -1,40 +1,27 @@
-// C++ program for flattening a Linked List
+// flattening a Linked List
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Linked list node
 class Node {
 public:
     int data;
     Node *right, *down;
 };
- 
 Node* head = NULL;
- 
-// An utility function to merge two sorted
-// linked lists
+// An utility function to merge two sorted linked lists
 Node* merge(Node* a, Node* b)
 {
- 
-    // If first linked list is empty then second
-    // is the answer
+    // If first linked list is empty then second is the answer
     if (a == NULL)
         return b;
- 
-    // If second linked list is empty then first
-    // is the result
+    // If second linked list is empty then first is the result
     if (b == NULL)
         return a;
- 
-    // Compare the data members of the two linked
-    // lists and put the larger one in the result
+    // Compare the data members of the two linked lists and put the larger one in the result
     Node* result;
- 
     if (a->data < b->data) {
         result = a;
         result->down = merge(a->down, b);
     }
- 
     else {
         result = b;
         result->down = merge(a, b->down);
@@ -42,45 +29,32 @@ Node* merge(Node* a, Node* b)
     result->right = NULL;
     return result;
 }
- 
 Node* flatten(Node* root)
 {
- 
     // Base Cases
     if (root == NULL || root->right == NULL)
         return root;
- 
     // Recur for list on right
     root->right = flatten(root->right);
- 
     // Now merge
     root = merge(root, root->right);
- 
-    // Return the root
-    // it will be in turn merged with its left
+    // Return the root it will be in turn merged with its left
     return root;
 }
- 
-// Utility function to insert a node at
-// beginning of the linked list
+// Utility function to insert a node at beginning of the linked list
 Node* push(Node* head_ref, int data)
 {
- 
     // Allocate the Node & Put in the data
     Node* new_node = new Node();
  
     new_node->data = data;
     new_node->right = NULL;
- 
     // Make next of new Node as head
     new_node->down = head_ref;
- 
     // Move the head to point to new Node
     head_ref = new_node;
- 
     return head_ref;
 }
- 
 void printList()
 {
     Node* temp = head;
@@ -90,8 +64,6 @@ void printList()
     }
     cout << endl;
 }
- 
-// Driver's code
 int main()
 {
  
@@ -128,9 +100,7 @@ int main()
     head->right->right->right
         = push(head->right->right->right, 20);
  
-    // Function call
     head = flatten(head);
- 
     printList();
     return 0;
 }
