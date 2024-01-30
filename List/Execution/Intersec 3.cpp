@@ -1,15 +1,9 @@
-// C++ program to print intersection of lists
- 
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* Link list node */
 struct Node {
     int data;
     Node* next;
 };
- 
-// A utility function to return  intersection node
 Node* intersectPoint(Node* headA, Node* headB)
 {
     stack<Node*> stackA;
@@ -20,12 +14,10 @@ Node* intersectPoint(Node* headA, Node* headB)
         stackB.push(headB);
         headB = headB->next;
     }
- 
     while (headA != NULL) {
         stackA.push(headA);
         headA = headA->next;
     }
- 
     if (!stackA.top()->data == stackB.top()->data) {
         return NULL;
     }
@@ -36,21 +28,10 @@ Node* intersectPoint(Node* headA, Node* headB)
         stackA.pop();
         stackB.pop();
     }
- 
     return intersectNode;
 }
- 
-// Driver code
 int main()
 {
-    /*
-    Create two linked lists
- 
-    1st Linked list is 3.6.9.15.30
-    2nd Linked list is 10.15.30
- 
-    15 30 are elements in the intersection list
-    */
  
     Node* newNode;
     Node* head1 = new Node();
