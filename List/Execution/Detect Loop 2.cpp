@@ -1,12 +1,10 @@
-// C++ program to return first node of loop
+//return first node of loop
 #include <bits/stdc++.h>
 using namespace std;
- 
 struct Node {
     int key;
     struct Node* next;
 };
- 
 Node* newNode(int key)
 {
     Node* temp = new Node;
@@ -14,8 +12,6 @@ Node* newNode(int key)
     temp->next = NULL;
     return temp;
 }
- 
-// A utility function to print a linked list
 void printList(Node* head)
 {
     while (head != NULL) {
@@ -24,23 +20,19 @@ void printList(Node* head)
     }
     cout << endl;
 }
- 
-// Function to detect first node of loop
-// in a linked list that may contain loop
+// Function to detect first node of loop in a linked list that may contain loop
 bool detectLoop(Node* head)
 {
     // Create a temporary node
     Node* temp = new Node;
     while (head != NULL) {
-        // This condition is for the case when there is no
-        // loop
+        // This condition is for the case when there is no loop
         if (head->next == NULL)
             return false;
         // Check if next is already pointing to temp
         if (head->next == temp)
             return true;
-        // Store the pointer to the next node
-        // in order to get to it in the next step
+        // Store the pointer to the next node in order to get to it in the next step
         Node* next = head->next;
         // Make next point to temp
         head->next = temp;
@@ -49,8 +41,6 @@ bool detectLoop(Node* head)
     }
     return false;
 }
- 
-/* Driver program to test above function*/
 int main()
 {
     Node* head = newNode(1);
@@ -58,7 +48,6 @@ int main()
     head->next->next = newNode(3);
     head->next->next->next = newNode(4);
     head->next->next->next->next = newNode(5);
-    /* Create a loop for testing(5 is pointing to 3) */
     head->next->next->next->next->next = head->next->next;
     bool found = detectLoop(head);
     if (found)
