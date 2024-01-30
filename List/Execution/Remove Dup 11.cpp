@@ -1,16 +1,10 @@
-// C++ program to remove all 
-// occurrences of duplicates 
-// from a sorted linked list. 
+// remove all occurrences of duplicates
 #include <bits/stdc++.h> 
-using namespace std; 
-  
-// A linked list node 
+using namespace std;
 struct Node { 
     int data; 
     struct Node* next; 
-}; 
-  
-// Utility function 
+};
 // to create a new Node 
 struct Node* newNode(int data) 
 { 
@@ -18,73 +12,42 @@ struct Node* newNode(int data)
     temp->data = data; 
     temp->next = NULL; 
     return temp; 
-} 
-  
-// Function to print nodes 
-// in a given linked list. 
+}
 void printList(struct Node* node) 
 { 
     while (node != NULL) { 
         cout<<node->data<<" "; 
         node = node->next; 
     } 
-} 
-  
-// Function to remove all occurrences 
-// of duplicate elements 
+}
 void removeAllDuplicates(struct Node*& start) 
 { 
-    // create a dummy node 
-    // that acts like a fake 
-    // head of list pointing 
-    // to the original head 
+    // create a dummy node that acts like a fake head of list pointing to the original head 
     Node* dummy = new Node; 
-  
-    // dummy node points 
-    // to the original head 
+    // dummy node points to the original head 
     dummy->next = start; 
-  
-    // Node pointing to last 
-    // node which has no duplicate. 
+    // Node pointing to last node which has no duplicate. 
     Node* prev = dummy; 
-  
-    // Node used to traverse 
-    // the linked list. 
+    // Node used to traverse the linked list. 
     Node* current = start; 
-  
     while (current != NULL) { 
-        // Until the current and 
-        // previous values are 
-        // same, keep updating current 
+        // Until the current and  previous values are same, keep updating current 
         while (current->next != NULL && prev->next->data == current->next->data) 
             current = current->next; 
-  
-        // if current has unique value 
-        // i.e current is not updated, 
-        // Move the prev pointer to 
-        // next node 
+        // if current has unique value Move the prev pointer to next node 
         if (prev->next == current) 
             prev = prev->next; 
-  
-        // when current is updated 
-        // to the last duplicate 
-        // value of that segment, 
-        // make prev the next of current 
+        // when current is updated  to the last duplicate  value of that segment, make prev the next of current 
         else
             prev->next = current->next; 
   
         current = current->next; 
     } 
-  
-    // update original head to 
-    // the next of dummy node 
+    // update original head to the next of dummy node 
     start = dummy->next; 
-} 
-  
-// Driver Code 
+}
 int main() 
 { 
-    // 23->28->28->35->49->49->53->53 
     struct Node* start = newNode(23); 
     start->next = newNode(28); 
     start->next->next = newNode(28); 
@@ -95,10 +58,10 @@ int main()
     start->next->next->next->next->next->next->next = newNode(53); 
     cout << "List before removal of duplicates\n"; 
     printList(start); 
-  
     removeAllDuplicates(start); 
   
     cout << "\nList after removal of duplicates\n"; 
     printList(start); 
     return 0; 
 } 
+
