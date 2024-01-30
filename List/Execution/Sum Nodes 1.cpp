@@ -1,31 +1,23 @@
-// C++ implementation to find the sum of last
-// 'n' nodes of the Linked List
+// find the sum of last 'n' nodes of the Linked List
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* A Linked list node */
 struct Node {
     int data;
     struct Node* next;
 };
- 
-// function to insert a node at the
-// beginning of the linked list
+// insert a node at the beginning of the linked list
 void push(struct Node** head_ref, int new_data)
 {
-    /* allocate node */
     struct Node* new_node = new Node;
- 
-    /* put in the data  */
+    // put in the data
     new_node->data = new_data;
  
-    /* link the old list to the new node */
+    // link the old list to the new node 
     new_node->next = (*head_ref);
  
-    /* move the head to point to the new node */
+    //move the head to point to the new node 
     (*head_ref) = new_node;
 }
- 
 void reverseList(struct Node** head_ref)
 {
     struct Node* current, *prev, *next;
@@ -38,47 +30,34 @@ void reverseList(struct Node** head_ref)
         prev = current;
         current = next;
     }
- 
     *head_ref = prev;
 }
- 
-// utility function to find the sum of last 'n' nodes
+// function to find the sum of last 'n' nodes
 int sumOfLastN_NodesUtil(struct Node* head, int n)
 {
     // if n == 0
     if (n <= 0)
         return 0;
- 
     // reverse the linked list
     reverseList(&head);
- 
     int sum = 0;
     struct Node* current = head;
  
-    // traverse the 1st 'n' nodes of the reversed
-    // linked list and add them
+    // traverse the 1st 'n' nodes of the reversed linked list and add them
     while (current != NULL && n--) {                   
- 
         // accumulate node's data to 'sum'
         sum += current->data;
- 
         // move to next node
         current = current->next;
     }
- 
     // reverse back the linked list
     reverseList(&head);
- 
     // required sum
     return sum;
 }
- 
-// Driver program to test above
 int main()
 {
     struct Node* head = NULL;
- 
-    // create linked list 10->6->8->4->12
     push(&head, 12);
     push(&head, 4);
     push(&head, 8);
