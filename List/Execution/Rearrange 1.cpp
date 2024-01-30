@@ -1,17 +1,10 @@
-// Cpp program to rearrange nodes 
-// as alternate odd even nodes in 
-// a Singly Linked List 
+// rearrange nodes  as alternate odd even nodes
 #include <bits/stdc++.h> 
 using namespace std; 
-  
-// Structure node 
 struct Node { 
     int data; 
     struct Node* next; 
-}; 
-  
-// A utility function to print 
-// linked list 
+};
 void printList(struct Node* node) 
 { 
     while (node != NULL) { 
@@ -20,9 +13,7 @@ void printList(struct Node* node)
     } 
     cout << endl; 
 } 
-  
-// Function to create newNode 
-// in a linkedlist 
+// create newNode
 Node* newNode(int key) 
 { 
     Node* temp = new Node; 
@@ -30,8 +21,7 @@ Node* newNode(int key)
     temp->next = NULL; 
     return temp; 
 } 
-  
-// Function to insert at beginning 
+//insert at beginning 
 Node* insertBeg(Node* head, int val) 
 { 
     Node* temp = newNode(val); 
@@ -39,29 +29,21 @@ Node* insertBeg(Node* head, int val)
     head = temp; 
     return head; 
 } 
-  
-// Function to rearrange the 
-// odd and even nodes 
+// Function to rearrange the odd and even nodes 
 void rearrange(Node** head) 
 { 
-    // Step 1: Segregate even and odd nodes 
-    // Step 2: Split odd and even lists 
-    // Step 3: Merge even list into odd list 
     Node* even; 
     Node *temp, *prev_temp; 
     Node *i, *j, *k, *l, *ptr; 
-  
-    // Step 1: Segregate Odd and Even Nodes 
+    
+    //Segregate Odd and Even Nodes
     temp = (*head)->next; 
     prev_temp = *head; 
-  
-    while (temp != nullptr) { 
-  
+    while (temp != nullptr) {
         // Backup next pointer of temp 
         Node* x = temp->next; 
   
-        // If temp is odd move the node 
-        // to beginning of list 
+        // If temp is odd move the node to beginning of list 
         if (temp->data % 2 != 0) { 
             prev_temp->next = x; 
             temp->next = (*head); 
@@ -69,13 +51,10 @@ void rearrange(Node** head)
         } 
         else { 
             prev_temp = temp; 
-        } 
-  
+        }
         // Advance Temp Pointer 
         temp = x; 
     } 
-  
-    // Step 2 
     // Split the List into Odd and even 
     temp = (*head)->next; 
     prev_temp = (*head); 
@@ -84,49 +63,34 @@ void rearrange(Node** head)
         prev_temp = temp; 
         temp = temp->next; 
     } 
-  
     even = temp; 
-  
     // End the odd List (Make last node null) 
     prev_temp->next = nullptr; 
-  
-    // Step 3: 
     // Merge Even List into odd 
     i = *head; 
     j = even; 
   
     while (j != nullptr && i != nullptr) { 
   
-        // While both lists are not 
-        // exhausted Backup next 
-        // pointers of i and j 
+        // While both lists are not exhausted Backup next pointers of i and j 
         k = i->next; 
         l = j->next; 
   
         i->next = j; 
         j->next = k; 
-  
         // ptr points to the latest node added 
         ptr = j; 
-  
         // Advance i and j pointers 
         i = k; 
         j = l; 
-    } 
-  
+    }
     if (i == nullptr) { 
-  
-        // Odd list exhausts before even, 
-        // append remainder of even list to odd. 
+        // Odd list exhausts before even, append remainder of even list to odd. 
         ptr->next = j; 
     } 
-  
-    // The case where even list exhausts before 
-    // odd list is automatically handled since we 
-    // merge the even list into the odd list 
-} 
-  
-// Driver Code 
+    // The case where even list exhausts before  odd list is automatically 
+    //handled since we merge the even list into the odd list 
+}
 int main() 
 { 
     Node* head = newNode(8); 
