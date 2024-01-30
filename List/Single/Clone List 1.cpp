@@ -1,10 +1,5 @@
-// C++ code to implement the approach
- 
 #include <bits/stdc++.h>
 using namespace std;
- 
- 
- 
 struct Node {
     int data;
     Node *next, *random;
@@ -13,13 +8,11 @@ struct Node {
         next = random = NULL;
     }
 };
- 
 Node* cloneLinkedList(Node* head) {
     if (head == NULL) {
         return NULL;
     }
-     
-    // Step 1: Create new nodes and insert them next to the original nodes
+    // Create new nodes and insert them next to the original nodes
     Node* curr = head;
     while (curr != NULL) {
         Node* newNode = new Node(curr->data);
@@ -27,8 +20,7 @@ Node* cloneLinkedList(Node* head) {
         curr->next = newNode;
         curr = newNode->next;
     }
-     
-    // Step 2: Set the random pointers of the new nodes
+    // Set the random pointers of the new nodes
     curr = head;
     while (curr != NULL) {
         if (curr->random != NULL) {
@@ -36,8 +28,7 @@ Node* cloneLinkedList(Node* head) {
         }
         curr = curr->next->next;
     }
-     
-    // Step 3: Separate the new nodes from the original nodes
+    // Separate the new nodes from the original nodes
     curr = head;
     Node* clonedHead = head->next;
     Node* clonedCurr = clonedHead;
@@ -52,8 +43,6 @@ Node* cloneLinkedList(Node* head) {
      
     return clonedHead;
 }
- 
- 
 // Function to print the linked list
 void printList(Node* head)
 {
@@ -67,8 +56,6 @@ void printList(Node* head)
     }
     cout << endl;
 }
- 
-// Driver code
 int main()
 {
     // Creating a linked list with random pointer
@@ -86,16 +73,13 @@ int main()
         = head->next->next;
     head->next->next->next->next->random
         = head->next;
-     
     // Print the original list
     cout << "The original linked list:\n";
     printList(head);
-     
     // Function call
     Node* sol = cloneLinkedList(head);
      
     cout << "The cloned linked list:\n";
     printList(sol);
-     
     return 0;
 }
