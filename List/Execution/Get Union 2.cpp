@@ -11,8 +11,6 @@ public:
         this->next = NULL;
     }
 };
- 
-// function to print linked list
 void printLinkedList(Node* head) {
     Node* temp = head;
     while (temp != NULL) {
@@ -21,8 +19,6 @@ void printLinkedList(Node* head) {
     }
     cout << "None";
 }
- 
-// function to get union of two linked lists
 Node* getUnion(Node* ll1, Node* ll2) {
     Node* tail = NULL;
     Node* head = NULL;
@@ -79,8 +75,6 @@ Node* getUnion(Node* ll1, Node* ll2) {
     }
     return head;
 }
- 
-// main function to test the code
 int main() {
     // create first linked list
     Node* head1 = new Node(10);
