@@ -1,32 +1,19 @@
-// C++ implementation to find the sum of last
-// 'n' nodes of the Linked List
+// find the sum of last 'n' nodes of the Linked List
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* A Linked list node */
 struct Node {
     int data;
     struct Node* next;
 };
  
-// function to insert a node at the
-// beginning of the linked list
+// insert a node at the beginning
 void push(struct Node** head_ref, int new_data)
 {
-    /* allocate node */
     struct Node* new_node = new Node;
- 
-    /* put in the data  */
     new_node->data = new_data;
- 
-    /* link the old list to the new node */
     new_node->next = (*head_ref);
- 
-    /* move the head to point to the new node */
     (*head_ref) = new_node;
 }
- 
-// utility function to find the sum of last 'n' nodes
 int sumOfLastN_NodesUtil(struct Node* head, int n)
 {
     // if n == 0
@@ -36,43 +23,28 @@ int sumOfLastN_NodesUtil(struct Node* head, int n)
     int sum = 0, temp = 0;
     struct Node* ref_ptr, *main_ptr;
     ref_ptr = main_ptr = head;
- 
-    // traverse 1st 'n' nodes through 'ref_ptr' and
-    // accumulate all node's data to 'sum'
+    // traverse 1st 'n' nodes through 'ref_ptr' and accumulate all node's data to 'sum'
     while (ref_ptr != NULL &&  n--) {                   
         sum += ref_ptr->data;
- 
         // move to next node
         ref_ptr = ref_ptr->next;
     }
- 
     // traverse to the end of the linked list
     while (ref_ptr != NULL) {
- 
-        // accumulate all node's data to 'temp' pointed
-        // by the 'main_ptr'
+        // accumulate all node's data to 'temp' pointed by the 'main_ptr'
         temp += main_ptr->data;
- 
-        // accumulate all node's data to 'sum' pointed by
-        // the 'ref_ptr'
+        // accumulate all node's data to 'sum' pointed by the 'ref_ptr'
         sum += ref_ptr->data;
- 
-        // move both the pointers to their respective
-        // next nodes
+        // move both the pointers to their respective next nodes
         main_ptr = main_ptr->next;
         ref_ptr = ref_ptr->next;
     }
- 
     // required sum
     return (sum - temp);
 }
- 
-// Driver program to test above
 int main()
 {
     struct Node* head = NULL;
- 
-    // create linked list 10->6->8->4->12
     push(&head, 12);
     push(&head, 4);
     push(&head, 8);
