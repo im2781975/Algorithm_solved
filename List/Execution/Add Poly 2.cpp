@@ -1,7 +1,5 @@
 #include <bits/stdc++.h> 
-using namespace std; 
-  
-/* Link list Node */
+using namespace std;
 struct Node { 
     int coeff; 
     int pow; 
@@ -49,35 +47,17 @@ void create_node(int x, int y, struct Node** temp)
         r = r->next; 
         r->next = NULL; 
     } 
-} 
-  
-/* Structure of Node used 
-struct Node 
-{ 
-    int coeff; 
-    int pow; 
-    struct Node* next; 
-  
-    Node(int c, int p){ 
-        coeff = c; 
-        pow = p; 
-        next = NULL; 
-    } 
-  
-}; 
-*/
+}
 // 1st Number: 5x^2+4x^1+2x^0 
 // 2nd Number: -5x^1-5x^0 
 class Solution { 
-public: 
-    /* The below method print the required sum of polynomial 
-    p1 and p2 as specified in output  */
+    public: 
     Node* addPolynomial(Node* p1, Node* p2) 
     { 
         Node* res = new Node( 
-            0, 0); // dummy node ...head of resultant list 
-        Node* prev 
-            = res; // pointer to last node of resultant list 
+            0, 0); 
+        Node* prev = res; 
+            // pointer to last node of resultant list 
         // like Merge procedure : 
         while (p1 != NULL and p2 != NULL) { 
             if (p1->pow < p2->pow) { 
@@ -106,8 +86,7 @@ public:
         } 
         return res->next; 
     } 
-}; 
-  
+};
 int main() 
 { 
     struct Node *poly1 = NULL, *poly2 = NULL, *poly = NULL; 
@@ -117,7 +96,7 @@ int main()
     append(&poly1, &tail1, 4, 1); 
     append(&poly1, &tail1, 2, 0); 
     // 2nd Number: -5x^1-5x^0 
-    append(&poly2, &tail2, -5, 1); 
+    append(&poly2, &tail2, -5, 1);
     append(&poly2, &tail2, -5, 0); 
     Solution obj; 
     Node* sum = obj.addPolynomial(poly1, poly2); 
