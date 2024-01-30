@@ -1,8 +1,5 @@
-// C++ code for the above approach
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Linked list Node
 struct Node {
     int data;
     struct Node* next;
@@ -15,7 +12,6 @@ struct Node {
         bottom = NULL;
     }
 };
- 
 // comparator function for priority queue
 struct mycomp {
     bool operator()(Node* a, Node* b)
@@ -23,7 +19,6 @@ struct mycomp {
         return a->data > b->data;
     }
 };
- 
 void flatten(Node* root)
 {
     priority_queue<Node*, vector<Node*>, mycomp> p;
@@ -32,27 +27,20 @@ void flatten(Node* root)
         p.push(root);
         root = root->next;
     }
- 
-    // Extracting the minimum node
-    // while priority queue is not empty
+    // Extracting the minimum node while priority queue is not empty
     while (!p.empty()) {
- 
         // extracting min
         auto k = p.top();
         p.pop();
- 
         // printing  least element
         cout << k->data << " ";
         if (k->bottom)
             p.push(k->bottom);
     }
 }
- 
-// Driver's code
 int main(void)
 {
-    // This code builds the flattened linked list
-    // of first picture in this article ;
+    // This code builds the flattened linked list of first picture in this article ;
     Node* head = new Node(5);
     auto temp = head;
     auto bt = head;
