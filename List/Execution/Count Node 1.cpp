@@ -1,21 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* Link list node */
 struct Node {
     int data;
     struct Node* next;
 };
- 
-/* This function detects and counts loop
-   nodes in the list. If loop is not there
-   then returns 0 */
+//This function detects and counts loop nodes in the list.
 int countNodesinLoop(struct Node* list)
 {
     unordered_set<struct Node*> visited;
     struct Node* current = list;
     int count = 0;
- 
     while (current != nullptr) {
         // If the node is already visited, it means there is a loop
         if (visited.find(current) != visited.end()) {
@@ -26,19 +20,15 @@ int countNodesinLoop(struct Node* list)
             } while (current != startOfLoop);
             return count;
         }
- 
         // Mark the current node as visited
         visited.insert(current);
- 
         // Move to the next node
         current = current->next;
     }
- 
-    /* Return 0 to indicate that
-       there is no loop*/
+    // Return 0 to indicate that
+       there is no loop
     return 0;
 }
- 
 struct Node* newNode(int key)
 {
     struct Node* temp = new struct Node;
@@ -46,8 +36,6 @@ struct Node* newNode(int key)
     temp->next = nullptr;
     return temp;
 }
- 
-// Driver Code
 int main()
 {
     struct Node* head = newNode(1);
@@ -55,8 +43,6 @@ int main()
     head->next->next = newNode(3);
     head->next->next->next = newNode(4);
     head->next->next->next->next = newNode(5);
- 
-    /* Create a loop for testing */
     head->next->next->next->next->next = head->next;
  
     cout << countNodesinLoop(head) << endl;
