@@ -32,6 +32,33 @@ void AlternatingSplit(Node* source, Node** aRef, Node** bRef)
     *aRef = a; 
     *bRef = b; 
 } 
+void AlternatingSplit(Node* source,Node** aRef, Node** bRef) 
+{ 
+    Node aDummy; 
+     
+    //points to the last node in 'a'
+    Node* aTail = &aDummy; 
+    Node bDummy; 
+    // points to the last node in 'b' 
+    Node* bTail = &bDummy; 
+    Node* current = source; 
+    aDummy.next = NULL; 
+    bDummy.next = NULL; 
+    while (current != NULL) 
+    { 
+        MoveNode(&(aTail->next), ¤t);
+        //add at 'a' tail 
+        aTail = aTail->next;
+        //advance the 'a' tail 
+        if (current != NULL) 
+        { 
+            MoveNode(&(bTail->next), ¤t); 
+            bTail = bTail->next; 
+        } 
+    } 
+    *aRef = aDummy.next; 
+    *bRef = bDummy.next; 
+} 
 // Take the node from the front of the source, and move it to the front of the dest. 
 //It is an error to call this with the source list empty. Before calling MoveNode(): source == {1, 2, 3} dest == {1, 2, 3} 
 //After calling MoveNode(): source == {2, 3} dest == {1, 1, 2, 3}
