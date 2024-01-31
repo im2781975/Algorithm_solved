@@ -1,9 +1,6 @@
-// Recursive C++ program to reverse
-// a linked list
+// reverse a linked list
 #include <bits/stdc++.h>
 using namespace std;
- 
-/* Link list node */
 struct Node {
     int data;
     struct Node* next;
@@ -13,7 +10,6 @@ struct Node {
         next = NULL;
     }
 };
- 
 struct LinkedList {
     Node* head;
     LinkedList() { head = NULL; }
@@ -22,20 +18,13 @@ struct LinkedList {
     {
         if (head == NULL || head->next == NULL)
             return head;
- 
-        /* reverse the rest list and put
-          the first element at the end */
+        // reverse the rest list and put the first element at the end 
         Node* rest = reverse(head->next);
         head->next->next = head;
- 
-        /* tricky step -- see the diagram */
         head->next = NULL;
- 
-        /* fix the head pointer */
+        // fix the head pointer 
         return rest;
     }
- 
-    /* Function to print linked list */
     void print()
     {
         struct Node* temp = head;
@@ -44,7 +33,6 @@ struct LinkedList {
             temp = temp->next;
         }
     }
- 
     void push(int data)
     {
         Node* temp = new Node(data);
@@ -52,11 +40,8 @@ struct LinkedList {
         head = temp;
     }
 };
- 
-/* Driver program to test above function*/
 int main()
 {
-    /* Start with the empty list */
     LinkedList ll;
     ll.push(20);
     ll.push(4);
@@ -65,9 +50,7 @@ int main()
  
     cout << "Given linked list\n";
     ll.print();
- 
     ll.head = ll.reverse(ll.head);
- 
     cout << "\nReversed linked list \n";
     ll.print();
     return 0;
