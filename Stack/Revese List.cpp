@@ -1,17 +1,12 @@
-// C++ program for above approach
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
- 
-// Create a class Node to enter values and address in the
-// list
+// Create a class Node to enter values and address in the list
 class Node {
 public:
     int data;
     Node* next;
 };
- 
-// Function to reverse the linked list
 void reverseLL(Node** head)
 {
     // Create a stack "s" of Node type
@@ -33,8 +28,6 @@ void reverseLL(Node** head)
     }
     temp->next = NULL;
 }
- 
-// Function to Display the elements in List
 void printlist(Node* temp)
 {
     while (temp != NULL) {
@@ -42,17 +35,12 @@ void printlist(Node* temp)
         temp = temp->next;
     }
 }
- 
-// Program to insert back of the linked list
+// insert back of the linked list
 void insert_back(Node** head, int value)
 {
- 
-    // we have used insertion at back method to enter values
-    // in the list.(eg: head->1->2->3->4->Null)
     Node* temp = new Node();
     temp->data = value;
     temp->next = NULL;
- 
     // If *head equals to NULL
     if (*head == NULL) {
         *head = temp;
@@ -66,8 +54,6 @@ void insert_back(Node** head, int value)
         return;
     }
 }
- 
-// Driver Code
 int main()
 {
     Node* head = NULL;
