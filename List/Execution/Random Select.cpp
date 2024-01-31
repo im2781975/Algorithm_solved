@@ -1,11 +1,7 @@
-/* C++ program to randomly select a node from a singly
-linked list */
- 
+// randomly select a node
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
- 
-/* Link list node */
 class Node {
 public:
     int key;
@@ -18,31 +14,20 @@ Node* newNode(int new_key)
 {
     // allocate node
     Node* new_node = (Node*)malloc(sizeof(Node));
- 
-    /// put in the key
+    // put in the key
     new_node->key = new_key;
     new_node->next = NULL;
- 
     return new_node;
 }
- 
-/* A utility function to insert a node at the beginning
-of linked list */
 void Node::push(Node** head_ref, int new_key)
 {
-    /* allocate node */
     Node* new_node = new Node;
- 
-    /* put in the key */
     new_node->key = new_key;
- 
-    /* link the old list of the new node */
+    //link the old list of the new node
     new_node->next = (*head_ref);
- 
-    /* move the head to point to the new node */
+    // move the head to point to the new node 
     (*head_ref) = new_node;
 }
- 
 void printRandom(Node* head)
 {
     Node* temp = head;
@@ -55,8 +40,6 @@ void printRandom(Node* head)
     int randIndex = rand() % n;
     cout << v[randIndex] << endl;
 }
- 
-// Driver's code
 int main()
 {
     Node n1;
@@ -66,8 +49,6 @@ int main()
     n1.push(&head, 4);
     n1.push(&head, 3);
     n1.push(&head, 30);
-    // function call
     printRandom(head);
-    // code & approach contributed by Sanket Gode.
     return 0;
 }
