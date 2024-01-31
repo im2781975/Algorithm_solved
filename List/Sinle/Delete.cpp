@@ -1,11 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
 struct Node {
     int number;
     Node* next;
 };
+//Given a reference (pointer to pointer) to the head of a list and an int, appends a new node at the end
+void append(Node** head_ref, int new_data)
+{
+    //allocate node
+    Node* new_node = new Node();
+    // Used in step 5
+    Node* last = *head_ref;
+    //Put in the data
+    new_node->data = new_data;
+    // This new node is going to be the last node, so make next of it as NULL
+    new_node->next = NULL;
  
+    // If the Linked List is empty,then make the new node as head
+    if (*head_ref == NULL) {
+        *head_ref = new_node;
+        return;
+    }
+    // Else traverse till the last node
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    // Change the next of last node
+    last->next = new_node;
+    return;
+}
 void Push(Node** head, int A)
 {
     Node* n = (Node*)malloc(sizeof(Node));
@@ -58,8 +81,6 @@ void printList(Node* head)
     }
     cout << endl << endl;
 }
- 
-// Driver code
 int main()
 {
     Node* list = (Node*)malloc(sizeof(Node));
@@ -69,7 +90,6 @@ int main()
     Push(&list, 3);
  
     printList(list);
- 
     // Delete any position from list
     deleteN(&list, 1);
     printList(list);
