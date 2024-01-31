@@ -1,20 +1,14 @@
-// C++ program to remove intermediate points
-// in a linked list that represents horizontal
-// and vertical line segments 
+// remove intermediate points
 #include <bits/stdc++.h>
 using namespace std; 
- 
-// Node has 3 fields including x, y 
-// coordinates and a pointer 
-// to next node 
+
+// Node has 3 fields including x, y coordinates and a pointer  to next node 
 class Node 
 { 
     public:
     int x, y; 
     Node *next; 
 }; 
- 
-/* Function to insert a node at the beginning */
 void push(Node ** head_ref, int x,int y) 
 { 
     Node* new_node =new Node();
@@ -22,9 +16,7 @@ void push(Node ** head_ref, int x,int y)
     new_node->y = y; 
     new_node->next = (*head_ref); 
     (*head_ref) = new_node; 
-} 
- 
-/* Utility function to print a singly linked list */
+}
 void printList(Node *head) 
 { 
     Node *temp = head; 
@@ -34,21 +26,14 @@ void printList(Node *head)
         temp = temp->next; 
     } 
     cout<<endl;
- 
 } 
- 
-// Utility function to remove Next from linked list 
-// and link nodes after it to head 
 void deleteNode(Node *head, Node *Next) 
 { 
     head->next = Next->next; 
     Next->next = NULL; 
     free(Next); 
 } 
- 
-// This function deletes middle nodes in a sequence of 
-// horizontal and vertical line segments represented by 
-// linked list. 
+// This function deletes middle nodes in a sequence of  horizontal and vertical line segments represented by  linked list. 
 Node* deleteMiddle(Node *head) 
 { 
     // If only one node or no node...Return back 
@@ -58,7 +43,6 @@ Node* deleteMiddle(Node *head)
  
     Node* Next = head->next; 
     Node *NextNext = Next->next ; 
- 
     // Check if this is a vertical line or horizontal line 
     if (head->x == Next->x) 
     { 
@@ -66,37 +50,33 @@ Node* deleteMiddle(Node *head)
         while (NextNext != NULL && Next->x == NextNext->x) 
         { 
             deleteNode(head, Next); 
- 
             // Update Next and NextNext for next iteration 
             Next = NextNext; 
             NextNext = NextNext->next; 
         } 
     } 
-    else if (head->y==Next->y) // If horizontal line 
+    else if (head->y==Next->y)
+    // If horizontal line 
     { 
         // Find middle nodes with same y value, and delete them 
         while (NextNext != NULL && Next->y == NextNext->y) 
         { 
             deleteNode(head, Next); 
- 
             // Update Next and NextNext for next iteration 
             Next = NextNext; 
             NextNext = NextNext->next; 
         } 
     } 
-    else // Adjacent points must have either same x or same y 
+    else
+    // Adjacent points must have either same x or same y 
     { 
         puts("Given linked list is not valid"); 
         return NULL; 
     } 
- 
     // Recur for next segment 
     deleteMiddle(head->next); 
- 
     return head; 
 } 
- 
-// Driver program to test above functions 
 int main() 
 { 
     Node *head = NULL; 
