@@ -21,7 +21,22 @@ void push(Node** head_ref, int new_data){
     // move the head to point to the new node 
     (*head_ref) = new_node;
 }
-// function to linked list
+void insertAfter(Node* prev_node, int new_data)
+{
+    // Check if the given prev_node is NULL
+    if (prev_node == NULL) {
+        cout << "The given previous node cannot be NULL";
+        return;
+    }
+    // Allocate new node
+    Node* new_node = new Node();
+    // Put in the data
+    new_node->data = new_data;
+    // Make next of new node as next of prev_node
+    new_node->next = prev_node->next;
+    // move the next of prev_node as new_node
+    prev_node->next = new_node;
+}
 void printList(Node* n){
     while (n) {
         cout << n->data << " ";
