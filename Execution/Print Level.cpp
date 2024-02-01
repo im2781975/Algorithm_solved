@@ -1,8 +1,6 @@
-/* C++ program to print levels 
-line by line */
+// print levels
 #include <bits/stdc++.h>
 using namespace std;
- 
 // A Binary Tree Node
 struct node
 {
@@ -10,48 +8,32 @@ struct node
     int data;
     struct node *right;
 };
- 
-// Function to do level order
-// traversal line by line
+// Function to do level order traversal line by line
 void levelOrder(node *root)
 {
     if (root == NULL) return;
- 
-    // Create an empty queue for
-    // level order traversal
+    // Create an empty queue for level order traversal
     queue<node *> q;
-     
-    // to store front element of 
-    // queue.
+    // to store front element of  queue.
     node *curr;
- 
     // Enqueue Root and NULL node.
     q.push(root);
     q.push(NULL);
- 
     while (q.size() > 1)
     {
         curr = q.front();
         q.pop();
-         
-        // condition to check 
-        // occurrence of next 
-        // level.
+        // condition to check  occurrence of next  level.
         if (curr == NULL)
         {
            q.push(NULL);
            cout << "\n";
         }
-         
         else {
-             
-            // pushing left child of 
-            // current node.
+            // pushing left child of current node.
             if(curr->left)
             q.push(curr->left);
-             
-            // pushing right child of
-            // current node.
+            // pushing right child of current node.
             if(curr->right)
             q.push(curr->right);
              
@@ -59,9 +41,6 @@ void levelOrder(node *root)
         }
     }
 }
- 
-// Utility function to create a
-// new tree node
 node* newNode(int data)
 {
     node *temp = new node;
@@ -70,14 +49,8 @@ node* newNode(int data)
     temp->right = NULL;
     return temp;
 }
- 
-// Driver program to test above
-// functions
 int main()
 {
-     
-    // Let us create binary tree
-    // shown above
     node *root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
