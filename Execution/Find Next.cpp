@@ -1,33 +1,29 @@
-/* Program to find next right of a given key */
+//find next right of a given key 
 #include <iostream>
 #include <queue>
 using namespace std;
- 
 // A Binary Tree Node
 struct node
 {
     struct node *left, *right;
     int key;
 };
- 
-// Method to find next right of given key k, it returns NULL if k is
-// not present in tree or k is the rightmost node of its level
+// Method to find next right of given key k, it returns NULL if k is not present in tree or k is the rightmost node of its level
 node* nextRight(node *root, int k)
 {
     // Base Case
     if (root == NULL)
         return 0;
- 
     // Create an empty queue for level order traversal
-    queue<node *> qn; // A queue to store node addresses
-    queue<int> ql;   // Another queue to store node levels
- 
-    int level = 0;  // Initialize level as 0
- 
+    queue<node *> qn; 
+    // A queue to store node addresses
+    queue<int> ql;  
+    // Another queue to store node levels
+    int level = 0;  
+    // Initialize level as 0
     // Enqueue Root and its level
     qn.push(root);
     ql.push(level);
- 
     // A standard BFS loop
     while (qn.size())
     {
@@ -36,7 +32,6 @@ node* nextRight(node *root, int k)
         level = ql.front();
         qn.pop();
         ql.pop();
- 
         // If the dequeued node has the given key k
         if (node->key == k)
         {
@@ -48,7 +43,6 @@ node* nextRight(node *root, int k)
             // Otherwise return next node from queue of nodes
             return qn.front();
         }
- 
         // Standard BFS steps: enqueue children of this node
         if (node->left != NULL)
         {
@@ -61,11 +55,9 @@ node* nextRight(node *root, int k)
             ql.push(level+1);
         }
     }
- 
     // We reach here if given key x doesn't exist in tree
     return NULL;
 }
- 
 // Utility function to create a new tree node
 node* newNode(int key)
 {
@@ -74,7 +66,6 @@ node* newNode(int key)
     temp->left = temp->right = NULL;
     return temp;
 }
- 
 // A utility function to test above functions
 void test(node *root, int k)
 {
@@ -84,11 +75,8 @@ void test(node *root, int k)
     else
       cout << "No next right node found for " << k << endl;
 }
- 
-// Driver program to test above functions
 int main()
 {
-    // Let us create binary tree given in the above example
     node *root = newNode(10);
     root->left = newNode(2);
     root->right = newNode(6);
