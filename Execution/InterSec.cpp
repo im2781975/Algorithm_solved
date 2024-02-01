@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
- 
 vector<ll> adj[100000];
 bool visited[100000];
  
@@ -17,10 +16,8 @@ bool dfs(int start, int end)
     }
     return false;
 }
- 
 int main()
 {
- 
     int V = 4;
     vector<ll> members = { 2, 5, 7, 9 };
  
@@ -41,3 +38,4 @@ int main()
  
     return 0;
 }
+
