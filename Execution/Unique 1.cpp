@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
 string FirstNonRepeating(string A)
 {
- 
     // ans string stores the final answer
     string ans = "";
     // map to find uniqueness of an element
@@ -11,19 +9,16 @@ string FirstNonRepeating(string A)
     queue<char> q;
     // queue to keep non-repeating element at the front.
     for (int i = 0; i < A.length(); i++) {
-        // if non-repeating element found push it in
-        // queue and count in map
+        // if non-repeating element found push it in queue and count in map
         if (mp.find(A[i]) == mp.end()) {
             q.push(A[i]);
         }
         mp[A[i]]++;
-        // if anytime front element is repeating pop it
-        // form queue
+        // if anytime front element is repeating pop it form queue
         while (!q.empty() && mp[q.front()] > 1) {
             q.pop();
         }
-        // if queue is not empty append front element
-        // else append "#" in ans string.
+        // if queue is not empty append front element else append "#" in ans string.
         if (!q.empty()) {
             ans += q.front();
         }
@@ -34,7 +29,6 @@ string FirstNonRepeating(string A)
     // return ans
     return ans;
 }
- 
 int main()
 {
     string A = "geeksforgeeksandgeeksquizfor";
