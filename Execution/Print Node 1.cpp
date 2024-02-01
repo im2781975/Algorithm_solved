@@ -1,16 +1,12 @@
-// C++ program to print all nodes between
-// two given levels
+// print all nodes between two given levels
 #include <bits/stdc++.h>
 using namespace std;
- 
 // A binary tree node
 struct Node{
     int data;
     struct Node* left;
     struct Node* right;
 };
- 
-// utility function to initialize the new node
 Node* newNode(int data){
     Node *new_node = new Node();
     new_node->data = data;
@@ -18,9 +14,7 @@ Node* newNode(int data){
     new_node->right = NULL;
     return new_node;
 }
- 
-// Recursive function to print all nodes between two given
-// levels in a binary tree
+// Recursive function to print all nodes between two given levels in a binary tree
 void printNodes(Node* root, int start, int end, vector<vector<int>> &ans, int level){
     if(root == NULL) return;
     printNodes(root->left, start, end, ans, level+1);
@@ -29,9 +23,6 @@ void printNodes(Node* root, int start, int end, vector<vector<int>> &ans, int le
     }
     printNodes(root->right, start, end, ans, level+1);
 }
- 
- 
-// driver code to test above function
 int main(){
     Node *root = newNode(1);
     root->left = newNode(2);
@@ -43,7 +34,6 @@ int main(){
  
     int start = 2;
     int end = 3;
-    // function call
     vector<vector<int>> ans(end-start+1);
     printNodes(root, start, end, ans, 1);
     for(auto i : ans){
