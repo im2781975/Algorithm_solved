@@ -1,16 +1,13 @@
-// C++ program to find circular tour for a truck
+// find circular tour for a truck
 #include <bits/stdc++.h>
 using namespace std;
- 
 // A petrol pump has petrol and distance to next petrol pump
 class petrolPump {
 public:
     int petrol;
     int distance;
 };
- 
-// The function returns starting point if there is a
-// possible solution, otherwise returns -1
+// The function returns starting point if there is a possible solution, otherwise returns -1
 int printTour(petrolPump p[], int n)
 {
     // storing the difference between petrol and distance
@@ -20,18 +17,14 @@ int printTour(petrolPump p[], int n)
            v.push_back(p[i].petrol-p[i].distance);
        }
         
-       // pref array will store the difference of petrol and distance 
-       // till the i'th position
-        
+       // pref array will store the difference of petrol and distance till the i'th position
        vector<int> pref(n);
        pref[0]=v[0];
        for(int i=0;i<n;i++)
        {
            pref[i]=pref[i-1]+v[i];
        }
-        
-       // suff array will store the difference of petrol and distance 
-       // till the i'th position from the end
+       // suff array will store the difference of petrol and distance till the i'th position from the end
         
        vector<int> suff(n);
        suff[n-1]=v[n-1];
@@ -40,23 +33,19 @@ int printTour(petrolPump p[], int n)
            suff[i]=suff[i+1]+v[i];
        }
         
-      int flag=0;
-      int ans=-1;
+        int flag=0;
+        int ans=-1;
         
-       for(int i=0;i<n;i++)
-       {
-           // when the pref array will become 0 first time then we will
-           // store the next index of it
-           // if the pref of i'th pos minus pref of last index where pref 
-           // array became negative is less than 0
-           // then we will update the ans
+        for(int i=0;i<n;i++)
+        {
+           // when the pref array will become 0 first time then we will store the next index of it
+           // if the pref of i'th pos minus pref of last index where pref array became negative is less than 0 then we will update the ans
             
            if((ans==-1 && pref[i]<0) || (ans!=-1 && pref[i]-pref[ans-1]<0))
            {
                 ans=i+1;
            }
        }
-        
        // no index in pref array is less than 0
        if(ans==-1)
        {
@@ -78,11 +67,9 @@ int printTour(petrolPump p[], int n)
                return n-1;
            }
        }
-        
        // if no index is picked as starting point
        return -1;
 }
- 
 int main() 
 {
     petrolPump arr[] = { { 6, 4 }, { 3, 6 }, { 7, 3 } };
