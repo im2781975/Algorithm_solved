@@ -1,8 +1,5 @@
-// C++ implementation of the approach
 #include <bits/stdc++.h>
 using namespace std;
- 
-// DFS Approach 
 void dfs(int row,int col,vector<vector<int>> &image,vector<vector<int>>& ans,int newColor,int iniColor,int n,int m,int delrow[],int delcol[]){
      
     // Marking it as the newColor
@@ -47,12 +44,9 @@ int main()
     // Co-ordinate provided by the user
     int x = 1;
     int y = 1;
- 
     // New color that has to be filled
     int newC = 3;
     vector<vector<int>> ans = floodFill(screen, x, y, newC);
-     
- 
     // Printing the updated screen
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -60,6 +54,5 @@ int main()
         }
         cout << endl;
     }
- 
     return 0;
 }
