@@ -1,7 +1,5 @@
 #include <bits/stdc++.h> 
- 
 using namespace std;
- 
 vector<int>repeatedNumber(const vector<int> &A) {
     long long int len = A.size();
     long long int Sum_N = (len * (len+1) ) /2, Sum_NSq = (len * (len +1) *(2*len +1) )/6;
@@ -18,10 +16,7 @@ vector<int>repeatedNumber(const vector<int> &A) {
     ans.push_back(repeating);
     ans.push_back(missingNumber);
     return ans;
-     
 }
- 
- 
 int main(void){
         std::vector<int> v = {4, 3, 6, 2, 1, 6,7};
     vector<int> res = repeatedNumber(v);
