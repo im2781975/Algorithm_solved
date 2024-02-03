@@ -1,8 +1,6 @@
-// C++ program to generate binary numbers from 1 to n
+// generate binary numbers from 1 to n
 #include <bits/stdc++.h>
 using namespace std;
- 
- 
 void generatePrintBinary(int n)
 {
    for(int i=1;i<=n;i++){
@@ -17,13 +15,9 @@ void generatePrintBinary(int n)
        cout<<str<<endl;
    }
 }
- 
-// Driver code
 int main()
 {
     int n = 10;
- 
-    // Function call
     generatePrintBinary(n);
     return 0;
 }
