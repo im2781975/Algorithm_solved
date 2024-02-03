@@ -1,39 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
 void quickSort(int *, int, int); 
- 
-/* Function to print pair of elements
-   having minimum sum */
+//print pair of elements having minimum sum 
 void minAbsSumPair(int arr[], int n) 
 {         
-    // Variables to keep track 
-    // of current sum and minimum sum 
+    // Variables to keep track of current sum and minimum sum
     int sum, min_sum = INT_MAX; 
-     
     // left and right index variables 
     int l = 0, r = n-1; 
-     
-    // variable to keep track of 
-    // the left and right pair for min_sum 
+    // variable to keep track of  the left and right pair for min_sum 
     int min_l = l, min_r = n-1; 
-     
-    /* Array should have at least two elements*/
+    //Array should have at least two elements
     if(n < 2) 
     { 
         cout << "Invalid Input"; 
         return; 
     } 
-     
-    /* Sort the elements */
+    //Sort the elements
     quickSort(arr, l, r); 
-     
     while(l < r) 
     { 
         sum = arr[l] + arr[r]; 
-     
-        /*If abs(sum) is less 
-          then update the result items*/
+        //If abs(sum) is less 
+          then update the result items
         if(abs(sum) < abs(min_sum)) 
         { 
             min_sum = sum; 
@@ -45,12 +34,9 @@ void minAbsSumPair(int arr[], int n)
         else
             r--; 
     } 
-     
     cout << "The two elements whose sum is minimum are "
          << arr[min_l] << " and " << arr[min_r]; 
-} 
- 
-// Driver Code
+}
 int main() 
 { 
     int arr[] = {1, 60, -10, 70, -80, 85}; 
@@ -58,16 +44,14 @@ int main()
     minAbsSumPair(arr, n); 
     return 0; 
 } 
-/* FOLLOWING FUNCTIONS ARE ONLY FOR 
-   SORTING PURPOSE */
+//For Sorting Purpose
 void exchange(int *a, int *b) 
 { 
     int temp; 
     temp = *a; 
     *a = *b; 
     *b = temp; 
-} 
- 
+}
 int partition(int arr[], int si, int ei) 
 { 
     int x = arr[ei]; 
@@ -85,19 +69,18 @@ int partition(int arr[], int si, int ei)
     exchange (&arr[i + 1], &arr[ei]); 
     return (i + 1); 
 } 
- 
-/* Implementation of Quick Sort 
-arr[] --> Array to be sorted 
-si --> Starting index 
-ei --> Ending index 
-*/
+// Implementation of Quick Sort 
+//arr[] --> Array to be sorted 
+// si--> Starting index 
+// ei--> Ending index 
 void quickSort(int arr[], int si, int ei) 
 { 
-    int pi; /* Partitioning index */
+    int pi; 
+    //Partitioning index 
     if(si < ei) 
     { 
         pi = partition(arr, si, ei); 
-        quickSort(arr, si, pi - 1); 
+        quickSort(arr, si, pi - 1);
         quickSort(arr, pi + 1, ei); 
     } 
 } 
