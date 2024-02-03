@@ -8,7 +8,6 @@ public:
     unsigned cap;
     int* arr;
 };
- 
 Queue* createQueue(unsigned cap)
 {
     Queue* queue = new Queue();
@@ -19,15 +18,13 @@ Queue* createQueue(unsigned cap)
     queue->arr = new int[(queue->cap * sizeof(int))];
     return queue;
 }
- 
 int isFull(Queue* queue)
 {
     return (queue->size == queue->cap);
 }
  
 int isempty(Queue* queue) { return (queue->size == 0); }
-// Function to add an item to the queue.
-// It changes rear and size.
+// Function to add an item to the queue. It changes rear and size.
 void enqueue(Queue* queue, int item)
 {
     if (isFull(queue))
@@ -37,8 +34,7 @@ void enqueue(Queue* queue, int item)
     queue->size = queue->size + 1;
     cout << item << " enqueued to queue\n";
 }
-// Function to remove an item from queue.
-// It changes front and size
+// Function to remove an item from queue.It changes front and size
 int dequeue(Queue* queue)
 {
     if (isempty(queue))
@@ -60,8 +56,6 @@ int rear(Queue* queue)
         return INT_MIN;
     return queue->arr[queue->rear];
 }
- 
-// Driver code
 int main()
 {
     Queue* queue = createQueue(1000);
