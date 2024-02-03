@@ -1,8 +1,6 @@
-// C++ program to rot all oranges when you can move
-// in all the four direction from a rotten orange
+// rot all oranges when you can move in all the four direction from a rotten orange
 #include <bits/stdc++.h>
 using namespace std;
- 
 const int R = 3;
 const int C = 5;
  
@@ -13,7 +11,6 @@ bool issafe(int i, int j)
         return true;
     return false;
 }
- 
 int rotOranges(int v[R][C])
 {
     bool changed = false;
@@ -48,9 +45,7 @@ int rotOranges(int v[R][C])
                 }
             }
         }
- 
-        // if no rotten orange found it means all
-        // oranges rottened now
+        // if no rotten orange found it means all oranges rottened now
         if (!changed)
             break;
         changed = false;
@@ -59,28 +54,19 @@ int rotOranges(int v[R][C])
  
     for (int i = 0; i < R; i++) {
         for (int j = 0; j < C; j++) {
- 
-            // if any orange is found to be
-            // not rotten then ans is not possible
+            // if any orange is found to be not rotten then ans is not possible
             if (v[i][j] == 1)
                 return -1;
         }
     }
- 
-    // Because initial value for a rotten
-    // orange was 2
+    // Because initial value for a rotten orange was 2
     return no - 2;
 }
- 
-// Driver function
 int main()
 {
  
     int v[R][C] = { { 2, 1, 0, 2, 1 },
-                    { 1, 0, 1, 2, 1 },
-                    { 1, 0, 0, 2, 1 } };
- 
+    { 1, 0, 1, 2, 1 },{ 1, 0, 0, 2, 1 } };
     cout << "Max time incurred: " << rotOranges(v);
- 
     return 0;
 }
