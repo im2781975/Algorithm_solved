@@ -51,5 +51,10 @@ int main()
          << countOnes(arr, 0, n - 1);
     cout << "Count of 1's in given array is "
          << countOnes(arr, n);
+    
+    auto ptr
+        = upper_bound(arr, arr + n, 1, greater<int>());
+    cout << "Count of 1's in given array is "
+         << (ptr - arr);
     return 0;
 }
