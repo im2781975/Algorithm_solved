@@ -1,8 +1,6 @@
-// C++ program to find shortest safe Route in
-// the matrix with landmines
+// find shortest safe Route in the matrix with landmines
 #include <bits/stdc++.h>
 using namespace std;
- 
 #define R 12 
 #define C 10 
  
@@ -10,25 +8,18 @@ struct Key{
     int x,y;
     Key(int i,int j){ x=i;y=j;};
 };
- 
-// These arrays are used to get row and column
-// numbers of 4 neighbours of a given cell
+// These arrays are used to get row and column numbers of 4 neighbours of a given cell
 int rowNum[] = { -1, 0, 0, 1 }; 
 int colNum[] = { 0, -1, 1, 0 };
  
-// A function to check if a given cell (x, y) is
-// a valid cell or not
+// A function to check if a given cell (x, y) is a valid cell or not
 bool isValid(int x, int y) 
 { 
     if (x < R && y < C && x >= 0 && y >= 0) 
         return true; 
- 
     return false; 
 } 
- 
-// A function to mark all adjacent cells of
-// landmines as unsafe. Landmines are shown with
-// number 0
+// A function to mark all adjacent cells of landmines as unsafe. Landmines are shown with number 0
 void findShortestPath(int mat[R][C]){
     int i,j;
  
@@ -55,7 +46,6 @@ void findShortestPath(int mat[R][C]){
                 mat[i][j] = 0; 
         } 
     } 
- 
     int dist[R][C];
  
     for(i=0;i<R;i++){
@@ -97,7 +87,6 @@ void findShortestPath(int mat[R][C]){
             ans = min(ans,dist[i][C-1]);
         }
     }
-     
     // if destination can be reached
     if(ans == INT_MAX)
         cout << "NOT POSSIBLE\n";
@@ -105,8 +94,6 @@ void findShortestPath(int mat[R][C]){
     else// if the destination is not reachable
         cout << "Length of shortest safe route is " << ans << endl;
 }
- 
-// Driver code
 int main(){
      
     // input matrix with landmines shown with number 0
@@ -125,7 +112,5 @@ int main(){
         { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, 
         { 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 } 
     }; 
-     
-    // find shortest path
     findShortestPath(mat); 
 }
