@@ -1,9 +1,6 @@
-Find the maximum element in an array which is first increasing and then decreasing
-// C++ program to find maximum 
-// element 
+//find maximum element 
 #include <bits/stdc++.h>
 using namespace std;
- 
 // function to find the maximum element 
 int findMaximum(int arr[], int low, int high) 
 { 
@@ -13,17 +10,12 @@ int findMaximum(int arr[], int low, int high)
     { 
         if (arr[i] > max) 
             max = arr[i]; 
-         
-        // break when once an element is smaller than 
-        // the max then it will go on decreasing 
-        // and no need to check after that 
+        // break when once an element is smaller than the max then it will go on decreasing & no need to check after that 
         else
             break; 
     } 
     return max; 
-} 
- 
-/* Driver code*/
+}
 int main() 
 { 
     int arr[] = {1, 30, 40, 50, 60, 70, 23, 20}; 
