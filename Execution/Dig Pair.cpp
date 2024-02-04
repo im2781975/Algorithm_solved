@@ -1,13 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-// Function to find if there exists a pair of elements in the array whose difference is n
+// find if there exists a pair of elements in the array whose difference is n
 void findPair(int arr[], int n, int diff) {
     // Nested loop to compare all possible pairs of elements
     for(int i=0; i<n; i++) {
         for(int j=0; j<n; j++) {
-              if(i == j)
-                  continue;
-           
+            if(i == j)
+                continue;
             // If the difference between the two elements is n, print them
             if((arr[j] - arr[i]) == diff) {
                 cout << "Pair Found: (" << arr[i] << ", " << arr[j] << ")";
@@ -23,7 +22,6 @@ bool findPair(int arr[], int size, int n)
     // Initialize positions of two elements 
     int i = 0; 
     int j = 1; 
- 
     // Search for a pair 
     while (i < size && j < size) 
     { 
@@ -37,64 +35,51 @@ bool findPair(int arr[], int size, int n)
             j++; 
         else
             i++; 
-    } 
- 
+    }
     cout << "No such pair"; 
     return false; 
 } 
 bool findPair(int arr[], int size, int n)
 {
-    // Step-1 Sort the array
     sort(arr, arr + size);
- 
     // Initialize positions of two elements
     int l = 0;
     int r = 1;
- 
-    // take absolute value of difference
-    // this does not affect the pair as A-B=diff is same as
-    // B-A= -diff
+    // take absolute value of difference this does not affect the pair as A-B=diff is same as B-A= -diff
     n = abs(n);
- 
-    // Search for a pair
- 
-    // These loop running conditions are sufficient
+    // Search for a pair.These loop running conditions are sufficient
     while (l <= r and r < size) {
         int diff = arr[r] - arr[l];
         if (diff == n
-            and l != r) // we need distinct elements in pair
-                        // so l!=r
+            and l != r) 
+            // we need distinct elements in pair. so l!=r
         {
             cout << "Pair Found: (" << arr[l] << ", "
                  << arr[r] << ")";
             return true;
         }
-        else if (diff > n) // try to reduce the diff
+        else if (diff > n) 
+        // try to reduce the diff
             l++;
-        else // Note if l==r then r will be advanced thus no
-             // pair will be missed
+        else
+        // Note if l==r then r will be advanced thus no pair will be missed
             r++;
     }
     cout << "No such pair";
     return false;
 }
-// The function assumes that the array is sorted
+// function assumes that the array is sorted
 bool findPair(int arr[], int size, int n)
 {
     unordered_map<int, int> mpp;
     for (int i = 0; i < size; i++) {
         mpp[arr[i]]++;
- 
-        // Check if any element whose frequency
-        // is greater than 1 exist or not for n == 0
+        // Check if any element whose frequency is greater than 1 exist or not for n == 0
         if (n == 0 && mpp[arr[i]] > 1)
             return true;
     }
- 
-    // Check if difference is zero and
-    // we are unable to find any duplicate or
-    // element whose frequency is greater than 1
-    // then no such pair found.
+    // Check if difference is zero & we are unable to find any duplicate or
+    // element whose frequency is greater than 1 then no such pair found.
     if (n == 0)
         return false;
  
@@ -105,7 +90,6 @@ bool findPair(int arr[], int size, int n)
             return true;
         }
     }
- 
     cout << "No Pair found";
     return false;
 }
