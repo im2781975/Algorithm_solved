@@ -43,12 +43,7 @@ double getMedian(int ar1[], int ar2[], int n)
     }
     return (1.0 * (m1 + m2)) / 2;
 }
-/* This function returns
-median of ar1[] and ar2[].
-Assumptions in this function:
-Both ar1[] and ar2[]
-are sorted arrays
-Both have n elements */
+// returns median of ar1[] and ar2[].
 int getMedian(int ar1[], int ar2[], int n)
 {
     int j = 0;
@@ -58,6 +53,45 @@ int getMedian(int ar1[], int ar2[], int n)
     sort(ar1, ar1 + n);
     sort(ar2, ar2 + n);
     return (ar1[n - 1] + ar2[0]) / 2;
+}
+double getMedian(int arr1[], int arr2[], int n)
+{
+    // according to given constraints all numbers are in this range
+    int low = (int)-1e9, high = (int)1e9;
+ 
+    int pos = n;
+    double ans = 0.0;
+    // binary search to find the element which will be present at pos = totalLen/2 after merging two arrays in sorted order
+    while (low <= high) {
+        int mid = low + ((high - low) >> 1);
+        // total number of elements in arrays which are less than mid
+        int ub = upper_bound(arr1, arr1 + n, mid) - arr1
+                 + upper_bound(arr2, arr2 + n, mid) - arr2;
+ 
+        if (ub <= pos)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+ 
+    ans = low;
+    // As there are even number of elements, we will also have to find element at pos = totalLen/2 - 1
+    pos--;
+    low = (int)-1e9;
+    high = (int)1e9;
+    while (low <= high) {
+        int mid = low + ((high - low) >> 1);
+        int ub = upper_bound(arr1, arr1 + n, mid) - arr1
+                 + upper_bound(arr2, arr2 + n, mid) - arr2;
+ 
+        if (ub <= pos)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    // average of two elements in case of even number of elements
+    ans = (ans + low) / 2;
+    return ans;
 }
 int main()
 {
@@ -72,5 +106,8 @@ int main()
         cout << "Doesn't work for arrays"
              << " of unequal size";
     getchar();
+    double median = getMedian(arr1, arr2, n);
+ 
+    cout << "Median is " << median << endl
     return 0;
 }
