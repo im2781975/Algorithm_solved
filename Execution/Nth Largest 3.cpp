@@ -1,11 +1,9 @@
-// C++ program for the above approach
 #include <bits/stdc++.h>
 using namespace std;
  
 vector<int> kthLargest(int k, int arr[], int n)
 {
     vector<int> ans(n);
- 
     // Creating a min-heap using priority queue
     priority_queue<int, vector<int>, greater<int> > pq;
  
@@ -21,25 +19,19 @@ vector<int> kthLargest(int k, int arr[], int n)
                 pq.push(arr[i]);
             }
         }
- 
         // If size is less than k
         if (pq.size() < k)
             ans[i] = -1;
         else
             ans[i] = pq.top();
     }
- 
     return ans;
 }
- 
-// Driver Code
 int main()
 {
     int n = 6;
     int arr[n] = { 1, 2, 3, 4, 5, 6 };
     int k = 4;
- 
-    // Function call
     vector<int> v = kthLargest(k, arr, n);
     for (auto it : v)
         cout << it << " ";
