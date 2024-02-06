@@ -1,8 +1,5 @@
-// C++ program for the above approach
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Simple binary search algorithm
 int binarySearch(int arr[], int target, int start, int end)
 {
     while (start <= end) {
@@ -15,37 +12,28 @@ int binarySearch(int arr[], int target, int start, int end)
         else if (target > arr[mid]) {
             start = mid + 1;
         }
-        else {
-            // ans found
+        else
             return mid;
-        }
     }
     return -1;
 }
  
- 
-// an algorithm that finds an element in an
-// array of infinite size
- 
+// an algorithm that finds an element in an array of infinite size
 int findPos(int arr[], int target)
 {
-    // first find the range
-    // first start with a box of size 2
+    // first find the range first start with a box of size 2
     int start = 0;
     int end = 1;
- 
     // condition for the target to lie in the range
     while (target > arr[end]) {
-        int temp = end + 1; // this is my new start
-        // double the box value
+        int temp = end + 1;
+        // this is my new start double the box value
         // end = previous end + sizeofbox*2
         end = end + (end - start + 1) * 2;
         start = temp;
     }
     return binarySearch(arr, target, start, end);
 }
- 
-// Driver code
 int main()
 {
  
@@ -58,6 +46,5 @@ int main()
         cout << "Element not found";
     else
         cout << "Element found at index " << ans;
- 
     return 0;
 }
