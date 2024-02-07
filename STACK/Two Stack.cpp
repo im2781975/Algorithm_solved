@@ -1,6 +1,5 @@
 #include <iostream> 
 #include <stdlib.h> 
-  
 using namespace std; 
   
 class twoStacks { 
@@ -8,19 +7,16 @@ class twoStacks {
     int size; 
     int top1, top2; 
   
-public: 
-    twoStacks(int n) // constructor 
+    public: 
+    twoStacks(int n) 
     { 
         size = n; 
         arr = new int[n]; 
         top1 = -1; 
         top2 = size; 
-    } 
-  
-    // Method to push an element x to stack1 
+    }
     void push1(int x) 
     { 
-        // There is at least one empty space for new element 
         if (top1 < top2 - 1) { 
             top1++; 
             arr[top1] = x; 
@@ -30,12 +26,8 @@ public:
             exit(1); 
         } 
     } 
-  
-    // Method to push an element x to stack2 
     void push2(int x) 
     { 
-        // There is at least one empty 
-        // space for new element 
         if (top1 < top2 - 1) { 
             top2--; 
             arr[top2] = x; 
@@ -45,8 +37,6 @@ public:
             exit(1); 
         } 
     } 
-  
-    // Method to pop an element from first stack 
     int pop1() 
     { 
         if (top1 >= 0) { 
@@ -58,9 +48,7 @@ public:
             cout << "Stack UnderFlow"; 
             exit(1); 
         } 
-    } 
-  
-    // Method to pop an element from second stack 
+    }
     int pop2() 
     { 
         if (top2 < size) { 
@@ -73,9 +61,7 @@ public:
             exit(1); 
         } 
     } 
-}; 
-  
-/* Driver program to test twoStacks class */
+};
 int main() 
 { 
     twoStacks ts(5); 
