@@ -1,10 +1,8 @@
-// program to demonstrate customized data structure
-// which supports functions in O(1)
+// customized data structure
 #include <iostream>
 #include <vector>
 using namespace std;
 const int MAXX = 1000;
- 
 // class stack
 class stack {
     int minn;
@@ -22,8 +20,6 @@ public:
     int AddElement(int element);
     int GetMin();
 };
- 
-// utility function for adding a new element
 int stack::AddElement(int element)
 {
     if (size > MAXX) {
@@ -36,8 +32,6 @@ int stack::AddElement(int element)
     size++;
     return 1;
 }
- 
-// utility function for returning last element of stack
 int stack::GetLastElement()
 {
     if (size == -1) {
@@ -46,15 +40,12 @@ int stack::GetLastElement()
     }
     return arr[size].first;
 }
- 
-// utility function for removing last element successfully;
 int stack::RemoveLastElement()
 {
     if (size == -1) {
         cout << "stack empty!!!\n";
         return 0;
     }
- 
     // updating minimum element
     if (size > 0 && arr[size - 1].second > arr[size].second) {
         minn = arr[size - 1].second;
@@ -63,7 +54,6 @@ int stack::RemoveLastElement()
     size -= 1;
     return 1;
 }
- 
 // utility function for returning min element till now;
 int stack::GetMin()
 {
@@ -73,8 +63,6 @@ int stack::GetMin()
     }
     return arr[size].second;
 }
- 
-// Driver code
 int main()
 {
     stack s;
