@@ -1,17 +1,13 @@
 #include <iostream> 
 #include <stdlib.h> 
-  
 using namespace std; 
-  
-/* A simple stack class with  
-basic stack functionalities */
 class Stack { 
 private: 
     static const int max = 100; 
     int arr[max]; 
     int top; 
   
-public: 
+    public: 
     Stack() { top = -1; } 
     bool isEmpty(); 
     bool isFull(); 
@@ -19,26 +15,21 @@ public:
     void push(int x); 
 }; 
   
-/* Stack's member method to check  
-if the stack is empty */
+// check  if the stack is empty
 bool Stack::isEmpty() 
 { 
     if (top == -1) 
         return true; 
     return false; 
 } 
-  
-/* Stack's member method to check  
-if the stack is full */
+// check  if the stack is full
 bool Stack::isFull() 
 { 
     if (top == max - 1) 
         return true; 
     return false; 
 } 
-  
-/* Stack's member method to remove  
-an element from it */
+// method to remove an element from it 
 int Stack::pop() 
 { 
     if (isEmpty()) { 
@@ -50,8 +41,7 @@ int Stack::pop()
     return x; 
 } 
   
-/* Stack's member method to insert  
-an element to it */
+// method to insert an element to it 
 void Stack::push(int x) 
 { 
     if (isFull()) { 
@@ -61,7 +51,6 @@ void Stack::push(int x)
     top++; 
     arr[top] = x; 
 } 
-  
 /* A class that supports all the stack  
 operations and one additional 
   operation getMin() that returns the  
@@ -78,12 +67,6 @@ public:
     void push(int x); 
     int getMin(); 
 }; 
-  
-/* SpecialStack's member method to insert 
- an element to it. This method 
-   makes sure that the min stack is also  
-updated with appropriate minimum 
-   values */
 void SpecialStack::push(int x) 
 { 
     if (isEmpty() == true) { 
@@ -99,29 +82,19 @@ void SpecialStack::push(int x)
         else
             min.push(y); 
     } 
-} 
-  
-/* SpecialStack's member method to  
-remove an element from it. This method 
-   removes top element from min stack also. */
+}
 int SpecialStack::pop() 
 { 
     int x = Stack::pop(); 
     min.pop(); 
     return x; 
-} 
-  
-/* SpecialStack's member method to get 
- minimum element from it. */
+}
 int SpecialStack::getMin() 
 { 
     int x = min.pop(); 
     min.push(x); 
     return x; 
 } 
-  
-/* Driver program to test SpecialStack 
- methods */
 int main() 
 { 
     SpecialStack s; 
@@ -133,3 +106,4 @@ int main()
     cout << s.getMin(); 
     return 0; 
 } 
+
