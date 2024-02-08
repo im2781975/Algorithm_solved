@@ -1,8 +1,5 @@
-// C++ program for linked list implementation of stack 
 #include <bits/stdc++.h> 
 using namespace std; 
-  
-// A structure to represent a stack 
 class StackNode { 
 public: 
     int data; 
@@ -47,9 +44,7 @@ int peek(StackNode* root)
     if (isEmpty(root)) 
         return INT_MIN; 
     return root->data; 
-} 
-  
-// Driver code 
+}
 int main() 
 { 
     StackNode* root = NULL; 
@@ -63,14 +58,10 @@ int main()
     cout << "Top element is " << peek(root) << endl; 
       
     cout <<"Elements present in stack : "; 
-     //print all elements in stack : 
     while(!isEmpty(root)) 
     { 
-        // print top element in stack 
         cout << peek(root) <<" "; 
-        // remove top element in stack 
         pop(&root); 
     } 
-  
     return 0; 
 } 
