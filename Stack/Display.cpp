@@ -1,24 +1,18 @@
-/* C++ program to implement basic stack 
-   operations */
 #include <bits/stdc++.h> 
-  
 using namespace std; 
-  
 #define MAX 1000 
   
 class Stack { 
     int top; 
   
-public: 
-    int a[MAX]; // Maximum size of Stack 
-  
+    public: 
+    int a[MAX];
     Stack() { top = -1; } 
     bool push(int x); 
     int pop(); 
     int peek(); 
     bool isEmpty(); 
 }; 
-  
 bool Stack::push(int x) 
 { 
     if (top >= (MAX - 1)) { 
@@ -30,8 +24,7 @@ bool Stack::push(int x)
         cout << x << " pushed into stack\n"; 
         return true; 
     } 
-} 
-  
+}
 int Stack::pop() 
 { 
     if (top < 0) { 
@@ -58,9 +51,7 @@ int Stack::peek()
 bool Stack::isEmpty() 
 { 
     return (top < 0); 
-} 
-  
-// Driver program to test above functions 
+}
 int main() 
 { 
     class Stack s; 
@@ -69,18 +60,12 @@ int main()
     s.push(30); 
     cout << s.pop() << " Popped from stack\n"; 
     
-    //print top element of stack after popping 
-    cout << "Top element is : " << s.peek() << endl; 
-    
-    //print all elements in stack : 
+    cout << "Top element is : " << s.peek() << endl;
     cout <<"Elements present in stack : "; 
     while(!s.isEmpty()) 
     { 
-        // print top element in stack 
         cout << s.peek() <<" "; 
-        // remove top element in stack 
         s.pop(); 
     } 
-  
     return 0; 
 }
