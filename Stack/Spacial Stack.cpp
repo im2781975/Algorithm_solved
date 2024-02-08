@@ -77,7 +77,7 @@ void SpecialStack::push(int x)
         Stack::push(x); 
         int y = min.pop(); 
         min.push(y); 
-        if (x < y) 
+        if (x <= y) 
             min.push(x); 
         else
             min.push(y); 
@@ -85,8 +85,13 @@ void SpecialStack::push(int x)
 }
 int SpecialStack::pop() 
 { 
-    int x = Stack::pop(); 
-    min.pop(); 
+int x = Stack::pop(); 
+    int y = min.pop(); 
+  
+    //Push the popped element y back only if it is not equal to x 
+    if (y != x) 
+        min.push(y); 
+  
     return x; 
 }
 int SpecialStack::getMin() 
