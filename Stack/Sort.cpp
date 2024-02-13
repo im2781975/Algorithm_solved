@@ -1,37 +1,28 @@
-// C++ program to sort a stack using an
-// auxiliary stack.
+
+// sort a stack using an auxiliary stack.
 #include <bits/stdc++.h>
 using namespace std;
- 
 // This function return the sorted stack
 stack<int> sortStack(stack<int> &input)
 {
     stack<int> tmpStack;
- 
     while (!input.empty())
     {
         // pop out the first element
         int tmp = input.top();
         input.pop();
- 
-        // while temporary stack is not empty and top
-        // of stack is lesser than temp
+        // while temporary stack is not empty and top of stack is lesser than temp
         while (!tmpStack.empty() && tmpStack.top() < tmp)
         {
-            // pop from temporary stack and push
-            // it to the input stack
+            // pop from temporary stack and push it to the input stack
             input.push(tmpStack.top());
             tmpStack.pop();
         }
- 
         // push temp in temporary of stack
         tmpStack.push(tmp);
     }
- 
     return tmpStack;
 }
- 
-// main function
 int main()
 {
     stack<int> input;
@@ -41,11 +32,9 @@ int main()
     input.push(98);
     input.push(92);
     input.push(23);
- 
     // This is the temporary stack
     stack<int> tmpStack = sortStack(input);
     cout << "Sorted numbers are:\n";
- 
     while (!tmpStack.empty())
     {
         cout << tmpStack.top()<< " ";
