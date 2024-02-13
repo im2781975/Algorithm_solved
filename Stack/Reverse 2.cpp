@@ -1,6 +1,4 @@
-// C++ program to implement Stack  
-// using linked list so that reverse 
-// can be done with O(1) extra space. 
+// implement Stack using linked list so that reverse 
 #include<bits/stdc++.h> 
 using namespace std; 
   
@@ -14,14 +12,10 @@ class StackNode {
         this->data = data; 
         this->next = NULL; 
     } 
-}; 
-  
+};
 class Stack { 
-      
-    StackNode *top; 
-      
+    StackNode *top;
     public: 
-      
     // Push and pop operations 
     void push(int data) 
     { 
@@ -32,15 +26,13 @@ class Stack {
         StackNode *s = new StackNode(data); 
         s->next = top; 
         top = s; 
-    } 
-      
+    }
     StackNode* pop() 
     { 
         StackNode *s = top; 
         top = top->next; 
         return s; 
-    } 
-  
+    }
     // prints contents of stack 
     void display() 
     { 
@@ -50,10 +42,8 @@ class Stack {
             s = s->next; 
         } 
         cout << endl; 
-    } 
-  
-    // Reverses the stack using simple 
-    // linked list reversal logic. 
+    }
+    // Reverses the stack using simple linked list reversal logic. 
     void reverse() 
     { 
         StackNode *prev, *cur, *succ; 
@@ -69,9 +59,7 @@ class Stack {
         } 
         top = prev; 
     } 
-}; 
-  
-// driver code 
+};
 int main() 
 { 
     Stack *s = new Stack(); 
@@ -84,10 +72,8 @@ int main()
     cout << endl; 
       
     // reverse 
-    s->reverse(); 
-  
+    s->reverse();
     cout << "Reversed Stack" << endl; 
     s->display(); 
-      
     return 0; 
 } 
