@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
 void solve(queue<int>& q, int k);
  
 // Function to reverse first k elements of a queue
@@ -14,7 +13,6 @@ queue<int> reverseFirstK(queue<int> q, int k) {
     }
     return q;
 }
- 
 void solve(queue<int>& q, int k) {
     if (k == 0) return;
     int e = q.front();
@@ -22,8 +20,6 @@ void solve(queue<int>& q, int k) {
     solve(q, k - 1);
     q.push(e);
 }
- 
-// Driver code
 int main() {
     queue<int> queue;
     queue.push(10);
@@ -39,8 +35,6 @@ int main() {
  
     int k = 5;
     queue = reverseFirstK(queue, k);
- 
-    // Printing queue
     while (!queue.empty()) {
         cout << queue.front() << " ";
         queue.pop();
