@@ -1,44 +1,35 @@
 #include <iostream> 
 using namespace std; 
- 
 class node { 
 public: 
     int data; 
     node* next; 
 }; 
- 
 class mystack { 
 public: 
     node* head; 
     node* tail; 
- 
     mystack() 
     { 
         head = NULL; 
         tail = NULL; 
     } 
 }; 
- 
 mystack* create() 
 { 
-    mystack* ms = new mystack(); // creating a new stack 
+    mystack* ms = new mystack();
     return ms; 
 } 
- 
 void push(int data, mystack* ms) 
 { 
     node* temp = new node(); 
     temp->data = data; 
     temp->next = ms->head; 
- 
-    // when pushing first element in the stack the tail 
-    // must be pointed by that first element 
+    // when pushing first element in the stack the tail must be pointed by that first element 
     if (ms->head == NULL) 
-        ms->tail = temp; 
-     
+        ms->tail = temp;
     ms->head = temp; 
-} 
- 
+}
 int pop(mystack* ms) 
 { 
     if (ms->head == NULL) { 
@@ -52,23 +43,19 @@ int pop(mystack* ms)
         delete temp; 
         return popped; 
     } 
-} 
- 
-// making the next pointer of tail of 
-// one stack point to other stack 
+}
+// making the next pointer of tail of one stack point to other stack 
 void merge(mystack* ms1, mystack* ms2) 
 { 
-if (ms1->head == NULL) 
-{ 
-    ms1->head = ms2->head; 
+    if (ms1->head == NULL) 
+    { 
+        ms1->head = ms2->head; 
+        ms1->tail = ms2->tail; 
+        return; 
+    } 
+    ms1->tail->next = ms2->head;
     ms1->tail = ms2->tail; 
-    return; 
-} 
-     
-ms1->tail->next = ms2->head; 
-ms1->tail = ms2->tail; 
-} 
- 
+}
 void display(mystack* ms) 
 { 
     node* temp = ms->head; 
@@ -76,8 +63,7 @@ void display(mystack* ms)
         cout << temp->data << " "; 
         temp = temp->next; 
     } 
-} 
- 
+}
 int main() 
 { 
     mystack* ms1 = create(); 
