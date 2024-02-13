@@ -1,8 +1,6 @@
-// CPP program to reverse a Queue
+// reverse a Queue
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Utility function to print the queue
 void Print(queue<int>& Queue)
 {
     while (!Queue.empty()) {
@@ -10,8 +8,21 @@ void Print(queue<int>& Queue)
         Queue.pop();
     }
 }
- 
 // Function to reverse the queue
+void reverseQueue(queue<int>& q)
+{
+    // base case
+    if (q.size() == 0)
+        return;
+    // storing front(first element) of queue
+    int fr = q.front();
+    // removing front
+    q.pop();
+    // asking recursion to reverse the leftover queue
+    reverseQueue(q);
+    // placing first element at its correct position
+    q.push(fr);
+}
 void reverseQueue(queue<int>& Queue)
 {
     stack<int> Stack;
@@ -24,8 +35,6 @@ void reverseQueue(queue<int>& Queue)
         Stack.pop();
     }
 }
- 
-// Driver code
 int main()
 {
     queue<int> Queue;
@@ -39,7 +48,6 @@ int main()
     Queue.push(80);
     Queue.push(90);
     Queue.push(100);
- 
     reverseQueue(Queue);
     Print(Queue);
 }
