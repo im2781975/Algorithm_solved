@@ -37,9 +37,49 @@ void calculateSpan(int price[], int n, int S[])
         st.push(i);
     }
 }
+// calculate stock span values implementing the same idea without using stack
+void calculateSpan(int A[], int n, int ans[])
+{
+    // Span value of first element is always 1
+    ans[0] = 1;
+    // Calculate span values for rest of the elements
+    for (int i = 1; i < n; i++) {
+        int counter = 1;
+        while ((i - counter) >= 0
+               && A[i] >= A[i - counter]) {
+            counter += ans[i - counter];
+        }
+        ans[i] = counter;
+    }
+}
+vector<int> calculateSpan(int arr[], int n)
+{
+    // Your code here
+    stack<int> s;
+    vector<int> ans;
+    for (int i = 0; i < n; i++) {
+        while (!s.empty() and arr[s.top()] <= arr[i])
+            s.pop();
+ 
+        if (s.empty())
+            ans.push_back(i + 1);
+        else {
+            int top = s.top();
+            ans.push_back(i - top);
+        }
+        s.push(i);
+    }
+ 
+    return ans;
+}
 void printArray(int arr[], int n)
 {
     for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+}
+void printArray(vector<int> arr)
+{
+    for (int i = 0; i < arr.size(); i++)
         cout << arr[i] << " ";
 }
 int main()
@@ -53,6 +93,7 @@ int main()
  
     // print the calculated span values
     printArray(S, n);
- 
+    vector<int> arr = calculateSpan(price, n);
+    printArray(arr);
     return 0;
 }
