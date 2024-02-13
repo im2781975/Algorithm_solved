@@ -1,4 +1,3 @@
-
 // sort a stack using an auxiliary stack.
 #include <bits/stdc++.h>
 using namespace std;
