@@ -1,42 +1,32 @@
-// CPP Program to implement a stack
-// using dequeue
+// implement a stack using dequeue
 #include <bits/stdc++.h>
 using namespace std;
- 
 class Stack {
-private:
+    private:
     // Create an empty deque
     deque<int> my_deque;
- 
-public:
+    public:
     void push(int item)
     {
         // Append the item to the end of the deque
         my_deque.push_back(item);
     }
- 
     int pop()
     {
-        // Remove and return the item from the end of the
-        // deque
+        // Remove and return the item from the end of the deque
         int item = my_deque.back();
         my_deque.pop_back();
         return item;
     }
- 
     int size()
     {
         // Return size of deque
         return my_deque.size();
     }
- 
     bool is_empty()
     {
-        // Return True if the deque is empty, and False
-        // otherwise
         return my_deque.empty();
     }
- 
     int top()
     {
         if (is_empty()) {
@@ -49,7 +39,6 @@ public:
         }
     }
 };
- 
 int main()
 {
     Stack st;
