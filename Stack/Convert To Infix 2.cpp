@@ -1,8 +1,7 @@
-// CPP Program to convert prefix to postfix
+// convert prefix to postfix
 #include <iostream>
 #include <stack>
 using namespace std;
- 
 // function to check if character is operator or not
 bool isOperator(char x)
 {
@@ -15,15 +14,12 @@ bool isOperator(char x)
     }
     return false;
 }
- 
 // Convert prefix to Postfix expression
 string preToPost(string pre_exp)
 {
- 
     stack<string> s;
     // length of expression
     int length = pre_exp.size();
- 
     // reading from right to left
     for (int i = length - 1; i >= 0; i--) 
     {
@@ -38,11 +34,9 @@ string preToPost(string pre_exp)
  
             // concat the operands and operator
             string temp = op1 + op2 + pre_exp[i];
- 
             // Push string temp back to stack
             s.push(temp);
         }
- 
         // if symbol is an operand
         else {
  
@@ -50,12 +44,9 @@ string preToPost(string pre_exp)
             s.push(string(1, pre_exp[i]));
         }
     }
- 
     // stack contains only the Postfix expression
     return s.top();
 }
- 
-// Driver Code
 int main()
 {
     string pre_exp = "*-A/BC-/AKL";
