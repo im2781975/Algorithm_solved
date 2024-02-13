@@ -1,13 +1,12 @@
-// C++ Program for Iterative Tower of Hanoi using STL
- 
+// Iterative Tower of Hanoi using STL
 #include <iostream>
 #include <vector>
 #include <stack>
 using namespace std;
  
 char rod[]={'S', 'A', 'D'};
-vector<stack<int>> stacks(3); // 3 stacks for 3 rods
- 
+vector<stack<int>> stacks(3); 
+// 3 stacks for 3 rods
 void moveDisk(int a, int b)
 {
     if (stacks[b].empty() || (!stacks[a].empty() && stacks[a].top() < stacks[b].top()))
@@ -19,7 +18,6 @@ void moveDisk(int a, int b)
     else
         moveDisk(b, a);
 }
- 
 void towerOfHanoi(int n)
 {
     cout << "Tower of Hanoi for " << n << " disks:\n";
@@ -42,7 +40,6 @@ void towerOfHanoi(int n)
             moveDisk(src, aux);
     }
 }
- 
 int main()
 {
     int n = 3; // number of disks
