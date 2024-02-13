@@ -1,14 +1,11 @@
-// C++ program to find max LR product
+// find max LR product
 #include <bits/stdc++.h>
 using namespace std;
- 
 stack<int> mystack;
-      
 // To find greater element to left
 void nextGreaterToLeft(int arr[], int res[], int N) {
     mystack.push(0);
     res[0] = 0;
-      
     // iterate through the array
     for(int i = 1; i < N; i++) {
         while(mystack.size() > 0  &&  arr[mystack.top()] <= arr[i])
@@ -19,27 +16,23 @@ void nextGreaterToLeft(int arr[], int res[], int N) {
         mystack.push(i);
     }
 }
-  
-//// To find greater element to right
+//To find greater element to right
 void nextGreaterToRight(int arr[], int res[], int N) {
     mystack = stack<int>();
       
     int n = N;
     mystack.push(n-1);
     res[n-1] *= 0;
-      
     // iterate through the array in the reverse order
     for(int i=n - 2 ; i >= 0; i--) {
         while(mystack.size() > 0  &&  arr[mystack.top()] <= arr[i])
             mystack.pop();
           
-        //multiply the index to the right with the index to the left
-        //in the resultant array
+        //multiply the index to the right with the index to the left in the resultant array
         res[i] = (mystack.size() == 0) ? res[i]*0 : res[i]*(mystack.top()+1);
         mystack.push(i);
     }
 }
-  
 //function to return the max value in the resultant array
 int maxProduct(int arr[], int res[], int N) {
     nextGreaterToLeft(arr,res, N);        //to find left max
@@ -51,7 +44,6 @@ int maxProduct(int arr[], int res[], int N) {
     }
     return Max;
 }
-     
 int main()
 {
     int arr[] = {5, 4, 3, 4, 5};
@@ -60,6 +52,5 @@ int main()
       
     int maxprod = maxProduct(arr, res, N);
     cout << maxprod << endl;
- 
     return 0;
 }
