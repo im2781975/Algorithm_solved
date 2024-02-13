@@ -1,20 +1,13 @@
-// C++ implementation of above approach.
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Function to check if A[] is
-// Stack Sortable or Not.
+// Function to check if A[] is Stack Sortable or Not.
 bool check(int A[], int N)
 {
     // Stack S
     stack<int> S;
- 
     // Pointer to the end value of array B.
     int B_end = 0;
- 
-    // Traversing each element of A[] from starting
-    // Checking if there is a valid operation 
-    // that can be performed.
+    // Traversing each element of A[] from starting Checking if there is a valid operation that can be performed.
     for (int i = 0; i < N; i++) 
     {
         // If the stack is not empty
@@ -22,34 +15,23 @@ bool check(int A[], int N)
         {
             // Top of the Stack.
             int top = S.top();
- 
-            // If the top of the stack is
-            // Equal to B_end+1, we will pop it
-            // And increment B_end by 1.
+            // If the top of the stack is Equal to B_end+1, we will pop it And increment B_end by 1.
             while (top == B_end + 1) 
             {
-                // if current top is equal to
-                // B_end+1, we will increment 
-                // B_end to B_end+1
+                // if current top is equal to B_end+1, we will increment B_end to B_end+1
                 B_end = B_end + 1;
- 
                 // Pop the top element.
                 S.pop();
  
-                // If the stack is empty We cannot
-                // further perform this operation.
-                // Therefore break
+                // If the stack is empty We cannot further perform this operation. Therefore break
                 if (S.empty()) 
                 {
                     break;
                 }
- 
                 // Current Top
                 top = S.top();
             }
- 
-            // If stack is empty
-            // Push the Current element
+            // If stack is empty Push the Current element
             if (S.empty()) {
                 S.push(A[i]);
             }
@@ -64,8 +46,7 @@ bool check(int A[], int N)
                 {
                     S.push(A[i]);
                 }
-                // Else We cannot sort the array
-                // Using any valid operations.
+                // Else We cannot sort the array Using any valid operations.
                 else
                 {
                     // Not Stack Sortable
@@ -75,17 +56,13 @@ bool check(int A[], int N)
         }
         else
         {
-            // If the stack is empty push the current
-            // element in the stack.
+            // If the stack is empty push the current element in the stack
             S.push(A[i]);
         }
     }
- 
     // Stack Sortable
     return true;
 }
- 
-// Driver's Code
 int main()
 {
     int A[] = { 4, 1, 2, 3 };
