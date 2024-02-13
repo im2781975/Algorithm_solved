@@ -1,15 +1,11 @@
-// C++ program to find duplicate parenthesis in a
-// balanced expression
+// find duplicate parenthesis in a balanced expression
 #include <bits/stdc++.h>
 using namespace std;
- 
-// Function to find duplicate parenthesis in a
-// balanced expression
+// Function to find duplicate parenthesis in a balanced expression
 bool findDuplicateparenthesis(string str)
 {
     // create a stack of characters
     stack<char> Stack;
- 
     // Iterate through the given expression
     for (char ch : str)
     {
@@ -19,11 +15,8 @@ bool findDuplicateparenthesis(string str)
             // pop character from the stack
             char top = Stack.top();
             Stack.pop();
- 
-            // stores the number of characters between a 
-            // closing and opening parenthesis
-            // if this count is less than or equal to 1
-            // then the brackets are redundant else not
+            // stores the number of characters between a closing and opening parenthesis
+            // if this count is less than or equal to 1 then the brackets are redundant else not
             int elementsInside = 0;
             while (top != '(')
             {
@@ -35,22 +28,15 @@ bool findDuplicateparenthesis(string str)
                 return 1;
             }
         }
- 
-        // push open parenthesis '(', operators and
-        // operands to stack
+        // push open parenthesis '(', operators and operands to stack
         else
             Stack.push(ch);
     }
- 
     // No duplicates found
     return false;
 }
- 
- 
-// Driver code
 int main()
 {
-    // input balanced expression
     string str = "(((a+(b))+(c+d)))";
  
     if (findDuplicateparenthesis(str))
