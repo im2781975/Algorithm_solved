@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <stack>
- 
 using namespace std;
  
 bool checkStackPermutation(const vector<int>& input, const vector<int>& output) {
@@ -15,10 +14,10 @@ bool checkStackPermutation(const vector<int>& input, const vector<int>& output) 
             s.pop();
             j++;
         }
-}
-if(j==output.size())
-    return true;
-  return false;
+    }
+    if(j==output.size())
+        return true;
+    return false;
 }
  
 int main() {
