@@ -1,81 +1,59 @@
 // insertion and deletion in Circular Queue
-#include <bits/stdc++.h>
+#include<iostream>
+#include<climits>
 using namespace std;
-// Structure of a Node
-struct Node {
+struct node{
     int data;
-    struct Node* link;
+    node *nxt;
 };
-struct Queue {
-    struct Node *front, *rear;
+struct Queue{
+    node *front, *rear;
 };
-// Function to create Circular queue
-void enQueue(Queue* q, int value)
-{
-    struct Node* temp = new Node;
-    temp->data = value;
-    if (q->front == NULL)
-        q->front = temp;
+void enqueue(Queue *q, int val){
+    node *tmp = new node;
+    tmp->data = val;
+    if(q->front == NULL)
+        q->front = tmp;
     else
-        q->rear->link = temp;
- 
-    q->rear = temp;
-    q->rear->link = q->front;
+        q->rear->nxt = tmp;
+    q->rear = tmp;
+    q->rear->nxt = q->front;
 }
-// Function to delete element from Circular Queue
-int deQueue(Queue* q)
-{
-    if (q->front == NULL) {
-        cout << "Queue is empty";
+int dequeue(Queue *q){
+    if(q->front == NULL){
+        cout << "Queue is Empty";
         return INT_MIN;
     }
-    // If this is the last node to be deleted
     int value;
-    if (q->front == q->rear) {
+    if(q->front == q->rear){
         value = q->front->data;
         free(q->front);
-        q->front = NULL;
-        q->rear = NULL;
+        q->front = q->rear = NULL;
     }
-    else // There are more than one nodes
-    {
-        struct Node* temp = q->front;
-        value = temp->data;
-        q->front = q->front->link;
-        q->rear->link = q->front;
-        free(temp);
+    else{
+        node *tmp = q->front;
+        value = tmp->data;
+        q->front = q->front->nxt;
+        q->rear->nxt = q->front;
+        free(tmp);
     }
     return value;
 }
-void displayQueue(struct Queue* q)
-{
-    struct Node* temp = q->front;
-    cout << endl << "Elements in Circular Queue are: ";
-    while (temp->link != q->front) {
-        cout << temp->data << " ";
-        temp = temp->link;
+void Display(Queue *q){
+    node *tmp = q->front;
+    cout << "\n";
+    while(tmp->nxt!= q->front){
+        cout << tmp->data << " ";
+        tmp  = tmp->nxt;
     }
-    cout << temp->data;
+    cout << tmp->data << " ";
 }
-int main()
-{
-    Queue* q = new Queue;
-    q->front = q->rear = NULL;
-    // Inserting elements in Circular Queue
-    enQueue(q, 14);
-    enQueue(q, 22);
-    enQueue(q, 6);
-    displayQueue(q);
-    // Deleting elements from Circular Queue
-    cout << endl << "Deleted value = " << deQueue(q);
-    cout << endl << "Deleted value = " << deQueue(q);
- 
-    // Remaining elements in Circular Queue
-    displayQueue(q);
- 
-    enQueue(q, 9);
-    enQueue(q, 20);
-    displayQueue(q);
- 
-    return 0;
+int main(){
+    Queue *q = new Queue;
+    q->front = NULL;
+    q->rear = NULL;
+    for(int i = 1; i < 11; i++){
+        enqueue(q, i);
+    }
+    Display(q);
 }
