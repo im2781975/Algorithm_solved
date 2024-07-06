@@ -42,7 +42,8 @@ int Deque::size() { return Size; }
 void Deque::insertFront(int data) 
 { 
     Node* newNode = Node::getnode(data); 
-    // If true then new element cannot be added and it is an 'Overflow' condition 
+    // If true then new element cannot be added and it is an 'Overflow' condition
+    // which would indicate a memory allocation failure 
     if (newNode == NULL) 
         cout << "OverFlow\n"; 
     else { 
