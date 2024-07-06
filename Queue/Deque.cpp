@@ -1,175 +1,126 @@
-//implementation of Deque using 
-#include <bits/stdc++.h> 
+#include<bits/stdc++.h>
 using namespace std;
-struct Node { 
-    int data; 
-    Node *prev, *next; 
-    // Function to get a new node 
-    static Node* getnode(int data)
-    { 
-        Node* newNode = (Node*)malloc(sizeof(Node)); 
-        newNode->data = data; 
-        newNode->prev = newNode->next = NULL; 
-        return newNode; 
-    } 
-};
-class Deque { 
-    Node* front; 
-    Node* rear; 
-    int Size; 
-    public: 
-    Deque() 
-    { 
-        front = rear = NULL; 
-        Size = 0; 
+struct node{
+    int data;
+    node *prv, *nxt;
+    static node *create(int val){
+        node *newnode = new node;
+        newnode->prv = NULL;
+        newnode->nxt = NULL;
+        newnode->data = val;
+        return newnode;
     }
-    // Operations on Deque 
-    void insertFront(int data); 
-    void insertRear(int data); 
-    void deleteFront(); 
-    void deleteRear(); 
-    int getFront(); 
-    int getRear(); 
-    int size(); 
-    bool isEmpty(); 
-    void erase(); 
-}; 
-// Function to check whether deque is empty or not 
-bool Deque::isEmpty() { return (front == NULL); } 
-// Function to return the number of elements in the deque 
-int Deque::size() { return Size; }
-// Function to insert an element at the front end 
-void Deque::insertFront(int data) 
-{ 
-    Node* newNode = Node::getnode(data); 
-    // If true then new element cannot be added and it is an 'Overflow' condition
-    // which would indicate a memory allocation failure 
-    if (newNode == NULL) 
-        cout << "OverFlow\n"; 
-    else { 
-        // If deque is empty 
-        if (front == NULL) 
-            rear = front = newNode; 
-        // Inserts node at the front end 
-        else { 
-            newNode->next = front;
-            front->prev = newNode;
-            front = newNode; 
-        } 
-        // Increments count of elements by 1 
-        Size++; 
-    } 
-} 
-// Function to insert an element  at the rear end 
-void Deque::insertRear(int data) 
-{ 
-    Node* newNode = Node::getnode(data); 
-    // If true then new element cannot be added and it is an 'Overflow' condition 
-    if (newNode == NULL) 
-        cout << "OverFlow\n"; 
-    else { 
-        // If deque is empty 
-        if (rear == NULL) 
-            front = rear = newNode; 
-        // Inserts node at the rear end 
-        else { 
-            newNode->prev = rear; 
-            rear->next = newNode; 
-            rear = newNode; 
+};
+class Deque{
+    node *front, *rear;
+    int size;
+    public:
+    Deque(){
+        front = rear = NULL;
+        size = 0;
+    }
+    void InsertFront(int data);
+    void InsertRear(int data);
+    void DeleteFront();
+    void DeleteRear();
+    int Front();
+    int Back();
+    int GetSize();
+    bool IsEmpty();
+    void Erase();
+};
+bool Deque::IsEmpty(){
+    return (front == NULL);
+}
+int Deque::GetSize(){
+    return size;
+}
+void Deque::InsertFront(int data){
+    node *newnode = node::create(data);
+    if(newnode == NULL)
+        cout << "Overflow";
+    else{
+        if(front == NULL)
+            front = rear = newnode;
+        else{
+            newnode->nxt = front;
+            front->prv = newnode;
+            front = newnode;
         }
-        Size++; 
-    } 
-} 
-// Function to delete the element  from the front end 
-void Deque::deleteFront() 
-{ 
-    // If deque is empty then  'Underflow' condition 
-    if (isEmpty()) 
-        cout << "UnderFlow\n"; 
-    // Deletes the node from the front end and makes the adjustment in the links 
-    else { 
-        Node* temp = front; 
-        front = front->next; 
-        // If only one element was present 
-        if (front == NULL) 
-            rear = NULL; 
-        else
-            front->prev = NULL; 
-        free(temp); 
-        // Decrements count of elements by 1 
-        Size--; 
-    } 
-} 
-// Function to delete the element  from the rear end 
-void Deque::deleteRear() 
-{ 
-    // If deque is empty then  'Underflow' condition 
-    if (isEmpty()) 
-        cout << "UnderFlow\n"; 
-    // Deletes the node from the rear end and makes the adjustment in the links 
-    else { 
-        Node* temp = rear; 
-        rear = rear->prev; 
-        // If only one element was present 
-        if (rear == NULL) 
-            front = NULL; 
-        else
-            rear->next = NULL; 
-        free(temp); 
-        // Decrements count of elements by 1 
-        Size--; 
-    } 
+        size++;
+    }
 }
-// Function to return the element at the front end 
-int Deque::getFront() 
-{ 
-    if (isEmpty()) 
-        return -1; 
-    return front->data; 
+void Deque::InsertRear(int data){
+    node *newnode = node::create(data);
+    if(newnode == NULL){
+        cout << "Overflow";
+    }
+    else{
+        if(rear == NULL)
+            front = rear = newnode;
+        else{
+            newnode->prv = rear;
+            rear->nxt = newnode;
+            rear = newnode;
+        }
+        size++;
+    }
 }
-int Deque::getRear() 
-{ 
-    if (isEmpty()) 
-        return -1; 
-    return rear->data; 
+void Deque::DeleteFront(){
+    if(IsEmpty())
+        cout << "\nEmpty";
+    else{
+        node *tmp = front;
+        front = front->nxt;
+        if(front == NULL)
+            rear = NULL;
+        else
+            front->prv = NULL;
+        free(tmp);
+        size--;
+    }
+}
+void Deque::DeleteRear(){
+    if(IsEmpty())
+        cout << "\nEmpty";
+    else{
+        node *tmp = rear;
+        rear = rear->prv;
+        if(rear == NULL)
+            front = NULL;
+        else
+            rear->nxt = NULL;
+        free(tmp);
+        size--;
+    }
+}
+int Deque::Front(){
+    if(IsEmpty())
+        return -1;
+    return front->data;
+}
+int Deque::Back(){
+    if(IsEmpty())
+        return -1;
+    return rear->data;
 }
 // Function to delete all the elements from Deque 
-void Deque::erase() 
-{ 
-    rear = NULL; 
-    while (front != NULL) { 
-        Node* temp = front; 
-        front = front->next; 
-        free(temp); 
-    } 
-    Size = 0; 
+void Deque::Erase(){
+    rear = NULL;
+    while(front!=NULL){
+        node *tmp = front;
+        front = front->nxt;
+        free(tmp);
+    }
+    size = 0;
 }
-int main() 
-{ 
-    Deque dq; 
-    cout << "Insert element '5' at rear end\n"; 
-    dq.insertRear(5); 
-  
-    cout << "Insert element '10' at rear end\n"; 
-    dq.insertRear(10); 
-  
-    cout << "Rear end element: " << dq.getRear() << endl; 
-  
-    dq.deleteRear(); 
-    cout << "After deleting rear element new rear"
-         << " is: " << dq.getRear() << endl; 
-  
-    cout << "Inserting element '15' at front end \n"; 
-    dq.insertFront(15); 
-  
-    cout << "Front end element: " << dq.getFront() << endl; 
-  
-    cout << "Number of elements in Deque: " << dq.size() 
-         << endl; 
-  
-    dq.deleteFront(); 
-    cout << "After deleting front element new "
-         << "front is: " << dq.getFront() << endl; 
-  
-    return 0; 
+int main(){
+    Deque q;
+    for(int i = 0; i < 5; i++){
+        q.InsertFront(i);
+    }
+    while(q.Front() != -1){
+        cout << q.Front();
+        q.DeleteFront();
+    }
 }
