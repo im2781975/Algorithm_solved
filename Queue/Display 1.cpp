@@ -1,13 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
-class node{
-    public:
+struct node{
     int data;
     node *nxt;
     node(int val):data(val), nxt(NULL){}
 };
 struct Queue{
-    public:
     node *front, *rear;
     Queue(){
         front = NULL;
