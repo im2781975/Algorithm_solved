@@ -1,47 +1,36 @@
 // check if a queue of first n natural number can be sorted using a stack
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-// Function to check if given queue element can be sorted into another queue using a stack.
-bool checkSorted(int n, queue<int>& q)
-{
-    stack<int> st;
-    int expected = 1;
-    int fnt;
-    // while given Queue is not empty.
-    while (!q.empty()) {
-        fnt = q.front();
+bool CheckSorted(int n, queue <int> &q){
+    stack <int> st;
+    int expect = 1;
+    int first;
+    while(!q.empty()){
+        first = q.front();
         q.pop();
-        // if front element is the expected element
-        if (fnt == expected)
-            expected++;
+        if(first == expect)
+            expect++;
         else {
-            // if stack is empty, push the element
-            if (st.empty()) {
-                st.push(fnt);
-            }
- 
+            if(st.empty())
+                st.push(first);
             // if top element is less than element which need to be pushed, then return false.
-            else if (!st.empty() && st.top() < fnt) {
+            else if(!st.empty() && st.top() < first)
                 return false;
-            }
-            // else push into the stack.
             else
-                st.push(fnt);
+                st.push(first);
         }
-        // while expected element are coming from stack, pop them out.
-        while (!st.empty() && st.top() == expected) {
+        //while expected element are coming from stack, pop them out
+        while(!st.empty() && st.top() == expect){
             st.pop();
-            expected++;
+            expect++;
         }
     }
-    // if the final expected element value is equal to initial Queue size and the stack is empty.
-    if (expected - 1 == n && st.empty())
+    // while expected element are coming from stack, pop them out.
+    if(expect - 1 == n && st.empty())
         return true;
- 
     return false;
 }
-int main()
-{
+int main(){
     queue<int> q;
     q.push(5);
     q.push(1);
@@ -49,7 +38,5 @@ int main()
     q.push(3);
     q.push(4);
     int n = q.size();
-    (checkSorted(n, q) ? (cout << "Yes") :(cout << "No"));
- 
-    return 0;
+    (CheckSorted(n, q) ? (cout << "Yes") :(cout << "No"));
 }
