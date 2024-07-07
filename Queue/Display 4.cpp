@@ -1,37 +1,30 @@
 // implement Queue using two stacks with costly deQueue()
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-struct Queue {
-    stack<int> s1, s2;
-    // Enqueue an item to the queue
-    void enQueue(int x)
-    {
-        s1.push(x);
+struct Queue{
+    stack <int> a, b;
+    void enque(int x){
+        a.push(x);
     }
-    // Dequeue an item from the queue
-    int deQueue()
-    {
-        // if both stacks are empty
-        if (s1.empty() && s2.empty())
+    int deque(){
+        if(a.empty() && b.empty())
             return -1;
-        // if s2 is empty, move elements from s1
-        if (s2.empty()) {
-            while (!s1.empty()) {
-                s2.push(s1.top());
-                s1.pop();
+        if(b.empty()){
+            while(!a.empty()){
+                b.push(a.top());
+                a.pop();
             }
         }
-        // return the top item from s2
-        int x = s2.top();
-        s2.pop();
+        int x = b.top();
+        b.pop();
         return x;
     }
 };
-int main()
-{
+int main(){
     Queue q;
-    cout << q.deQueue() << '\n';
-    q.enQueue(1);
-    cout << q.deQueue() << '\n';
-    return 0;
+    cout << q.deque() << "\n";
+    for(int i = 1; i <= 5; i++){
+        q.enque(i);
+        cout << q.deque() << " ";
+    }
 }
