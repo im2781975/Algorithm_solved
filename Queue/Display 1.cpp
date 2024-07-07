@@ -1,48 +1,38 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-struct QNode {
+class node{
+    public:
     int data;
-    QNode* next;
-    QNode(int d)
-    {
-        data = d;
-        next = NULL;
-    }
+    node *nxt;
+    node(int val):data(val), nxt(NULL){}
 };
-struct Queue {
-    QNode *front, *rear;
-    Queue() { front = rear = NULL; }
-    void enQueue(int x)
-    {
-        QNode* temp = new QNode(x);
-        // If queue is empty, then new node is front and rear both
-        if (rear == NULL) {
-            front = rear = temp;
+struct Queue{
+    public:
+    node *front, *rear;
+    Queue(){
+        front = NULL;
+        rear = NULL;
+    }
+    void enQueue(int val){
+        node *newnode = new node(val);
+        if(rear == NULL){
+            front = rear = newnode;
             return;
         }
-        // Add the new node at the end of queue and change rear
-        rear->next = temp;
-        rear = temp;
+        rear ->nxt = newnode;
+        rear = newnode;
     }
-    // Function to remove a key from given queue q
-    void deQueue()
-    {
-        // If queue is empty, return NULL.
-        if (front == NULL)
+    void deQueue(){
+        if(front == NULL)
             return;
-        // Store previous front and move front one node ahead
-        QNode* temp = front;
-        front = front->next;
-        // If front becomes NULL, then change rear also as NULL
-        if (front == NULL)
+        node *tmp = front;
+        front = front->nxt;
+        if(front == NULL)
             rear = NULL;
- 
-        delete (temp);
+        delete tmp;
     }
 };
-int main()
-{
- 
+int main(){
     Queue q;
     q.enQueue(10);
     q.enQueue(20);
@@ -55,4 +45,3 @@ int main()
     cout << "Queue Front : " << ((q.front != NULL) ? (q.front)->data : -1)<< endl;
     cout << "Queue Rear : " << ((q.rear != NULL) ? (q.rear)->data : -1);
 }
-
