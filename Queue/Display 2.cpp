@@ -21,6 +21,7 @@ bool isEmpty(Queue* queue) {
     return (queue->front == nullptr);
 }
 // Function to check whether the queue is full or not
+//queue is never considered full under the current implementation. This is because the queue uses dynamic memory allocation (i.e., it creates new nodes using the new operator), allowing it to grow as long as there is available memory.
 bool isFull(Queue* queue) {
     // Assuming dynamic memory allocation for nodes
     return false;  // You need to handle dynamic memory allocation to make this check meaningful
