@@ -1,78 +1,64 @@
-#include <iostream>
-#include <climits>
+#include<iostream>
+#include<climits>
 using namespace std;
-const int MAX_SIZE = 100;
-struct QNode {
+struct node{
     int data;
-    QNode* next;
-    QNode(int d) {
-        data = d;
-        next = nullptr;
-    }
+    node *nxt;
+    node(int val):data(val), nxt(nullptr){}
 };
-struct Queue {
-    QNode *front, *rear;
-    Queue() {
-        front = rear = nullptr;
-    }
+struct Queue{
+    node *front, *rear;
+    Queue():front(nullptr), rear(nullptr){}
 };
-// check whether the queue is empty or not
-bool isEmpty(Queue* queue) {
-    return (queue->front == nullptr);
+bool IsEmpty(Queue *q){
+    return(q->front == nullptr);
 }
 // Function to check whether the queue is full or not
-//queue is never considered full under the current implementation. This is because the queue uses dynamic memory allocation (i.e., it creates new nodes using the new operator), allowing it to grow as long as there is available memory.
-bool isFull(Queue* queue) {
-    // Assuming dynamic memory allocation for nodes
-    return false;  // You need to handle dynamic memory allocation to make this check meaningful
+//queue is never considered full under the current implementation.
+//because the queue uses dynamic memory allocation (i.e., it creates new nodes using the new operator), 
+//allowing it to grow as long as there is available memory.
+bool IsFull(Queue *q){
+    return false;
 }
-// Function to enqueue an element into the queue
-void queueEnqueue(Queue* queue, int data) {
-    The function isFull always returns false, which means the check if (isFull(queue)) in the queueEnqueue function will never be true under the current implementation. Therefore, the message "\nQueue is full\n" will never be printed, and the function will always proceed to create a new node and add it to the queue.
-    if (isFull(queue)) {
-        cout << "\nQueue is full\n";
+void enqueue(Queue *q, int data){
+    if(IsFull(q)){
+        cout << "Queue is Full";
         return;
     }
-    QNode* newNode = new QNode(data);
-    if (isEmpty(queue)) {
-        queue->front = queue->rear = newNode;
-    } else {
-        queue->rear->next = newNode;
-        queue->rear = newNode;
+    node *newnode = new node(data);
+    if(IsEmpty(q)){
+        q->front = q->rear = newnode;
+    }
+    else{
+        q->rear->nxt = newnode;
+        q->rear = newnode;
     }
 }
-// dequeue an element from the queue
-void queueDequeue(Queue* queue) {
-    if (isEmpty(queue)) {
-        cout << "\nQueue is empty\n";
+void dequeue(Queue *q){
+    if(IsEmpty(q)){
+        cout << "Queue is empty";
         return;
     }
-    QNode* temp = queue->front;
-    queue->front = temp->next;
-
-    if (queue->front == nullptr) {
-        queue->rear = nullptr;
-    }
-
-    delete temp;
-}
-int front(Queue* queue) {
-    if (isEmpty(queue))
+    node *tmp = q->front;
+    q->front = tmp->nxt;
+    if(q->front == nullptr)
+        q->rear = nullptr;
+    free(tmp);
+};
+int Front(Queue *q){
+    if(IsEmpty(q))
         return INT_MIN;
-    return queue->front->data;
+    return q->front->data;
 }
-int rear(Queue* queue) {
-    if (isEmpty(queue))
+int Back(Queue *q){
+    if(IsEmpty(q))
         return INT_MIN;
-    return queue->rear->data;
-}
-int main() {
-    Queue myQueue;
-    queueEnqueue(&myQueue, 10);
-    queueEnqueue(&myQueue, 20);
-    queueDequeue(&myQueue);
-
-    cout << "Front of the queue: " << front(&myQueue) << "\n";
-    cout << "Rear of the queue: " << rear(&myQueue) << "\n";
-    return 0;
+    return q->rear->data;
+};
+int main(){
+    Queue q;
+    for(int i = 1; i < 100; i+= 10)
+        enqueue(&q, i);
+    cout << "Front Element is: " << Front(&q);
+    cout << "\nBack Element is: " << Back(&q);
 }
