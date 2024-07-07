@@ -1,4 +1,5 @@
 // implement Queue using one stack and recursive call stack.
+stack follows LIFO.but queue follows FIFO.convert stack to queue
 #include <bits/stdc++.h>
 using namespace std;
 struct Queue {
