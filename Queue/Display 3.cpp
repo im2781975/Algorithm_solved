@@ -1,40 +1,32 @@
-// implement Queue using one stack and recursive call stack.
-stack follows LIFO.but queue follows FIFO.convert stack to queue
-#include <bits/stdc++.h>
+// implement Queue using one stack and recursive call stack.convert stack to queue
+#include<bits/stdc++.h>
 using namespace std;
-struct Queue {
-    stack<int> s;
-    void enQueue(int x)
-    {
-        s.push(x);
+struct Queue{
+    stack <int> st;
+    void enqueue(int x){
+        st.push(x);
     }
-    // Dequeue an item from the queue
-    int deQueue()
-    {
-        if (s.empty())
+    int dequeue(){
+        if(st.empty())
             return -1;
-        // pop an item from the stack
-        int x = s.top();
-        s.pop();
-        // if stack becomes empty, return the popped item
-        if (s.empty())
+        int x = st.top();
+        st.pop();
+        if(st.empty())
             return x;
         // recursive call
-        int item = deQueue();
+        int item = dequeue();
         // push popped item back to the stack
-        s.push(x);
+        st.push(x);
         // return the result of deQueue() call
         return item;
     }
 };
-int main()
-{
+int main(){
     Queue q;
-    q.enQueue(1);
-    q.enQueue(2);
-    q.enQueue(3);
-    cout << q.deQueue() << '\n';
-    cout << q.deQueue() << '\n';
-    cout << q.deQueue() << '\n';
-    return 0;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    cout << q.dequeue() << '\n';
+    cout << q.dequeue() << '\n';
+    cout << q.dequeue() << '\n';
 }
