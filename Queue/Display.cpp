@@ -1,71 +1,55 @@
-// Implementation of queue(enqueue, dequeue).
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
- 
-class Queue {
-public:
-    int front, rear, size;
-    unsigned cap;
-    int* arr;
+class Queue{
+    public:
+    // Declare Variable to store values
+    int front, rear, cap, size, *arr;
 };
-Queue* createQueue(unsigned cap)
-{
-    Queue* queue = new Queue();
-    queue->cap = cap;
-    queue->front = queue->size = 0;
- 
-    queue->rear = cap - 1;
-    queue->arr = new int[(queue->cap * sizeof(int))];
-    return queue;
+Queue *create(int cap){
+    Queue *q = new Queue();
+    q->cap = cap;q->size = 0;
+    q->front = 0; q->rear = -1;
+    q->arr = new int[q->cap];
+    return q;
 }
-int isFull(Queue* queue)
-{
-    return (queue->size == queue->cap);
+bool IsFull(Queue *q){
+    return (q->size == q->cap);
 }
- 
-int isempty(Queue* queue) { return (queue->size == 0); }
-// Function to add an item to the queue. It changes rear and size.
-void enqueue(Queue* queue, int item)
-{
-    if (isFull(queue))
+bool IsEmpty(Queue *q){
+    return (q->size == 0);
+}
+void enque(Queue *q, int val){
+    if(IsFull(q)){
+        cout << "Queue is full";
         return;
-    queue->rear = (queue->rear + 1) % queue->cap;
-    queue->arr[queue->rear] = item;
-    queue->size = queue->size + 1;
-    cout << item << " enqueued to queue\n";
+    }
+    q->rear = (q->rear + 1) % q->cap;
+    q->arr[q->rear] = val;
+    q->size = q->size + 1;
+    cout << "\nValue is: " << val;
 }
-// Function to remove an item from queue.It changes front and size
-int dequeue(Queue* queue)
-{
-    if (isempty(queue))
+int Deque(Queue *q){
+    if(IsEmpty(q))
         return INT_MIN;
-    int item = queue->arr[queue->front];
-    queue->front = (queue->front + 1) % queue->cap;
-    queue->size = queue->size - 1;
+    int item = q->arr[q->front];
+    q->front = (q->front + 1) % q->cap;
+    q->size = q->size -1;
     return item;
 }
-int front(Queue* queue)
-{
-    if (isempty(queue))
+int Front(Queue *q){
+    if(IsEmpty(q))
         return INT_MIN;
-    return queue->arr[queue->front];
+    return q->arr[q->front];
 }
-int rear(Queue* queue)
-{
-    if (isempty(queue))
+int Back(Queue *q){
+    if(IsEmpty(q))
         return INT_MIN;
-    return queue->arr[queue->rear];
+    return q->arr[q->rear];
 }
-int main()
-{
-    Queue* queue = createQueue(1000);
-    enqueue(queue, 10);
-    enqueue(queue, 20);
-    enqueue(queue, 30);
-    enqueue(queue, 40);
-    cout << dequeue(queue);
-    cout << " dequeued from queue\n";
-    cout << "Front item is " << front(queue) << endl;
-    cout << "Rear item is " << rear(queue);
-    return 0;
+int main(){
+    Queue *q = create(100);
+    for(int i = 0; i < 100; i+= 10)
+        enque(q, i);
+   cout << "\nFront: " << Front(q);
+   cout << "\nBack: " << Back(q);
 }
