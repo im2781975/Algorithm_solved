@@ -31,6 +31,11 @@ struct Queue{
     }
 };
 //Another Implementation
+struct node{
+    int data;
+    node *nxt;
+    node(int val):data(val), nxt(NULL){}
+};
 struct Queue{
     node *front, *rear;
     Queue():front(nullptr), rear(nullptr){}
