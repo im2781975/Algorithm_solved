@@ -27,6 +27,7 @@ bool isFull(Queue* queue) {
 }
 // Function to enqueue an element into the queue
 void queueEnqueue(Queue* queue, int data) {
+    The function isFull always returns false, which means the check if (isFull(queue)) in the queueEnqueue function will never be true under the current implementation. Therefore, the message "\nQueue is full\n" will never be printed, and the function will always proceed to create a new node and add it to the queue.
     if (isFull(queue)) {
         cout << "\nQueue is full\n";
         return;
