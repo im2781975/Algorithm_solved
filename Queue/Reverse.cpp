@@ -1,53 +1,35 @@
-// reverse a Queue
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-void Print(queue<int>& Queue)
-{
-    while (!Queue.empty()) {
-        cout << Queue.front() << " ";
-        Queue.pop();
+void print(queue <int> &q){
+    while(!q.empty()){
+        cout << q.front() << " ";
+        q.pop();
     }
 }
-// Function to reverse the queue
-void reverseQueue(queue<int>& q)
-{
-    // base case
-    if (q.size() == 0)
+void reverse(queue <int> &q){
+    if(q.size() == 0)
         return;
-    // storing front(first element) of queue
-    int fr = q.front();
-    // removing front
+    int first = q.front();
     q.pop();
-    // asking recursion to reverse the leftover queue
-    reverseQueue(q);
-    // placing first element at its correct position
-    q.push(fr);
+    reverse(q);
+    q.push(first);
 }
-void reverseQueue(queue<int>& Queue)
-{
-    stack<int> Stack;
-    while (!Queue.empty()) {
-        Stack.push(Queue.front());
-        Queue.pop();
+void Reverse(queue <int> &q){
+    stack <int> st;
+    while(!q.empty()){
+        st.push(q.front());
+        q.pop();
     }
-    while (!Stack.empty()) {
-        Queue.push(Stack.top());
-        Stack.pop();
+    while(!st.empty()){
+        q.push(st.top());
+        st.pop();
     }
-}
-int main()
-{
-    queue<int> Queue;
-    Queue.push(10);
-    Queue.push(20);
-    Queue.push(30);
-    Queue.push(40);
-    Queue.push(50);
-    Queue.push(60);
-    Queue.push(70);
-    Queue.push(80);
-    Queue.push(90);
-    Queue.push(100);
-    reverseQueue(Queue);
-    Print(Queue);
+};
+int main(){
+    queue <int> q;
+    for(int i = 0; i <= 100; i+=10)
+        q.push(i);
+    reverse(q);
+    Reverse(q);
+    print(q);
 }
