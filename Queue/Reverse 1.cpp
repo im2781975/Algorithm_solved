@@ -1,53 +1,36 @@
-// reverse first k elements of a queue.
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-// Function to reverse the first K elements of the Queue
-void reverseQueueFirstKElements(int k, queue<int>& Queue)
-{
-    if (Queue.empty() == true || k > Queue.size())
+// reverse first k elements of a queue.
+void ReverseFirst(int k, queue <int> &q){
+    if(q.empty() || k > q.size())
         return;
-    if (k <= 0)
+    if(k <= 0)
         return;
-    stack<int> Stack;
- 
-    //Push the first K elements into a Stack
-    for (int i = 0; i < k; i++) {
-        Stack.push(Queue.front());
-        Queue.pop();
+    stack <int> st;
+    for(int i = 0; i < k; i++){
+        st.push(q.front());
+        q.pop();
     }
-    // Enqueue the contents of stack at the back of the queue
-    while (!Stack.empty()) {
-        Queue.push(Stack.top());
-        Stack.pop();
+    while(!st.empty()){
+        q.push(st.top());
+        st.pop();
     }
-    // Remove the remaining elements & enqueue them at the end of the Queue
-    for (int i = 0; i < Queue.size() - k; i++) {
-        Queue.push(Queue.front());
-        Queue.pop();
+    for(int i = 0; i < q.size() - k; i++){
+        q.push(q.front());
+        q.pop();
     }
 }
-void Print(queue<int>& Queue)
-{
-    while (!Queue.empty()) {
-        cout << Queue.front() << " ";
-        Queue.pop();
+void print(queue <int> &q){
+    while(!q.empty()){
+        cout << q.front() << " ";
+        q.pop();
     }
 }
-int main()
-{
-    queue<int> Queue;
-    Queue.push(10);
-    Queue.push(20);
-    Queue.push(30);
-    Queue.push(40);
-    Queue.push(50);
-    Queue.push(60);
-    Queue.push(70);
-    Queue.push(80);
-    Queue.push(90);
-    Queue.push(100);
- 
+int main(){
+    queue <int> q;
+    for(int i = 10; i <= 100; i+=10)
+        q.push(i);
     int k = 5;
-    reverseQueueFirstKElements(k, Queue);
-    Print(Queue);
+    ReverseFirst(k, q);
+    print(q);
 }
