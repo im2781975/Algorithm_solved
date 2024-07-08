@@ -1,43 +1,37 @@
-#include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
-void solve(queue<int>& q, int k);
- 
 // Function to reverse first k elements of a queue
-queue<int> reverseFirstK(queue<int> q, int k) {
+void solve(queue <int> q, int k){
+    if(k == 0)
+        return;
+    int first = q.front();
+    q.pop();
+    solve(q, k - 1);
+    q.push(first);
+}
+queue <int> ReverseFirst(queue <int> q, int k){
     solve(q, k);
-    int s = q.size() - k;
-    while (s-- > 0) {
+    int size = q.size() - k;
+    while(size-- > 0){
         int x = q.front();
         q.pop();
         q.push(x);
     }
     return q;
 }
-void solve(queue<int>& q, int k) {
-    if (k == 0) return;
-    int e = q.front();
-    q.pop();
-    solve(q, k - 1);
-    q.push(e);
-}
-int main() {
-    queue<int> queue;
-    queue.push(10);
-    queue.push(20);
-    queue.push(30);
-    queue.push(40);
-    queue.push(50);
-    queue.push(60);
-    queue.push(70);
-    queue.push(80);
-    queue.push(90);
-    queue.push(100);
- 
-    int k = 5;
-    queue = reverseFirstK(queue, k);
-    while (!queue.empty()) {
-        cout << queue.front() << " ";
-        queue.pop();
+void print(queue <int> q){
+    while(!q.empty()){
+        cout << q.front() << " ";
+        q.pop();
     }
-    return 0;
+}
+int main(){
+    queue <int> q;
+    for(int i = 0; i <= 100; i+=10)
+        q.push(i);
+    int k = 5;
+    // Need to store the value in a queue
+    q = ReverseFirst(q, k);
+    print(q);
 }
