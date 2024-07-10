@@ -1,42 +1,30 @@
 // sort a stack using an auxiliary stack.
-#include <bits/stdc++.h>
+#include<iostream>
+#include<stack>
 using namespace std;
-// This function return the sorted stack
-stack<int> sortStack(stack<int> &input)
-{
-    stack<int> tmpStack;
-    while (!input.empty())
-    {
-        // pop out the first element
-        int tmp = input.top();
-        input.pop();
-        // while temporary stack is not empty and top of stack is lesser than temp
-        while (!tmpStack.empty() && tmpStack.top() < tmp)
-        {
-            // pop from temporary stack and push it to the input stack
-            input.push(tmpStack.top());
-            tmpStack.pop();
+stack <int> SortStack(stack <int> st){
+    stack <int> Stack;
+    while(!st.empty()){
+        int tmp = st.top();
+        st.pop();
+        while(!Stack.empty() && Stack.top() > tmp){
+            st.push(Stack.top());
+            Stack.pop();
         }
-        // push temp in temporary of stack
-        tmpStack.push(tmp);
+        Stack.push(tmp);
     }
-    return tmpStack;
+    return Stack;
 }
-int main()
-{
-    stack<int> input;
-    input.push(34);
-    input.push(3);
-    input.push(31);
-    input.push(98);
-    input.push(92);
-    input.push(23);
-    // This is the temporary stack
-    stack<int> tmpStack = sortStack(input);
-    cout << "Sorted numbers are:\n";
-    while (!tmpStack.empty())
-    {
-        cout << tmpStack.top()<< " ";
-        tmpStack.pop();
+int main(){
+    stack <int> st;
+    st.push(2);
+    st.push(3);
+    st.push(1);
+    st.push(5);
+    st.push(4);
+    stack <int>Stack = SortStack(st);
+    while(!Stack.empty()){
+        cout << Stack.top() << " ";
+        Stack.pop();
     }
 }
