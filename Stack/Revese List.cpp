@@ -1,71 +1,57 @@
-#include <bits/stdc++.h>
-#include <iostream>
+#include<iostream>
+#include<stack>
 using namespace std;
-// Create a class Node to enter values and address in the list
-class Node {
-public:
+class node{
+    public:
     int data;
-    Node* next;
+    node *nxt;
 };
-void reverseLL(Node** head)
-{
-    // Create a stack "s" of Node type
-    stack<Node*> s;
-    Node* temp = *head;
-    while (temp->next != NULL) {
-        // Push all the nodes in to stack
-        s.push(temp);
-        temp = temp->next;
+void Reverse(node **head){
+    stack <node*> st;
+    node *tmp = *head;
+    while(tmp ->nxt!=NULL){
+        st.push(tmp);
+        tmp = tmp->nxt;
     }
-    *head = temp;
-    while (!s.empty()) {
-        // Store the top value of stack in list
-        //The next pointer of temp is updated to point to the node popped from the stack.
-        temp->next = s.top();
-        // Pop the value from stack
-        s.pop();
-        // update the next pointer in the list
-        temp = temp->next;
+    *head = tmp;
+    while(!st.empty()){
+        tmp-> nxt = st.top();
+        st.pop();
+        tmp = tmp ->nxt;
     }
-    temp->next = NULL;
+    tmp->nxt = NULL;
 }
-void printlist(Node* temp)
-{
-    while (temp != NULL) {
-        cout << temp->data << " ";
-        temp = temp->next;
+void print(node *tmp){
+    while(tmp !=NULL){
+        cout << tmp ->data << " ";
+        tmp = tmp->nxt;
     }
+    cout << "\n";
 }
-// insert back of the linked list
-void insert_back(Node** head, int value)
-{
-    Node* temp = new Node();
-    temp->data = value;
-    temp->next = NULL;
-    // If *head equals to NULL
-    if (*head == NULL) {
-        *head = temp;
+void InsertBack(node **head, int val){
+    node *newnode = new node();
+    newnode ->data = val;
+    newnode ->nxt = NULL;
+    if(*head == NULL){
+        *head = newnode;
         return;
     }
-    else {
-        Node* last_node = *head;
-        while (last_node->next != NULL)
-            last_node = last_node->next;
-        last_node->next = temp;
+    else{
+        node *tmp = *head;
+        while(tmp->nxt!=NULL)
+            tmp = tmp->nxt;
+        tmp->nxt = newnode;
         return;
     }
-}
-int main()
-{
-    Node* head = NULL;
-    insert_back(&head, 1);
-    insert_back(&head, 2);
-    insert_back(&head, 3);
-    insert_back(&head, 4);
-    cout << "Given linked list\n";
-    printlist(head);
-    reverseLL(&head);
-    cout << "\nReversed linked list\n";
-    printlist(head);
-    return 0;
+};
+int main(){
+    node *head = NULL;
+    InsertBack(&head, 1);
+    InsertBack(&head, 2);
+    InsertBack(&head, 3);
+    InsertBack(&head, 4);
+    InsertBack(&head, 5);
+    print(head);
+    Reverse(&head);
+    print(head);
 }
