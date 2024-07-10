@@ -1,51 +1,39 @@
 // implement a stack using two queue
-#include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
-class Stack {
-    queue<int> q1, q2;
+class Queue{
+    queue <int> a, b;
     public:
-    void push(int x)
-    {
-        // Push x first in empty q2
-        q2.push(x);
-        // Push all the remaining elements in q1 to q2.
-        while (!q1.empty()) {
-            q2.push(q1.front());
-            q1.pop();
+    void push(int x){
+        b.push(x);
+        while(!a.empty()){
+            b.push(a.front());
+            a.pop();
         }
-        // swap the names of two queues
-        queue<int> q = q1;
-        q1 = q2;
-        q2 = q;
+        queue <int> q = a;
+        a = b; b = q;
     }
-    void pop()
-    {
-        // if no elements are there in q1
-        if (q1.empty())
+    void pop(){
+        if(a.empty())
             return;
-        q1.pop();
+        a.pop();
     }
-    int top()
-    {
-        if (q1.empty())
+    int top(){
+        if(a.empty())
             return -1;
-        return q1.front();
+        return a.front();
     }
-    int size() 
-        return q1.size();
+    int Getsize(){
+        return a.size();
+    }
 };
-int main()
-{
-    Stack s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
-    cout << "current size: " << s.size() << endl;
-    cout << s.top() << endl;
-    s.pop();
-    cout << s.top() << endl;
-    s.pop();
-    cout << s.top() << endl;
-    cout << "current size: " << s.size() << endl;
-    return 0;
+int main(){
+    Queue q;
+    for(int i = 1; i <= 5; i++){
+        q.push(i);
+        cout << q.top() << " ";
+        q.pop();
+    }
 }
+
