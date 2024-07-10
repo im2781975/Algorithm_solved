@@ -1,38 +1,25 @@
 // reverse the number using a stack
-#include <bits/stdc++.h>
+#include<iostream>
+#include<stack>
 using namespace std;
-// Stack to maintain order of digits
 stack <int> st;
-// Function to push digits into stack
-void push_digits(int number)
-{
-    while (number != 0) 
-    {
-        st.push(number % 10);
-        number = number / 10;
+void PushDigit(int num){
+    while(num !=0){
+        st.push(num % 10);
+        num /= 10;
     }
 }
-// Function to reverse the number
-int reverse_number(int number)
-{
-    // Function call to push number's digits to stack
-    push_digits(number);
-     
-    int reverse = 0;
-    int i = 1;
-    // Popping the digits and forming the reversed number
-    while (!st.empty()) 
-    {
-        reverse = reverse + (st.top() * i);
+int Reverse(int num){
+    PushDigit(num);
+    int rev = 0, i = 1;
+    while(!st.empty()){
+        rev = rev + (st.top() * i);
         st.pop();
-        i = i * 10;
+        i *= 10;
     }
-    // Return the reversed number formed
-    return reverse;
+    return rev;
 }
-int main()
-{
-    int number = 39997;
-    cout << reverse_number(number);
-    return 0;
+int main(){
+    int num; cin >> num;
+    cout << Reverse(num);
 }
