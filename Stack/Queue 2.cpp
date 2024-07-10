@@ -1,64 +1,45 @@
 // implement a stack using two queue
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
 using namespace std;
-class Stack {
-    queue<int> q1, q2;
+class Stack{
+    queue <int > a, b;
     public:
-    void pop()
-    {
-        if (q1.empty())
+    void pop(){
+        if(a.empty())
             return;
-        // Leave one element in q1 & push others in q2.
-        while (q1.size() != 1) {
-            q2.push(q1.front());
-            q1.pop();
+        if(a.size() !=1){
+            b.push(a.front());
+            a.pop();
         }
-        // Pop the only left element from q1
-        q1.pop();
-        // swap the names of two queues
-        queue<int> q = q1;
-        q1 = q2;
-        q2 = q;
+        // Pop the only left element from a
+        a.pop();
+        queue <int> q = a;
+        a = b; b = q;
     }
-    void push(int x)
-        q1.push(x);
-    int top()
-    {
-        if (q1.empty())
+    void push(int x){
+        a.push(x);
+    }
+    int top(){
+        if(a.empty())
             return -1;
- 
-        while (q1.size() != 1) {
-            q2.push(q1.front());
-            q1.pop();
+        if(a.size() !=1){
+            b.push(a.front());
+            a.pop();
         }
-        // last pushed element
-        int temp = q1.front();
-        // to empty the auxiliary queue after last operation
-        q1.pop();
-        // push last element to q2
-        q2.push(temp);
-        // swap the two queues names
-        queue<int> q = q1;
-        q1 = q2;
-        q2 = q;
-        return temp;
+        int tmp = a.front();
+        a.pop();
+        b.push(tmp);
+        queue <int> q = a;
+        a = b; b = q;
+        return tmp;
     }
-    int size() 
-        return q1.size();
 };
-int main()
-{
-    Stack s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
- 
-    cout << "current size: " << s.size() << endl;
-    cout << s.top() << endl;
-    s.pop();
-    cout << s.top() << endl;
-    s.pop();
-    cout << s.top() << endl;
-    cout << "current size: " << s.size() << endl;
-    return 0;
+int main(){
+    Stack st;
+    for(int i = 1; i <= 5; i++){
+        st.push(i);
+        cout << st.top() << " ";
+        st.pop();
+    }
 }
