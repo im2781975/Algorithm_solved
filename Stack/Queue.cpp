@@ -1,46 +1,34 @@
 // Queue using two stacks with costly enQueue()
-#include <bits/stdc++.h>
+#include<iostream>
+#include<stack>
 using namespace std;
-struct Queue {
-    stack<int> s1, s2;
- 
-    void enQueue(int x)
-    {
-        // Move all elements from s1 to s2
-        while (!s1.empty()) {
-            s2.push(s1.top());
-            s1.pop();
+struct Queue{
+    stack <int> a, b;
+    void enqueue(int x){
+        // Move all elements from  a to b
+        while(!a.empty()){
+            b.push(a.top());
+            a.pop();
         }
-        s1.push(x);
-        // Push everything back to s1
-        while (!s2.empty()) {
-            s1.push(s2.top());
-            s2.pop();
+        a.push(x);
+        // Push everything back to a
+        while(!b.empty()){
+            a.push(b.top());
+            b.pop();
         }
     }
-    // Dequeue an item from the queue
-    int deQueue()
-    {
-        // if first stack is empty
-        if (s1.empty()) {
+    int dequeue(){
+        if(a.empty())
             return -1;
-        }
-        // Return top of s1
-        int x = s1.top();
-        s1.pop();
+        int x = a.top();
+        a.pop();
         return x;
     }
 };
-int main()
-{
+int main(){
     Queue q;
-    q.enQueue(1);
-    q.enQueue(2);
-    q.enQueue(3);
- 
-    cout << q.deQueue() << '\n';
-    cout << q.deQueue() << '\n';
-    cout << q.deQueue() << '\n';
- 
-    return 0;
+    for(int i = 0; i <= 10; i+= 2){
+        q.enqueue(i);
+        cout << q.dequeue() << " ";
+    }
 }
