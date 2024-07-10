@@ -20,6 +20,7 @@ void reverseLL(Node** head)
     *head = temp;
     while (!s.empty()) {
         // Store the top value of stack in list
+        //The next pointer of temp is updated to point to the node popped from the stack.
         temp->next = s.top();
         // Pop the value from stack
         s.pop();
