@@ -1,80 +1,66 @@
-#include <iostream> 
-using namespace std; 
-class node { 
-public: 
-    int data; 
-    node* next; 
-}; 
-class mystack { 
-public: 
-    node* head; 
-    node* tail; 
-    mystack() 
-    { 
-        head = NULL; 
-        tail = NULL; 
-    } 
-}; 
-mystack* create() 
-{ 
-    mystack* ms = new mystack();
-    return ms; 
-} 
-void push(int data, mystack* ms) 
-{ 
-    node* temp = new node(); 
-    temp->data = data; 
-    temp->next = ms->head; 
-    // when pushing first element in the stack the tail must be pointed by that first element 
-    if (ms->head == NULL) 
-        ms->tail = temp;
-    ms->head = temp; 
+#include<iostream>
+using namespace std;
+class node{
+    public:
+    int data;
+    node *nxt;
+};
+class Stack{
+    public:
+    node *head, *tail;
+    Stack():head(NULL), tail(NULL){}
+};
+Stack *create(){
+    Stack *st = new Stack();
+    return st;
 }
-int pop(mystack* ms) 
-{ 
-    if (ms->head == NULL) { 
-        cout << "stack underflow" << endl; 
-        return 0; 
-    } 
-    else { 
-        node* temp = ms->head; 
-        ms->head = ms->head->next; 
-        int popped = temp->data; 
-        delete temp; 
-        return popped; 
-    } 
+void push(int data, Stack *st){
+    node *newnode = new node();
+    newnode ->data = data;
+    newnode ->nxt = st->head;
+    if(st->head == NULL)
+        st->tail = newnode;
+    st->head = newnode;
 }
-// making the next pointer of tail of one stack point to other stack 
-void merge(mystack* ms1, mystack* ms2) 
-{ 
-    if (ms1->head == NULL) 
-    { 
-        ms1->head = ms2->head; 
-        ms1->tail = ms2->tail; 
-        return; 
-    } 
-    ms1->tail->next = ms2->head;
-    ms1->tail = ms2->tail; 
+int pop(Stack *st){
+    if(st->head == NULL){
+        cout << "\nStack is Empty";
+        return 0;
+    }
+    node *tmp = st->head;
+    st->head = st->head->nxt;
+    int value = tmp->data;
+    delete tmp; return value;
 }
-void display(mystack* ms) 
-{ 
-    node* temp = ms->head; 
-    while (temp != NULL) { 
-        cout << temp->data << " "; 
-        temp = temp->next; 
-    } 
+void merged(Stack *a, Stack *b){
+    if(a->head == NULL){
+        a->head = b->head;
+        a->tail = b->tail;
+    }
+    else{
+        a->tail->nxt= b->head;
+        //After linking, the function updates a's tail to 
+        //point to b's tail, as b's elements are now at the bottom of a.
+        a->tail = b->tail;
+    }
 }
-int main() 
-{ 
-    mystack* ms1 = create(); 
-    mystack* ms2 = create(); 
- 
-    push(6, ms1); 
-    push(5, ms1); 
-    push(4, ms1); 
-    push(9, ms2); 
-    push(8, ms2); 
-    push(7, ms2); 
-    merge(ms1, ms2); 
-    display(ms1); 
+void Display(Stack *st){
+    node *trv = st->head;
+    cout <<"\nElements are: ";
+    while(trv !=NULL){
+        cout << trv->data << " ";
+        trv = trv->nxt;
+    }
+}
+int main(){
+    Stack *a = create();
+    Stack *b = create();
+    for(int i = 1; i <= 5; i++){
+        push(i, a);
+        push(i+5, b);
+    }
+    Display(a);
+    Display(b);
+    merged(b, a);
+    Display(a);
 }
