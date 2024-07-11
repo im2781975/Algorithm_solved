@@ -1,76 +1,61 @@
-#include<bits/stdc++.h> 
-using namespace std; 
-  
-class StackNode { 
-    public: 
-    int data; 
-    StackNode *next; 
-      
-    StackNode(int data) 
-    { 
-        this->data = data; 
-        this->next = NULL; 
-    } 
-}; 
-class Stack { 
-    StackNode *top; 
-    public: 
-    void push(int data) 
-    { 
-        if (top == NULL) { 
-            top = new StackNode(data); 
-            return; 
-        } 
-        StackNode *s = new StackNode(data); 
-        s->next = top; 
-        top = s; 
-    } 
-    StackNode* pop() 
-    { 
-        StackNode *s = top; 
-        top = top->next; 
-        return s; 
-    } 
-    void display() 
-    { 
-        StackNode *s = top; 
-        while (s != NULL) { 
-            cout << s->data << " "; 
-            s = s->next; 
-        } 
-        cout << endl; 
-    } 
-    void reverse() 
-    { 
-        StackNode *prev, *cur, *succ; 
-        cur = prev = top; 
-        cur = cur->next; 
-        prev->next = NULL; 
-        while (cur != NULL) { 
-  
-            succ = cur->next; 
-            cur->next = prev; 
-            prev = cur; 
-            cur = succ; 
-        } 
-        top = prev; 
-    } 
-}; 
-int main() 
-{ 
-    Stack *s = new Stack(); 
-    s->push(1); 
-    s->push(2); 
-    s->push(3); 
-    s->push(4); 
-    cout << "Original Stack" << endl;; 
-    s->display(); 
-    cout << endl; 
-      
-    // reverse 
-    s->reverse(); 
-    cout << "Reversed Stack" << endl; 
-    s->display(); 
-      
-    return 0; 
-} 
+#include<iostream>
+#include<stack>
+using namespace std;
+class node{
+    public:
+    int data; node *nxt;
+    node(int val):data(val), nxt(NULL){}
+};
+class Stack{
+    node *top;
+    public:
+    void push(int data){
+        node *newnode = new node(data);
+        if(top == NULL){
+            top = newnode;
+            return;
+        }
+        else{
+            newnode->nxt = top;
+            top = newnode;
+        }
+    }
+    node *pop(){
+        node *tmp = top;
+        top = top->nxt;
+        return tmp;
+    }
+    void Display(){
+        node *tmp = top;
+        cout << "\nElements are: ";
+        while(tmp !=NULL){
+            cout << tmp->data << " ";
+            tmp = tmp->nxt;
+        }
+    }
+    //Reverse() function is to reverse the linked list, not to 
+    //interact with the console.For this it doesn't have cout statements within it. 
+    void Reverse(){
+        node *cur, *prv, *succ;
+        cur = prv = top;
+        cur = cur->nxt;
+        prv->nxt = NULL;
+        while(cur !=NULL){
+            succ = cur->nxt;
+            cur->nxt = prv;
+            prv = cur;
+            cur = succ;
+        }
+        top = prv;
+    }
+};
+int main(){
+    Stack *st = new Stack();
+    for(int i = 1; i <= 6; i++){
+        st->push(i);
+    }
+    st->Display();
+    st->Reverse();
+    st->Display();
+}
+
