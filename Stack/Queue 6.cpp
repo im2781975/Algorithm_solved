@@ -1,56 +1,40 @@
-// implement a stack using dequeue
-#include <bits/stdc++.h>
+#include<iostream>
+#include<deque>
 using namespace std;
-class Stack {
-    private:
-    // Create an empty deque
-    deque<int> my_deque;
+// implement a stack using dequeue
+class Deque{
+    deque <int>dq;
     public:
-    void push(int item)
-    {
-        // Append the item to the end of the deque
-        my_deque.push_back(item);
+    void push(int data){
+        
+        dq.push_back(data);
     }
-    int pop()
-    {
-        // Remove and return the item from the end of the deque
-        int item = my_deque.back();
-        my_deque.pop_back();
+    int pop(){
+        int item = dq.back();
+        dq.pop_back();
         return item;
     }
-    int size()
-    {
-        // Return size of deque
-        return my_deque.size();
+    int GetSize(){
+        return dq.size();
     }
-    bool is_empty()
-    {
-        return my_deque.empty();
+    bool IsEmpty(){
+        return dq.empty();
     }
-    int top()
-    {
-        if (is_empty()) {
-            // If the stack is empty, return -1
+    int top(){
+        if(IsEmpty())
             return -1;
-        }
-        else {
-            // Return the last item in the deque
-            return my_deque.back();
-        }
+        return dq.back();
     }
 };
-int main()
-{
-    Stack st;
-    st.push(1);
-    st.push(2);
-    st.push(3);
-    cout << "current size: " << st.size() << endl;
-    cout << st.top() << endl;
-    st.pop();
-    cout << st.top() << endl;
-    st.pop();
-    cout << st.top() << endl;
-    cout << "current size: " << st.size() << endl;
-    return 0;
+int main(){
+    Deque dq;
+    for(int i = 1; i < 10; i+= 2)
+        dq.push(i);
+    cout << "\nSize is: " << dq.GetSize();
+    cout << "\nElements are: ";
+    while(!dq.IsEmpty()){
+        cout << dq.top() << " ";
+        dq.pop();
+    }
+    cout << "\nSize is: " << dq.GetSize();
 }
