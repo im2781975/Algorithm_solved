@@ -1,67 +1,47 @@
-#include <bits/stdc++.h> 
-using namespace std; 
-class StackNode { 
-public: 
-    int data; 
-    StackNode* next; 
-}; 
-  
-StackNode* newNode(int data) 
-{ 
-    StackNode* stackNode = new StackNode(); 
-    stackNode->data = data; 
-    stackNode->next = NULL; 
-    return stackNode; 
-} 
-  
-int isEmpty(StackNode* root) 
-{ 
-    return !root; 
-} 
-  
-void push(StackNode** root, int data) 
-{ 
-    StackNode* stackNode = newNode(data); 
-    stackNode->next = *root; 
-    *root = stackNode; 
-    cout << data << " pushed to stack\n"; 
-} 
-  
-int pop(StackNode** root) 
-{ 
-    if (isEmpty(*root)) 
-        return INT_MIN; 
-    StackNode* temp = *root; 
-    *root = (*root)->next; 
-    int popped = temp->data; 
-    free(temp); 
-  
-    return popped; 
-} 
-  
-int peek(StackNode* root) 
-{ 
-    if (isEmpty(root)) 
-        return INT_MIN; 
-    return root->data; 
+#include<iostream>
+#include<climits>
+using namespace std;
+class node{
+    public:
+    int data;
+    node *nxt;
+};
+node *create(int x){
+    node *newnode = new node();
+    newnode->data = x;
+    newnode->nxt = NULL;
+    return newnode;
 }
-int main() 
-{ 
-    StackNode* root = NULL; 
-  
-    push(&root, 10); 
-    push(&root, 20); 
-    push(&root, 30); 
-  
-    cout << pop(&root) << " popped from stack\n"; 
-  
-    cout << "Top element is " << peek(root) << endl; 
-      
-    cout <<"Elements present in stack : "; 
-    while(!isEmpty(root)) 
-    { 
-        cout << peek(root) <<" "; 
-        pop(&root); 
-    } 
-    return 0; 
-} 
+bool IsEmpty(node *root){
+    return(root == NULL);
+}
+void push(node**root, int data){
+    node *newnode = create(data);
+    newnode->nxt = *root;
+    *root = newnode;
+    cout << data << " ";
+}
+int pop(node **root){
+    if(IsEmpty(*root))
+        return INT_MIN;
+    node *tmp = *root;
+    (*root) = (*root)->nxt;
+    int x = tmp->data;
+    free(tmp);
+    return x;
+}
+int peek(node *root){
+    if(IsEmpty(root))
+        return INT_MIN;
+    return root->data;
+};
+int main(){
+    node *root = NULL;
+    for(int i = 10; i <= 100; i+= 10)
+        push(&root, i);
+    cout << "\nElements are: ";
+    while(!IsEmpty(root)){
+        cout << peek(root) << " ";
+        pop(&root);
+    }
+}
