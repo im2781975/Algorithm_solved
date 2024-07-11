@@ -1,57 +1,47 @@
 // implement a stack using one queue and recursion
-#include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
 using namespace std;
-// Stack Class that acts as a queue
-class Stack {
-    queue<int> q;
+class Queue{
+    queue <int> q;
     public:
-    void push(int data, int c);
+    void push(int data, int size);
     void pop();
     int top();
-    int size();
-    bool empty();
+    int GetSize();
+    bool IsEmpty();
 };
-void Stack::push(int data, int c)
-{
-    // Push the current element first & After every recursion add the front element again
+void Queue::push(int data, int size){
+    // Push the cur element first & After every recursion add the front element again
     q.push(data);
-    // Return if size becomes 0
-    if (c <= 0)
+    if(size <= 0)
         return;
-    // Store current front
     int x = q.front();
-    // Delete front element
     q.pop();
-    // Decrement size by 1 in every recursion
-    c--;
-    Stack::push(x, c);
+    size--;
+    Queue::push(x, size);
 }
-// Removes the top element
-void Stack::pop()
-{
-    if (q.empty())
-        cout << "No elements\n";
-    else
+void Queue::pop(){
+    if(IsEmpty()){
+        cout << "\nQueue is Empth";
+        abort();
+    }
+    q.pop();
+}
+int Queue::top(){
+    return ((IsEmpty())? -1 : q.front());
+}
+int Queue::GetSize(){
+    return q.size();
+}
+bool Queue::IsEmpty(){
+    return q.empty();
+}
+int main(){
+    Queue q;
+    for(int i = 1; i <= 6; i++){
+        q.push(i, q.GetSize());
+        cout << q.top() << " ";
         q.pop();
-}
-// Returns top of stack
-int Stack::top() { return (q.empty()) ? -1 : q.front(); }
-// Returns true if Stack is empty else false
-bool Stack::empty() { return (q.empty()); }
-int Stack::size() { return q.size(); }
-int main()
-{
-    Stack st;
-    st.push(1, st.size()); 
-        // Value and size
-    st.push(2, st.size());
-    st.push(3, st.size());
-    cout << "current size: " << st.size() << "\n";
-    cout << st.top() << "\n";
-    st.pop();
-    cout << st.top() << "\n";
-    st.pop();
-    cout << st.top() << "\n";
-    cout << "current size: " << st.size();
-    return 0;
+    }
 }
