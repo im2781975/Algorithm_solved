@@ -1,48 +1,41 @@
 // implement a stack using Priority queue(min heap)
 #include<bits/stdc++.h>
 using namespace std;
-typedef pair<int, int> pi;
-// User defined stack class
+typedef pair <int, int> pi;
 class Stack{
-    // cnt is used to keep track of the number of elements in the stack
-    //and also serves as key for the priority queue.
     int cnt;
-    priority_queue<pair<int, int> > pq;
+    priority_queue <pi> pq;
     public:
     Stack():cnt(0){}
-    void push(int n);
+    void push(int data);
     void pop();
     int top();
-    bool isEmpty();
+    bool IsEmpty();
 };
-// push function increases cnt by 1 & inserts this cnt with the original value.
-void Stack::push(int n){
-    cnt++;
-    pq.push(pi(cnt, n));
+bool Stack::IsEmpty(){
+    return pq.empty();
 }
-// pops element and reduces count.
+void Stack::push(int data){
+    cnt++;
+    pq.push(pi(cnt, data));
+}
 void Stack::pop(){
-    if(pq.empty()){ cout<<"Nothing to pop!!!";}
+    if(IsEmpty()){
+        cout << "\nQueue is empty";
+        abort();
+    }
     cnt--;
     pq.pop();
 }
-// returns the top element in the stack using cnt as key to determine top(highest priority),
-// default comparator for pairs works fine in this case
 int Stack::top(){
-    pi temp=pq.top();
-    return temp.second;
+    pi item = pq.top();
+    return item.second;
 }
-bool Stack::isEmpty(){
-    return pq.empty();
-}
-int main()
-{
-    Stack* s=new Stack();
-    s->push(1);
-    s->push(2);
-    s->push(3);
-    while(!s->isEmpty()){
-        cout << s->top() << "\n";
-        s->pop();
+int main(){
+    Stack *st = new Stack();
+    for(int i = 1; i < 20; i+= 3){
+        st->push(i);
+        cout << st->top()<< " ";
+        st->pop();
     }
 }
