@@ -46,6 +46,7 @@ string preToInfix(string pre_exp) {
     }
   }
   // Stack now contains the Infix expression
+   // After the loop completes, the stack contains the final infix expression
   return s.top();
 }
 int main() {
