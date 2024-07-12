@@ -1,114 +1,74 @@
 // customized data structure
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
-const int MAXX = 1000;
-// class stack
-class stack {
-    int minn;
-    int size;
- 
-public:
-    stack()
-    {
-        minn = 99999;
-        size = -1;
-    }
+#define Max 100
+class Stack{
+    int min, size;
+    public:
+    Stack():min(INT_MAX), size(0){}
     vector<pair<int, int> > arr;
-    int GetLastElement();
-    int RemoveLastElement();
-    int AddElement(int element);
+    int AddValue(int val);
+    int GetLast();
+    int RemoveLast();
     int GetMin();
+    void Display();
+    int Size();
 };
-int stack::AddElement(int element)
-{
-    if (size > MAXX) {
-        cout << "stack overflow, max size reached!\n";
+int Stack::AddValue(int val){
+    if(size >= Max){
+        cout << "Overflow";
         return 0;
     }
-    if (element < minn)
-        minn = element;
-    arr.push_back(make_pair(element, minn));
-    size++;
+    if(min > val)
+        min = val;
+    arr.push_back(make_pair(val, min));
+    size++; return 1;
+}
+int Stack::GetLast(){
+    if(size == 0){
+        cout << "Underflow";
+        abort();
+    }
+    return arr[size - 1].first;
+}
+int Stack::RemoveLast(){
+    if(size == 0){
+        cout << "Underflow";
+        abort();
+    }
+    arr.pop_back(); size--;
+    if(size == 0)
+        min = INT_MAX;
+    else
+        min = arr[size - 1].second;
     return 1;
 }
-int stack::GetLastElement()
-{
-    if (size == -1) {
-        cout << "No elements in stack\n";
+int Stack::GetMin(){
+    if(size == 0){
+        cout << "Stack is empty";
         return 0;
     }
-    return arr[size].first;
+    return arr[size - 1].second;
 }
-int stack::RemoveLastElement()
-{
-    if (size == -1) {
-        cout << "stack empty!!!\n";
-        return 0;
+void Stack::Display(){
+    if(size == 0){
+        cout << "Underflow";
+        return;
     }
-    // updating minimum element
-    if (size > 0 && arr[size - 1].second > arr[size].second) {
-        minn = arr[size - 1].second;
-    }
-    arr.pop_back();
-    size -= 1;
-    return 1;
+    cout << "\nElements are: ";
+    for(int i = size - 1; i >= 0; i--)
+        cout << arr[i].first << " ";
 }
-// utility function for returning min element till now;
-int stack::GetMin()
-{
-    if (size == -1) {
-        cout << "stack empty!!\n";
-        return 0;
-    }
-    return arr[size].second;
+int Stack::Size(){
+    return size;
 }
-int main()
-{
-    stack s;
-    int success = s.AddElement(5);
-    if (success == 1)
-        cout << "5 inserted successfully\n";
- 
-    success = s.AddElement(7);
-    if (success == 1)
-        cout << "7 inserted successfully\n";
- 
-    success = s.AddElement(3);
-    if (success == 1)
-        cout << "3 inserted successfully\n";
-    int min1 = s.GetMin();
-    cout << "min element  :: " << min1 << endl;
- 
-    success = s.RemoveLastElement();
-    if (success == 1)
-        cout << "removed successfully\n";
- 
-    success = s.AddElement(2);
-    if (success == 1)
-        cout << "2 inserted successfully\n";
- 
-    success = s.AddElement(9);
-    if (success == 1)
-        cout << "9 inserted successfully\n";
-    int last = s.GetLastElement();
-    cout << "Last element :: " << last << endl;
- 
-    success = s.AddElement(0);
-    if (success == 1)
-        cout << "0 inserted successfully\n";
-    min1 = s.GetMin();
-    cout << "min element  :: " << min1 << endl;
- 
-    success = s.RemoveLastElement();
-    if (success == 1)
-        cout << "removed successfully\n";
- 
-    success = s.AddElement(11);
-    if (success == 1)
-        cout << "11 inserted successfully\n";
-    min1 = s.GetMin();
-    cout << "min element  :: " << min1 << endl;
- 
-    return 0;
+int main(){
+    Stack st;
+    int Done = st.AddValue(5);
+    (Done == 1)? cout << "Successfull\n" : cout << "No\n";
+    st.AddValue(7);
+    st.AddValue(3);
+    st.Display();
+    cout << "\nMin elements are: " << st.GetMin();
+    cout << "\n" << st.Size();
 }
