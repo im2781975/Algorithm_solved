@@ -35,9 +35,11 @@ string preToInfix(string pre_exp) {
     string temp = "(" + op1 + pre_exp[i] + op2 + ")";
  
     // Push string temp back to stack
+        // 
         s.push(temp);
     }
     // if symbol is an operand
+     //Convert the character to a string and push it onto the stack.
     else {
     // push the operand to the stack
         s.push(string(1, pre_exp[i]));
