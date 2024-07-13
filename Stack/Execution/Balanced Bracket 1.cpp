@@ -1,5 +1,24 @@
 #include<iostream>
+#include<stack>
 using namespace std;
+// Function to check if brackets are balanced
+bool IsBalanced(string str){
+    stack <char> st;
+    for(int i = 0; i < str.length(); i++){
+        if(st.empty())
+            st.push(str[i]);
+        else{
+            if((st.top() == '(' && str[i] == ')') || (st.top() == '{' && str[i] == '}') || (st.top() == '[' && str[i] == ']'))
+                st.pop();
+            else{
+                st.push(str[i]);
+            }
+        }
+    }
+    if(st.empty())
+        return true;
+    return false;
+}
 bool IsBalanced(string str){
     int i = -1;
     for(auto &ch : str){
@@ -20,4 +39,3 @@ int main(){
     (IsBalanced(str)) ?cout << "Yes":
     cout << "No";
 }
-
