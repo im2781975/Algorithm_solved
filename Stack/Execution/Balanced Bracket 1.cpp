@@ -1,26 +1,23 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-bool areBracketsBalanced(string s)
-{
-    int i=-1;
-    for(auto& ch:s){
-        if(ch=='(' || ch=='{' || ch=='[')
-            s[++i]=ch;
+bool IsBalanced(string str){
+    int i = -1;
+    for(auto &ch : str){
+        if(ch == '(' || ch == '{'|| ch == '[')
+            str[++i] = ch;
         else{
-            if(i>=0 && ((s[i]=='(' && ch==')') || (s[i]=='{' && ch=='}') || (s[i]=='[' && ch==']')))
-                i--;
-            else
-                return false;
-            }
+            if(i >= 0 && ((str[i] == '(' && ch == ')') || (str[i] == '{' && ch == '}') || (str[i]== '[' && ch == ']')))
+                return true;
+            return false;
+        }
     }
-    return i==-1;
+    //If i is -1, it means all opening brackets have been matched with 
+    //closing brackets, and the brackets are balanced. The function returns true.
+    return i == -1;
 }
-int main()
-{
-    string expr = "{()}[]";
-    if (areBracketsBalanced(expr))
-        cout << "Balanced";
-    else
-        cout << "Not Balanced";
-    return 0;
+int main(){
+    string str = "{()}[]";
+    (IsBalanced(str)) ?cout << "Yes":
+    cout << "No";
 }
+
