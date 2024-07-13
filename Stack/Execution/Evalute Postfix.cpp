@@ -1,43 +1,34 @@
-// evaluate value of a postfix expression
-#include <bits/stdc++.h>
+#include<ioatream>
+#include<stack>
 using namespace std;
-// returns value of a given postfix expression
-int evaluatePostfix(string exp)
-{
-    // Create a stack of capacity equal to expression size
-    stack<int> st;
-    // Scan all characters one by one
-    for (int i = 0; i < exp.size(); ++i) {
-        // If the scanned character is an operand (number here), push it to the stack.
-        if (isdigit(exp[i]))
-            st.push(exp[i] - '0');
-        // If the scanned character is an operator,pop two elements from stack apply the operator
-        else {
-            int val1 = st.top();
-            st.pop();
-            int val2 = st.top();
-            st.pop();
-            switch (exp[i]) {
-            case '+':
-                st.push(val2 + val1);
-                break;
-            case '-':
-                st.push(val2 - val1);
-                break;
-            case '*':
-                st.push(val2 * val1);
-                break;
-            case '/':
-                st.push(val2 / val1);
-                break;
+// evaluate value of a postfix expression
+int postfix(string str){
+    stack<char>st;
+    for(int i = 0; i < str.length(); i++){
+        if(isdigit(str[i]))
+            st.push(str[i] - '0');
+        else{
+            int x = st.top(); st.pop();
+            int y = st.top(); st.pop();
+            switch(str[i]){
+                case '+':
+                    st.push(x + y);
+                    break;
+                case '-':
+                    st.push(y - x);
+                    break;
+                case '*':
+                    st.push(x * y);
+                    break;
+                case '/':
+                    st.push(y / x);
+                    break;
             }
         }
     }
     return st.top();
 }
-int main()
-{
-    string exp = "231*+9-";
-    cout << "postfix evaluation: " << evaluatePostfix(exp);
-    return 0;
+int main(){
+    string str ="231*+9-";
+    cout << postfix(str);
 }
