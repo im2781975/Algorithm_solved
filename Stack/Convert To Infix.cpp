@@ -1,41 +1,26 @@
-// find infix for a given postfix.
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-bool isOperand(char x)
-{
-   return (x >= 'a' && x <= 'z') ||
-          (x >= 'A' && x <= 'Z');
+bool IsOperand(char x){
+    if((x >= 'a' && x <= 'z') || x >= 'A' && x <= 'Z')
+        return true;
+    return false;
 }
-// Get Infix for a given postfix expression
-string getInfix(string exp)
-{
-    stack<string> s;
-    for (int i=0; exp[i]!='\0'; i++)
-    {
-        // Push operands
-        if (isOperand(exp[i]))
-        {
-           // string op(1, exp[i]); creates a string from the single character exp[i], and this string is then pushed onto the stack s.
-           string op(1, exp[i]);
-           s.push(op);
-        }
-        // We assume that input is a valid postfix and expect an operator.
-        else
-        {
-            string op1 = s.top();
-            s.pop();
-            string op2 = s.top();
-            s.pop();
-            s.push("(" + op2 + exp[i] +
-                   op1 + ")");
+string GetInfix(string str){
+    stack < string> st;
+    for(int i = 0; str[i]; i++){
+        if(IsOperand(str[i]))
+            // creates a string from the single character str[i] 
+            //this string is then pushed onto the stack st
+            st.push(string(1, str[i]));
+        else{
+            string x = st.top(); st.pop();
+            string y = st.top(); st.pop();
+            st.push("(" + y + str[i] + x + ")");
         }
     }
-    // There must be a single element in stack now which is the required infix.
-    return s.top();
+    return st.top();
 }
-int main()
-{
-    string exp = "ab*c+";
-    cout << getInfix(exp);
-    return 0;
+int main(){
+    string str ="ab*c+";
+    cout << GetInfix(str);
 }
