@@ -1,57 +1,29 @@
-// convert prefix to Infix
-#include <iostream>
-#include <stack>
+#include<iostream>
+#include<stack>
 using namespace std;
-// check if character is operator or not
-bool isOperator(char x) {
-    switch (x) {
-        case '+':
-        case '-':
-        case '/':
-        case '*':
-        case '^':
-        case '%':
-    return true;
-  }
-  return false;
+bool IsOperator(char ch){
+    if(ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^' || ch == '%')
+        return true;
+    return false;
 }
-// Convert prefix to Infix expression
-string preToInfix(string pre_exp) {
-    stack<string> s;
-    // length of expression
-    int length = pre_exp.size();
- 
-    // reading from right to left
-    for (int i = length - 1; i >= 0; i--) {
-    // check if symbol is operator
-    if (isOperator(pre_exp[i])) {
-    // pop two operands from stack
-    string op1 = s.top();   
-        s.pop();
-    string op2 = s.top();   
-        s.pop();
- 
-    //concat the operands and operator
-    string temp = "(" + op1 + pre_exp[i] + op2 + ")";
- 
-    // Push string temp back to stack
-        // 
-        s.push(temp);
+string PrefixToInfix(string str){
+    stack <string> st;
+    for(int i = str.size() -1; i >= 0; i--){
+        if(IsOperator(str[i])){
+            string x = st.top(); st.pop();
+            string y = st.top(); st.pop();
+            //concat the operands and operator
+            string tmp = "(" + x + str[i] + y + ")";
+            st.push(tmp);
+        }
+        else
+            //Convert the character to a string and push it onto the stack.
+             //first arg(1) specifies the number of times to copy the char.second arg (str[i]) is the character to be copied
+            st.push(string(1, str[i]));
     }
-    // if symbol is an operand
-     //Convert the character to a string and push it onto the stack.
-    else {
-    // push the operand to the stack
-        first argument (1) specifies the number of times to repeat the character.second argument (pre_exp[i]) is the character to be repeated
-        s.push(string(1, pre_exp[i]));
-    }
-  }
-  // Stack now contains the Infix expression
-   // After the loop completes, the stack contains the final infix expression
-  return s.top();
+    return st.top();
 }
-int main() {
-    string pre_exp = "*-A/BC-/AKL";
-    cout << "Infix : " << preToInfix(pre_exp);
-  return 0;
+int main(){
+    string str = "*-A/BC-/AKL";
+    cout << PrefixToInfix(str);
 }
