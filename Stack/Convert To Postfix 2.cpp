@@ -1,55 +1,26 @@
-// convert prefix to postfix
-#include <iostream>
-#include <stack>
+#include<iostream>
+#include<stack>
 using namespace std;
-// function to check if character is operator or not
-bool isOperator(char x)
-{
-    switch (x) {
-    case '+':
-    case '-':
-    case '/':
-    case '*':
+bool IsOperator(char x){
+    if(x == '+' || x == '-' || x == '*' || x == '/')
         return true;
-    }
     return false;
 }
-// Convert prefix to Postfix expression
-string preToPost(string pre_exp)
-{
-    stack<string> s;
-    // length of expression
-    int length = pre_exp.size();
-    // reading from right to left
-    for (int i = length - 1; i >= 0; i--) 
-    {
-        // check if symbol is operator
-        if (isOperator(pre_exp[i]))
-        {
-            // pop two operands from stack
-            string op1 = s.top();
-            s.pop();
-            string op2 = s.top();
-            s.pop();
- 
-            // concat the operands and operator
-            string temp = op1 + op2 + pre_exp[i];
-            // Push string temp back to stack
-            s.push(temp);
+string PrefixToPostfix(string str){
+    stack < string> st;
+    for(int i = str.size() -1; i >= 0; i--){
+        if(IsOperator(str[i])){
+            string x = st.top(); st.pop();
+            string y = st.top(); st.pop();
+            string tmp = x + y + str[i];
+            st.push(tmp);
         }
-        // if symbol is an operand
-        else {
- 
-            // push the operand to the stack
-            s.push(string(1, pre_exp[i]));
-        }
+        else
+            st.push(string(1, str[i]));
     }
-    // stack contains only the Postfix expression
-    return s.top();
+    return st.top();
 }
-int main()
-{
-    string pre_exp = "*-A/BC-/AKL";
-    cout << "Postfix : " << preToPost(pre_exp);
-    return 0;
+int main(){
+    string str = "*-A/BC-/AKL";
+    cout << PrefixToPostfix(str);
 }
