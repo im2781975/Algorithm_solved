@@ -21,6 +21,7 @@ int evaluatePostfix(char* exp)
                 num = num * 10 + (int)(exp[i] - '0');
                 i++;
             }
+            After the loop exits, i has been incremented one extra time (pointing to a non-digit character). i-- decrements the index back to the last digit character.
             i--;
             // Push the element in the stack
             st.push(num);
