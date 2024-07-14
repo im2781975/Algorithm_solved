@@ -1,99 +1,58 @@
-// convert infix to prefix
-#include <bits/stdc++.h>
+#include<iostream>
+#include <stack>
+#include<algorithm>
 using namespace std;
-// Function to check if the character is an operator
-bool isOperator(char c)
-{
-    return (!isalpha(c) && !isdigit(c));
+bool IsOperator(char ch){
+    return (!isalpha(ch) && !isdigit(ch));
 }
-// Function to get the priority of operators
-int getPriority(char C)
-{
-    if (C == '-' || C == '+')
+int prec(char ch){
+    if(ch == '+' || ch == '-')
         return 1;
-    else if (C == '*' || C == '/')
+    else if(ch == '*' || ch == '/')
         return 2;
-    else if (C == '^')
+    else if(ch == '^')
         return 3;
     return 0;
 }
-// Function to convert the infix expression to postfix
-string infixToPostfix(string infix)
-{
-    infix = '(' + infix + ')';
-    int l = infix.size();
-    stack<char> char_stack;
-    string output;
-    for (int i = 0; i < l; i++) {
- 
-        // If the scanned character is & operand, add it to output.
-        if (isalpha(infix[i]) || isdigit(infix[i]))
-            output += infix[i];
-        // If the scanned character is an ‘(‘, push it to the stack.
-        else if (infix[i] == '(')
-            char_stack.push('(');
-        // If the scanned character is an ‘)’, pop and output from the stack until an ‘(‘ is encountered.
-        else if (infix[i] == ')') {
-            while (char_stack.top() != '(') {
-                output += char_stack.top();
-                char_stack.pop();
+string InfixToPostfix(string str) {
+    stack<char> st;
+    string final;
+    for (int i = 0; i < str.size(); i++) {
+        if (isalpha(str[i]) || isdigit(str[i])) {
+            final += str[i];
+        } else if (str[i] == '(') {
+            st.push(str[i]);
+        } else if (str[i] == ')') {
+            while (!st.empty() && st.top() != '(') {
+                final += st.top();
+                st.pop();
             }
-            // Remove '(' from the stack
-            char_stack.pop();
-        }
-        // Operator found
-        else {
-            if (isOperator(char_stack.top())) {
-                if (infix[i] == '^') {
-                    while (
-                        getPriority(infix[i])
-                        <= getPriority(char_stack.top())) {
-                        output += char_stack.top();
-                        char_stack.pop();
-                    }
-                }
-                else {
-                    while (
-                        getPriority(infix[i])
-                        < getPriority(char_stack.top())) {
-                        output += char_stack.top();
-                        char_stack.pop();
-                    }
-                }
-                // Push current Operator on stack
-                char_stack.push(infix[i]);
+            st.pop(); // pop '('
+        } else {
+            while (!st.empty() && prec(st.top()) >= prec(str[i])) {
+                final += st.top();
+                st.pop();
             }
+            st.push(str[i]);
         }
     }
-    while (!char_stack.empty()) {
-        output += char_stack.top();
-        char_stack.pop();
+    while (!st.empty()) {
+        final += st.top();
+        st.pop();
     }
-    return output;
+    return final;
 }
-// convert infix to prefix notation
-string infixToPrefix(string infix)
-{
-    // Reverse String and replace ( with ) and vice versa Get Postfix Reverse Postfix
-    int l = infix.size();
-    // Reverse infix
-    reverse(infix.begin(), infix.end());
-    // Replace ( with ) and vice versa
-    for (int i = 0; i < l; i++) {
- 
-        if (infix[i] == '(')
-            infix[i] = ')';
-        else if (infix[i] == ')')
-            infix[i] = '(';
+string InfixToPrefix(string str){
+    reverse(str.begin(), str.end());
+    for(int i = 0; i < str.size(); i++){
+        if(str[i] == '(') str[i] = ')';
+        else if(str[i] == ')') str[i] = '(';
     }
-    string prefix = infixToPostfix(infix);
-    // Reverse postfix
-    reverse(prefix.begin(), prefix.end());
-    return prefix;
+        string prefix = InfixToPostfix(str);
+        reverse(prefix.begin(), prefix.end());
+        return prefix;
 }
-int main()
-{
-    string s = ("x+y*z/w+u");
-    cout << infixToPrefix(s) << std::endl;
-    return 0;
+int main(){
+    string str =("x+y*z/w+u");
+    cout << InfixToPrefix(str);
 }
