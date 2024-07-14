@@ -15,6 +15,7 @@ string getInfix(string exp)
         // Push operands
         if (isOperand(exp[i]))
         {
+           // string op(1, exp[i]); creates a string from the single character exp[i], and this string is then pushed onto the stack s.
            string op(1, exp[i]);
            s.push(op);
         }
