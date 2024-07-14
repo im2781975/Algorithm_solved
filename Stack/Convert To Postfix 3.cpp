@@ -1,64 +1,49 @@
-// convert infix expression to postfix
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 // Function to return precedence of operators
-int prec(char c)
-{
-    if (c == '^')
+int prec(char ch){
+    if(ch == '^')
         return 3;
-    else if (c == '/' || c == '*')
+    else if(ch == '/' || ch == '*')
         return 2;
-    else if (c == '+' || c == '-')
+    else if(ch == '+' || ch == '-')
         return 1;
     else
         return -1;
 }
-// convert infix expression to postfix expression
-void infixToPostfix(string s)
-{
-    stack<char> st;
+void InfixToPostfix(string str){
+    stack <char> st;
     string result;
- 
-    for (int i = 0; i < s.length(); i++) {
-        char c = s[i];
-        // If the scanned character is an operand, add it to output string.
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-            || (c >= '0' && c <= '9'))
-            result += c;
-        // If the scanned character is an ‘(‘, push it to the stack.
-        else if (c == '(')
-            st.push('(');
-        // If the scanned character is an ‘)’, pop and add to output string from the stack until an ‘(‘ is encountered.
-        else if (c == ')') {
-            // If the character is a closing parenthesis ), pop from the stack to the result until an opening parenthesis is encountered. Then pop and discard the opening parenthesis.
-            while (st.top() != '(') {
+    for(int i = 0; i < str.size(); i++){
+        char ch = str[i];
+        if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <='Z') || (ch >= '0' && ch <= '9'))
+            result += ch;
+        else if(ch == '(')
+            st.push(ch);
+        else if(ch == ')'){
+            while(st.top() != '('){
                 result += st.top();
                 st.pop();
             }
             st.pop();
         }
         // If an operator is scanned
-        else {
-            while (!st.empty()
-                   && prec(s[i]) <= prec(st.top())) {
+        else{
+            while(!st.empty() && prec(str[i]) <= prec(st.top())){
                 result += st.top();
                 st.pop();
             }
-            st.push(c);
+            st.push(ch);
         }
     }
     // Pop all the remaining elements from the stack
-    while (!st.empty()) {
+    while(!st.empty()){
         result += st.top();
         st.pop();
     }
-    cout << result << endl;
+    cout << result;
 }
-int main()
-{
-    string exp = "a+b*(c^d-e)^(f+g*h)-i";
-    infixToPostfix(exp);
-   
-    return 0;
+int main(){
+    string str ="a+b*(c^d-e)^(f+g*h)-i";
+    InfixToPostfix(str);
 }
-
