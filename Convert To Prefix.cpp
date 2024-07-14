@@ -1,7 +1,32 @@
 #include<iostream>
-#include <stack>
+#include<stack>
 #include<algorithm>
 using namespace std;
+bool isOperator(char ch){
+    if(ch == '+' || ch == '-' || ch == '*' || ch == '/')
+        return true;
+    return false;
+}
+string PostfixToPrefix(string str){
+    stack <string> st;
+    for(int i = 0; i < str.size(); i++){
+        if(isOperator(str[i])){
+            string x = st.top(); st.pop();
+            string y = st.top(); st.pop();
+            string tmp = str[i] + y + x;
+            st.push(tmp);
+        }
+        else
+            st.push(string(1, str[i]));
+    }
+    string ans = "";
+    while(!st.empty()){
+        ans+= st.top();
+        st.pop();
+    }
+    return ans;
+}
+//***//
 bool IsOperator(char ch){
     return (!isalpha(ch) && !isdigit(ch));
 }
@@ -53,6 +78,10 @@ string InfixToPrefix(string str){
         return prefix;
 }
 int main(){
-    string str =("x+y*z/w+u");
-    cout << InfixToPrefix(str);
+    string str ="ABC/-AK/L-*";
+    cout << PostfixToPrefix(str);
+    string st =("x+y*z/w+u");
+    cout << "\n" << InfixToPrefix(st);
 }
+
+
