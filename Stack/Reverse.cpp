@@ -19,6 +19,24 @@ void Reverse(stack <int> &st){
         InsertBottom(st, x);
     }
 }
+// reverse the number using a stack
+stack <int> st;
+void PushDigit(int num){
+    while(num !=0){
+        st.push(num % 10);
+        num /= 10;
+    }
+}
+int Reverse(int num){
+    PushDigit(num);
+    int rev = 0, i = 1;
+    while(!st.empty()){
+        rev = rev + (st.top() * i);
+        st.pop();
+        i *= 10;
+    }
+    return rev;
+}
 int main(){
     stack <int> a, b;
     for(int i = 1; i <= 4; i++)
@@ -34,4 +52,8 @@ int main(){
         cout << a.top() <<  " ";
         a.pop();
     }
+    //****//
+    int num; cin >> num;
+    cout << Reverse(num);
 }
+
