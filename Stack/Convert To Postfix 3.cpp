@@ -30,6 +30,7 @@ void infixToPostfix(string s)
             st.push('(');
         // If the scanned character is an ‘)’, pop and add to output string from the stack until an ‘(‘ is encountered.
         else if (c == ')') {
+            // If the character is a closing parenthesis ), pop from the stack to the result until an opening parenthesis is encountered. Then pop and discard the opening parenthesis.
             while (st.top() != '(') {
                 result += st.top();
                 st.pop();
