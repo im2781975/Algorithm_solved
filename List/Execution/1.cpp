@@ -74,6 +74,46 @@ void mergelist(node *a, node *&b) {
         a = a -> next
     }
 }
+// arrange linked list in zigzag fashion
+void zigzag(node *head) {
+    bool greater = false;
+    node *curr = head;
+    while(curr -> next) {
+        if(greater) {
+            if(curr -> data > curr -> next -> data) swap(curr -> data, curr -> next -> data);
+        }
+        else {
+            if(curr -> data < curr -> next -> data) swap(curr -> data, curr -> next -> data);
+        }
+        greater = !greater;
+    }
+}
+node* zigzag(node* head, bool flag)
+{
+    if (!head || !head->next)
+        return head;
+    if (flag == 1) {
+        if (head->data > head->next->data)
+            swap(head->data, head->next->data);
+        return zigzag(head->next, !flag);
+    }
+    else {
+        if (head->data < head->next->data)
+            swap(head->data, head->next->data);
+        return zigzag(head->next, !flag);
+    }
+}
+node *zigzag(node *head, bool flag) {
+    if(!head || !head -> next) return head;
+    if(flag) {
+        if(head -> data > head -> next -> data) swap(head -> data, head -> next -> data);
+        return zigzag(head -> next, !flag);
+    }
+    else {
+        if(head -> data < head -> next -> data) swap(head -> data, head -> next -> data);
+        return zigzag(head -> next, !flag);
+    }
+}
 struct node {
     char data; node* next;
 };
@@ -123,3 +163,4 @@ bool ispalindrome(node *head) {
     prv -> next = mid? (mid -> next == zweithalf) : zweithalf;
     return res;
 }
+
